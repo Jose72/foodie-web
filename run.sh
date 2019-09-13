@@ -1,0 +1,1 @@
+sudo docker run -p 3000:3000 --name 7552-web-app 7552-web-app
