@@ -19,7 +19,6 @@ cache:
 
 script:
   - npm test
-  - npm run build
   - docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app .
   - docker tag $DOCKER_USERNAME/7552-web-app registry.heroku.com/$HEROKU_APP_NAME/web
 
