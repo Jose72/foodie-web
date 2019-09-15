@@ -1,30 +1,13 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import logo from './logo.svg';
 import './App.css';
 import { LoginPage } from '../LoginPage'
-import { BrowserRouter, Router, Switch, Route, Link, Redirect} from 'react-router-dom';
-
-const Home = () => (
-  <div className='App'>
-    <header className='App-header'>
-      <h5>
-        Foodie Web   
-      </h5>
-      
-    </header>
-    <div className='App-content'>
-      <Link className='Link' to="/login">Login</Link>
-      <p>
-      </p>
-    </div>
-    <footer className='App-footer'>
-      <p>
-        <small>&copy; Copyright 2019. Foodie Inc.</small>
-      </p>
-    </footer>
-  </div>
-)
+import { UsersPage } from '../UsersPage'
+import { MenuPage } from '../MenuPage'
+import { HomePage } from '../HomePage'
+import { BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
+import { ProtectedRoute } from '../utils/ProtectedRoute'
+import { Auth } from '../utils/Authentication'
 
 const NotFound = () => <div>Not found</div>
 
@@ -35,7 +18,12 @@ class App extends React.Component {
     this.state = {
         currentUser: null
     };
-}
+  }
+
+  logout() {
+    Auth.logout();
+    this.context.history.push('/login')
+  }
 
   render() {
     return (
@@ -43,15 +31,18 @@ class App extends React.Component {
         <BrowserRouter>
         <div>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={HomePage} />
               <Route path="/login" component={LoginPage} />
+              <ProtectedRoute path="/menu" component={MenuPage} isAuthenticated={Auth.isAuthenticated} />
+              <ProtectedRoute path="/users" component={UsersPage} isAuthenticated={Auth.isAuthenticated} />
               <Route component={NotFound} />
             </Switch>
         </div>
         </BrowserRouter>
       </div>
     )
-  }
+    }
+  
 }
 
 export {App};

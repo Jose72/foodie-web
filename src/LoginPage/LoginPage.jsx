@@ -1,4 +1,7 @@
 import React from 'react';
+import { Auth} from '../utils/Authentication'
+import { Redirect, Router} from 'react-router-dom';
+
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
@@ -17,7 +20,13 @@ class LoginPage extends React.Component {
       if (this.validateForm()){
 
       }
-      console.log(this.state)
+
+      Auth.login(this.state.username, this.state.password)
+      if (Auth.isAuthenticated){
+        this.props.history.push('/menu')
+      } else {
+        this.props.history.push('/')
+      }
   }
 
   change = (e) => {
@@ -29,6 +38,7 @@ class LoginPage extends React.Component {
     return (
       <div className='Login'>
         <form>
+            <label>Username</label>
             <input
                 size='150%'
                 name='username' 
@@ -39,6 +49,7 @@ class LoginPage extends React.Component {
             <br/>
             <br/>
             <br/>
+            <label>Password</label>
             <input 
                 name='password' 
                 placeholder='Password' 
@@ -52,6 +63,7 @@ class LoginPage extends React.Component {
         </form>
       </div>
     )
+    
   }
 }
 
