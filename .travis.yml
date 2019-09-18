@@ -29,7 +29,8 @@ deploy:
       docker push josemorelli/7552-web-app;
       docker push registry.heroku.com/$HEROKU_APP_NAME/web;
       heroku container:release web --app $HEROKU_APP_NAME
-    branch: develop
+    on:
+      branch: master
   - provider: script
     script:
       # push to dockerhub
@@ -37,4 +38,5 @@ deploy:
       docker push josemorelli/7552-web-app:develop;
       docker push registry.heroku.com/$HEROKU_APP_NAME_DEVELOP/web;
       heroku container:release web --app $HEROKU_APP_NAME_DEVELOP
-    branch: develop
+    on:
+      branch: develop
