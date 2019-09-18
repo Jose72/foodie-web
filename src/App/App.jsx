@@ -7,6 +7,7 @@ import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
 import { BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
+import { PublicRoute } from '../utils/PublicRoute'
 import { Auth } from '../utils/Authentication'
 
 const NotFound = () => <div>Not found</div>
@@ -26,15 +27,16 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(Auth.isAuthenticated);
     return (
       <div>
         <BrowserRouter>
         <div>
             <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-              <ProtectedRoute path="/menu" component={MenuPage} isAuthenticated={Auth.isAuthenticated} />
-              <ProtectedRoute path="/users" component={UsersPage} isAuthenticated={Auth.isAuthenticated} />
+              <PublicRoute exact path="/" component={HomePage} />
+              <PublicRoute path="/login" component={LoginPage} />
+              <ProtectedRoute path="/menu" component={MenuPage} />
+              <ProtectedRoute path="/users" component={UsersPage} />
               <Route component={NotFound} />
             </Switch>
         </div>

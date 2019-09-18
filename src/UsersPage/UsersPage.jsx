@@ -18,15 +18,15 @@ class UsersPage extends React.Component {
     }
 
     onSubmit = (e) => {
-        e.persist()
-        e.preventDefault()
+        e.persist();
+        e.preventDefault();
         console.log(this.state)
-    }
+    };
 
     change = (e) => {
         e.persist();
         this.setState({[e.target.name]:  e.target.value})
-    }
+    };
 
     render(){
         return (
@@ -36,14 +36,14 @@ class UsersPage extends React.Component {
                     size='150%'
                     name='firstName' 
                     placeholder='First Name' 
-                    value={this.state.query.firstname} 
+                    value={this.state.query.firstName}
                     onChange={e => this.change(e)} 
                 />
                 <input
                     size='150%'
                     name='lastName' 
                     placeholder='Last Name' 
-                    value={this.state.query.lastname} 
+                    value={this.state.query.lastName}
                     onChange={e => this.change(e)} 
                 />
                 <input

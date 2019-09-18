@@ -1,5 +1,5 @@
 import React from 'react';
-import { Auth} from '../utils/Authentication'
+import { Auth } from '../utils/Authentication'
 import { Redirect, Router} from 'react-router-dom';
 
 import './LoginPage.css';
@@ -15,45 +15,47 @@ class LoginPage extends React.Component {
   }
 
   onSubmit = (e) => {
-      e.persist()
-      e.preventDefault()
+      e.persist();
+      e.preventDefault();
       if (this.validateForm()){
 
       }
 
       Auth.login(this.state.username, this.state.password)
-      if (Auth.isAuthenticated){
+      if (Auth.isAuthenticated()){
         this.props.history.push('/menu')
       } else {
         this.props.history.push('/')
       }
-  }
+  };
 
   change = (e) => {
       e.persist();
       this.setState({[e.target.name]:  e.target.value})
-  }
+  };
 
   render(){
     return (
       <div className='Login'>
         <form>
-            <label>Username</label>
+            <label className='Login-label'>Username</label>
+            <br/>
             <input
                 size='150%'
                 name='username' 
-                placeholder='Username' 
+                //placeholder='Username'
                 value={this.state.username} 
                 onChange={e => this.change(e)} 
             />
             <br/>
             <br/>
             <br/>
-            <label>Password</label>
+            <label className='Login-label'>Password</label>
+            <br/>
             <input 
                 name='password' 
-                placeholder='Password' 
-                value={this.state.pasword} 
+                //placeholder='Password'
+                value={this.state.password}
                 onChange={e => this.change(e)} 
             />
             <br/>
