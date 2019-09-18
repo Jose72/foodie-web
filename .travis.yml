@@ -20,13 +20,17 @@ cache:
 script:
   - npm test
 
+  # master
+  - test $TRAVIS_BRANCH = "master" && docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app .
+  - test $TRAVIS_BRANCH = "master" && docker tag $DOCKER_USERNAME/7552-web-app registry.heroku.com/$HEROKU_APP_NAME/web
+  # develop
+  - test $TRAVIS_BRANCH = "develop" && docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app:develop .
+  - test $TRAVIS_BRANCH = "develop" && docker tag $DOCKER_USERNAME/7552-web-app:develop registry.heroku.com/$HEROKU_APP_NAME_DEVELOP/web
 
 deploy:
   - provider: script
     script:
       # push to dockerhub
-      docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app .
-      docker tag $DOCKER_USERNAME/7552-web-app registry.heroku.com/$HEROKU_APP_NAME/web
       docker push josemorelli/7552-web-app
       docker push registry.heroku.com/$HEROKU_APP_NAME/web
       heroku container:release web --app $HEROKU_APP_NAME
@@ -35,8 +39,6 @@ deploy:
   - provider: script
     script:
       # push to dockerhub
-      docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app:develop .
-      docker tag $DOCKER_USERNAME/7552-web-app:develop registry.heroku.com/$HEROKU_APP_NAME_DEVELOP/web
       docker push josemorelli/7552-web-app:develop
       docker push registry.heroku.com/$HEROKU_APP_NAME_DEVELOP/web
       heroku container:release web --app $HEROKU_APP_NAME_DEVELOP
