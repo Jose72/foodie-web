@@ -5,10 +5,12 @@ import { Redirect, Router} from 'react-router-dom';
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
-  state = {
-    username: '',
-    password: ''
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '' };
+    }
 
   validateForm() {
     return this.state.username.length > 0 && this.state.password.length > 0;
@@ -17,16 +19,10 @@ class LoginPage extends React.Component {
   onSubmit = (e) => {
       e.persist();
       e.preventDefault();
-      if (this.validateForm()){
-
-      }
 
       Auth.login(this.state.username, this.state.password)
-      if (Auth.isAuthenticated()){
-        this.props.history.push('/menu')
-      } else {
-        this.props.history.push('/')
-      }
+          .then(t => {window.location.reload()
+          })
   };
 
   change = (e) => {

@@ -5,29 +5,26 @@ import { LoginPage } from '../LoginPage'
 import { UsersPage } from '../UsersPage'
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
-import { BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
 import { Auth } from '../utils/Authentication'
+import dotenv from  'dotenv'
 
-const NotFound = () => <div>Not found</div>
+
+dotenv.config();
+const baseURL = process.env.REACT_APP_API_ENDPOINT;
+
+const NotFound = () => <div>Not found</div>;
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-        currentUser: null
-    };
-  }
-
-  logout() {
-    Auth.logout();
-    this.context.history.push('/login')
   }
 
   render() {
-    console.log(Auth.isAuthenticated);
+      console.log(baseURL);
     return (
       <div>
         <BrowserRouter>
