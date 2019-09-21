@@ -7,7 +7,6 @@ class UsersPage extends React.Component {
         super(props);
     
         this.state = {
-            listUsersDisplay: [],
             query: {
                 firstName: '',
                 lastName: '',
@@ -21,6 +20,7 @@ class UsersPage extends React.Component {
         e.persist();
         e.preventDefault();
         console.log(this.state)
+        fetch()
     };
 
     change = (e) => {
@@ -30,39 +30,49 @@ class UsersPage extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className={'UserPage'}>
+                <header className='UserPage-header'>
+                    <h5>
+                        User Menu
+                    </h5>
+                </header>
                 <form>
-                <input
-                    size='150%'
-                    name='firstName' 
-                    placeholder='First Name' 
-                    value={this.state.query.firstName}
-                    onChange={e => this.change(e)} 
-                />
-                <input
-                    size='150%'
-                    name='lastName' 
-                    placeholder='Last Name' 
-                    value={this.state.query.lastName}
-                    onChange={e => this.change(e)} 
-                />
-                <input
-                    size='150%'
-                    name='phone' 
-                    placeholder='Phone Number' 
-                    value={this.state.query.phone} 
-                    onChange={e => this.change(e)} 
-                />
-                <input
-                    size='150%'
-                    name='email' 
-                    placeholder='Email' 
-                    value={this.state.query.email} 
-                    onChange={e => this.change(e)} 
-                />
+                    <div className=''>
+                        <form>
+                        <input
+                            size='150%'
+                            name='firstName'
+                            placeholder='First Name'
+                            value={this.state.firstName}
+                            onChange={this.change}
+                            //onChange={e => this.change(e)}
+                        />
+                        <input
+                            size='150%'
+                            name='lastName'
+                            placeholder='Last Name'
+                            value={this.state.lastName}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            size='150%'
+                            name='phone'
+                            placeholder='Phone Number'
+                            value={this.state.phone}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            size='150%'
+                            name='email'
+                            placeholder='Email'
+                            value={this.state.email}
+                            onChange={e => this.change(e)}
+                        />
+                        </form>
+                        <br/>
+                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                    </div>
                 </form>
-                <br/>
-                <button onClick={(e) => this.onSubmit(e)}> Search </button>
             </div>
         )
     }

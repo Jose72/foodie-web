@@ -40,15 +40,6 @@
     color: white;
   }
 
-.Menu-button{
-    background-color: #FF9800;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
 
 .Link {
     color: #61dafb;
