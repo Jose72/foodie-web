@@ -21,8 +21,8 @@ class LoginPage extends React.Component {
       e.preventDefault();
 
       Auth.login(this.state.username, this.state.password)
-          .then(t => {if ( t === true) {window.location.reload()}
-          })
+          .then(() => {window.location.reload()})
+          .catch((t) => {alert(t)})
   };
 
   change = (e) => {

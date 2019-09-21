@@ -11,7 +11,7 @@ class Auth extends React.Component {
                 // call resolve if the method succeeds
                 localStorage.setItem('token', 'admin_token');
                 console.log("Loggin successful");
-                resolve(true);
+                resolve({status: true, text: 'Login successful'});
             })
         }
 
@@ -25,23 +25,17 @@ class Auth extends React.Component {
         console.log(requestOptions);
         return fetch(API_URL + 'auth/', requestOptions)
             .then(res => {
-                if (res.status === 200) {
-                    return res.json()
+                if (res.ok) {
+                    let data = res.json();
+                    localStorage.setItem('token', data['token']);
+                    console.log("Loggin successful");
                 } else {
-                    console.log(res);
-                    throw Error(res.statusText);
+                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
-            })
-            .then (data => {
-                //should check for token field
-                console.log(data);
-                localStorage.setItem('token', data['token']);
-                console.log("Loggin successful");
-                return true
             })
             .catch(error => {
                 console.log(error);
-                return false
+                return Promise.reject(error)
             })
 
     }
