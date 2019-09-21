@@ -23,9 +23,9 @@ class Auth extends React.Component {
             body: JSON.stringify({username, password})
         };
         console.log(requestOptions);
-        return fetch(API_URL, requestOptions)
+        return fetch(API_URL + 'auth/', requestOptions)
             .then(res => {
-                if (res.ok) {
+                if (res.status === 200) {
                     return res.json()
                 } else {
                     console.log(res);
@@ -37,6 +37,7 @@ class Auth extends React.Component {
                 console.log(data);
                 localStorage.setItem('token', data['token']);
                 console.log("Loggin successful");
+                return true
             })
             .catch(error => {
                 console.log(error);

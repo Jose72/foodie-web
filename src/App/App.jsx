@@ -9,11 +9,7 @@ import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
 import { Auth } from '../utils/Authentication'
-import dotenv from  'dotenv'
 
-
-dotenv.config();
-const baseURL = process.env.REACT_APP_API_ENDPOINT;
 
 const NotFound = () => <div>Not found</div>;
 
@@ -24,7 +20,6 @@ class App extends React.Component {
   }
 
   render() {
-      console.log(baseURL);
     return (
       <div>
         <BrowserRouter>

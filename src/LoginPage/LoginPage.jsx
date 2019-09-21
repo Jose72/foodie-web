@@ -21,7 +21,7 @@ class LoginPage extends React.Component {
       e.preventDefault();
 
       Auth.login(this.state.username, this.state.password)
-          .then(t => {window.location.reload()
+          .then(t => {if ( t === true) {window.location.reload()}
           })
   };
 
@@ -46,7 +46,7 @@ class LoginPage extends React.Component {
             <br/>
             <br/>
             <br/>
-            <label className='Login-label'>Password</label>
+            <label className={'Login-label'}>Password</label>
             <br/>
             <input 
                 name='password' 
