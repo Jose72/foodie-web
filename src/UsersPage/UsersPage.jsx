@@ -1,6 +1,8 @@
 import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
+import { UserComm } from '../utils/UserComm'
+import {Button} from "bootstrap/js/src";
 
 
 class UsersPage extends React.Component {
@@ -9,15 +11,20 @@ class UsersPage extends React.Component {
     
         this.state = {
             userList: [],
+            maxUsersPerPage: 50,
+            currentPageIndex: 1,
             query: {
                 firstName: '',
                 lastName: '',
                 email: '',
                 phone: ''
-            }
+            },
+            lastQuery: this.query
         };
 
-
+        this.renderElement = this.renderElement.bind(this);
+        this.onClickDelete = this.onClickDelete.bind(this);
+        this.onClickModify = this.onClickModify.bind(this);
     }
 
     //Search button
@@ -25,6 +32,7 @@ class UsersPage extends React.Component {
         e.persist();
         e.preventDefault();
         console.log(this.state);
+        //fetch query
         this.setState({userList: [{id: 1, firstName: 'Jonh', lastName: 'Cart', email: 'JCARt@gamil.com', phone: 44443334},
             {id: 2, firstName: 'Mira', lastName: 'Smith', email: 'MirSmi@gamil.com', phone: 45654222},
             {id: 3, firstName: 'Kal', lastName: 'Santht', email: 'KSant@gamil.com', phone: 67634354}]})
@@ -53,18 +61,17 @@ class UsersPage extends React.Component {
     };
 
     //Delete user
-    onClickDelete = (e) => {
+    onClickDelete(user, e){
         e.persist();
         e.preventDefault();
-
-
+        console.log('Delete')
     };
 
     //Modify user
-    onClickModify = (e) => {
+    onClickModify(user, e){
         e.persist();
         e.preventDefault();
-
+        console.log('Modify')
 
     };
 
@@ -91,8 +98,12 @@ class UsersPage extends React.Component {
                 <td>{user.lastName}</td>
                 <td>{user.phone}</td>
                 <td>{user.email}</td>
-                <td><button onClick={(e) => this.onClickDelete(e)}> Delete </button></td>
-                <td><button onClick={(e) => this.onClickModify(e)}> Modify </button></td>
+                <td>
+                    <button onClick={(e) => this.onClickDelete(user, e)}> Delete </button>
+                </td>
+                <td>
+                    <button onClick={(e) => this.onClickDelete(user, e)}> Modify </button>
+                </td>
             </tr>
         )
     }
@@ -154,6 +165,7 @@ class UsersPage extends React.Component {
                             {this.state.userList.map(this.renderElement)}
                         </tbody>
                     </Table>
+
                 </div>
             </div>
         )
