@@ -2,7 +2,6 @@ import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
-import {Button} from "bootstrap/js/src";
 
 
 class UsersPage extends React.Component {
@@ -22,6 +21,7 @@ class UsersPage extends React.Component {
             lastQuery: this.query
         };
 
+        this.onSubmit =  this.onSubmit.bind(this);
         this.renderElement = this.renderElement.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickModify = this.onClickModify.bind(this);
@@ -31,12 +31,14 @@ class UsersPage extends React.Component {
     onSubmit = (e) => {
         e.persist();
         e.preventDefault();
-        console.log(this.state);
         //fetch query
-        this.setState({userList: [{id: 1, firstName: 'Jonh', lastName: 'Cart', email: 'JCARt@gamil.com', phone: 44443334},
-            {id: 2, firstName: 'Mira', lastName: 'Smith', email: 'MirSmi@gamil.com', phone: 45654222},
-            {id: 3, firstName: 'Kal', lastName: 'Santht', email: 'KSant@gamil.com', phone: 67634354}]})
-
+        UserComm.getUsers(this.state.maxUsersPerPage, this.state.currentPageIndex)
+            .then((u) => {
+                console.log(u);
+                this.setState({userList: u});
+                }
+            )
+            .catch((t) => {alert(t)});
     };
 
     //Change on form fields
@@ -64,6 +66,17 @@ class UsersPage extends React.Component {
     onClickDelete(user, e){
         e.persist();
         e.preventDefault();
+        UserComm.deleteUser(user.id)
+            .then(() => {
+                UserComm.getUsers(this.state.maxUsersPerPage, this.state.currentPageIndex)
+                    .then((u) => {
+                            console.log(u);
+                            this.setState({userList: u})
+                        }
+                    )
+                    .catch((t) => {alert(t)});
+            })
+            .catch((t) => {alert(t)});
         console.log('Delete')
     };
 
