@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import './App.css';
 import { LoginPage } from '../LoginPage'
 import { UsersPage } from '../UsersPage'
+import { UserAdd } from '../UsersPage'
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
@@ -27,8 +28,9 @@ class App extends React.Component {
             <Switch>
               <PublicRoute exact path="/" component={HomePage} />
               <PublicRoute path="/login" component={LoginPage} />
-              <ProtectedRoute path="/menu" component={MenuPage} />
-              <ProtectedRoute path="/users" component={UsersPage} />
+              <ProtectedRoute exact path="/menu" component={MenuPage} />
+              <ProtectedRoute exact path="/users" component={UsersPage} />
+              <ProtectedRoute exact path="/users/add" component={UserAdd} />
               <Route component={NotFound} />
             </Switch>
         </div>

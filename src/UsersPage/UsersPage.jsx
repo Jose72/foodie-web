@@ -2,6 +2,8 @@ import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
+import Modal from "reactstrap/es/Modal";
+import {Link} from "react-router-dom";
 
 
 class UsersPage extends React.Component {
@@ -16,15 +18,18 @@ class UsersPage extends React.Component {
                 firstName: '',
                 lastName: '',
                 email: '',
-                phone: ''
+                phone: '',
+                subscription: '',
             },
-            lastQuery: this.query
+            lastQuery: this.query,
+            showAddUserModal: false
         };
 
         this.onSubmit =  this.onSubmit.bind(this);
         this.renderElement = this.renderElement.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickModify = this.onClickModify.bind(this);
+        this.onClickCloseAddUserModal = this.onClickCloseAddUserModal.bind(this);
     }
 
     //Search button
@@ -62,6 +67,7 @@ class UsersPage extends React.Component {
 
     };
 
+
     //Delete user
     onClickDelete(user, e){
         e.persist();
@@ -91,11 +97,14 @@ class UsersPage extends React.Component {
     renderFields(){
         return (
             <tr className={'Table-header'}>
-                <th style={{width: '10%'}}> Id</th>
+                <th style={{width: '10%'}}>Id</th>
                 <th style={{width: '10%'}}>First Name</th>
                 <th style={{width: '10%'}}>Last Name</th>
                 <th style={{width: '10%'}}>Phone</th>
                 <th style={{width: '10%'}}>Email</th>
+                <th style={{width: '10%'}}>Subscription</th>
+                <th style={{width: '10%'}}>Reputation</th>
+                <th style={{width: '10%'}}>Gratitude Points</th>
                 <th style={{width: '2%'}}></th>
                 <th style={{width: '2%'}}></th>
             </tr>
@@ -111,6 +120,9 @@ class UsersPage extends React.Component {
                 <td>{user.lastName}</td>
                 <td>{user.phone}</td>
                 <td>{user.email}</td>
+                <td>{user.subscription}</td>
+                <td>{user.reputation}</td>
+                <td>{user.gratitudePoints}</td>
                 <td>
                     <button onClick={(e) => this.onClickDelete(user, e)}> Delete </button>
                 </td>
@@ -130,6 +142,7 @@ class UsersPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'UserPage-content'}>
+                    <Link className='Link' to='/users/add'>Add User</Link>
                     <form>
                         <div className='User-search'>
                             <form>
@@ -138,8 +151,7 @@ class UsersPage extends React.Component {
                                 name='firstName'
                                 placeholder='First Name'
                                 value={this.state.firstName}
-                                onChange={this.change}
-                                //onChange={e => this.change(e)}
+                                onChange={e => this.change(e)}
                             />
                             <input
                                 size='150%'
@@ -182,6 +194,11 @@ class UsersPage extends React.Component {
                 </div>
             </div>
         )
+    }
+
+
+    onClickCloseAddUserModal(){
+        this.setState({showUserModal: false})
     }
 }
 
