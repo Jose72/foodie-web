@@ -2,7 +2,6 @@ import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
-import Modal from "reactstrap/es/Modal";
 import {Link} from "react-router-dom";
 
 
