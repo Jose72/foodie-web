@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {UserComm} from "../utils";
 
+import './UserAdd.css';
+
 class UserAdd extends React.Component{
     constructor(props) {
         super(props);
@@ -39,7 +41,7 @@ class UserAdd extends React.Component{
 
     render(){
         return(
-            <div className='AddUser'>
+            <div className='AddUser-content'>
                 <form>
                     <label className='AddUser-label'>First Name</label>
                     <br/>
