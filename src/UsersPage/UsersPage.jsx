@@ -2,7 +2,7 @@ import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Modal from "reactstrap/es/Modal";
 
 const userModifyEmpty = {
