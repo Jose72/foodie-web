@@ -90,12 +90,10 @@ class UserAdd extends React.Component{
                     <br/>
                     <label className={'AddUser-label'}>Subscription</label>
                     <br/>
-                    <input
-                        name='subscription'
-                        //placeholder='Password'
-                        value={this.state.subscription}
-                        onChange={e => this.change(e)}
-                    />
+                    <select name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
+                        <option value='flat'>flat</option>
+                        <option value='premium'>premium</option>
+                    </select>
                     <br/>
                     <br/>
                     <br/>

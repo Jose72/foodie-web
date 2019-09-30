@@ -46,14 +46,16 @@ class UserComm extends React.Component {
             })
     };
 
-    static modifyUser(id, opts){
+    static modifyUser(user, opts){
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id})
+            body: JSON.stringify({firstName: user.firstName, lastName: user.lastName,
+                email: user.email, phone: user.phone, subscription: user.subscription,
+                reputation: user.reputation, gratitudePoints: user.gratitudePoints})
         };
-        return fetch(API_URL + USER_ROUTE + id, requestOptions)
+        return fetch(API_URL + USER_ROUTE + user.id, requestOptions)
             .then(res => {
                 if (res.ok) {
                     console.log("Update Successful");
