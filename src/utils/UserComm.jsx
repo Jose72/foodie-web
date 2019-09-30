@@ -58,7 +58,7 @@ class UserComm extends React.Component {
         return fetch(API_URL + USER_ROUTE + user.id, requestOptions)
             .then(res => {
                 if (res.ok) {
-                    console.log("Update Successful");
+                    return Promise.resolve('Update Successful')
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
