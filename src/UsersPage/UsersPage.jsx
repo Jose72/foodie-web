@@ -216,7 +216,7 @@ class UsersPage extends React.Component {
                                 <label className={'ModifyUser-label'}>Last Name</label>
                                 <br/>
                                 <input
-                                    name='userModify.lastName'
+                                    name='lastName'
                                     //placeholder='Password'
                                     value={this.state.userModify.lastName}
                                     onChange={e => this.changeUserModify(e)}
