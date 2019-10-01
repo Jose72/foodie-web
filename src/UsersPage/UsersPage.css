@@ -39,7 +39,8 @@
     font-size: calc(1px + 2vmin);
     color: white;
 }
-.User-search{
+
+.User-search {
     margin-top: 10%;
     width: 100%;
     top: 0;
@@ -47,6 +48,14 @@
     align-items: center;
     justify-content: center;
 }
+
+.Button-page-move {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 /*
 .Table-header {
     background-color: #ffffff;

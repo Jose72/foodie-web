@@ -22,7 +22,6 @@ class UsersPage extends React.Component {
     
         this.state = {
             userList: [],
-            maxUsersPerPage: 50,
             currentPageIndex: 1,
             query: {
                 firstName: '',
@@ -50,6 +49,8 @@ class UsersPage extends React.Component {
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickModify = this.onClickModify.bind(this);
         this.submitModifyUserModal = this.submitModifyUserModal.bind(this);
+        this.onClickPrevious = this.onClickPrevious.bind(this);
+        this.onClickNext = this.onClickNext.bind(this);
     }
 
     //Search button
@@ -57,7 +58,7 @@ class UsersPage extends React.Component {
         e.persist();
         e.preventDefault();
         //fetch query
-        UserComm.getUsers(this.state.maxUsersPerPage, this.state.currentPageIndex)
+        UserComm.getUsers(this.state.currentPageIndex)
             .then((u) => {
                 console.log(u);
                 this.setState({userList: u});
@@ -95,15 +96,30 @@ class UsersPage extends React.Component {
     onClickNext = (e) => {
         e.persist();
         e.preventDefault();
-
+        UserComm.getUsers(this.state.currentPageIndex+1)
+            .then((u) => {
+                    console.log(u);
+                    this.setState({currentPageIndex: this.state.currentPageIndex+1});
+                    this.setState({userList: u});
+                }
+            )
+            .catch((t) => {});
     };
 
     //Previous page of table
     onClickPrevious = (e) => {
         e.persist();
         e.preventDefault();
-
-
+        if (this.state.currentPageIndex > 1) {
+            UserComm.getUsers(this.state.currentPageIndex - 1)
+                .then((u) => {
+                        console.log(u);
+                        this.setState({currentPageIndex: this.state.currentPageIndex - 1});
+                        this.setState({userList: u});
+                    }
+                )
+                .catch((t) => {alert(t)});
+        }
     };
 
 
@@ -113,7 +129,7 @@ class UsersPage extends React.Component {
         e.preventDefault();
         UserComm.deleteUser(user.id)
             .then(() => {
-                UserComm.getUsers(this.state.maxUsersPerPage, this.state.currentPageIndex)
+                UserComm.getUsers(this.state.currentPageIndex)
                     .then((u) => {
                             console.log(u);
                             this.setState({userList: u})
@@ -324,6 +340,10 @@ class UsersPage extends React.Component {
                         </tbody>
                     </Table>
 
+                </div>
+                <div className={'Button-page-move'}>
+                    <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
+                    <button onClick={(e) => this.onClickNext(e)}> Next </button>
                 </div>
             </div>
         )

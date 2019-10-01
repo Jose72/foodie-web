@@ -6,13 +6,13 @@ const USERS_ROUTE = 'users/';
 
 class UserComm extends React.Component {
 
-    static getUsers(n, p){
+    static getUsers(p){
         const requestOptions = {
             method: 'GET',
             headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'},
         };
-        return fetch(API_URL + USERS_ROUTE + '?' + 'page=' + p + '&' + 'number' + n, requestOptions)
+        return fetch(API_URL + USERS_ROUTE + '?' + 'page=' + p, requestOptions)
             .then(res => {
                 if (res.ok) {
                     return res.json();
