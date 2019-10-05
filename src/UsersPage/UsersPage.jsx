@@ -11,7 +11,7 @@ const userModifyEmpty = {
     lastName: '',
     email: '',
     phone: '',
-    subscription: '',
+    subscription: 'flat',
     reputation: 0,
     gratitudePoints: 0
 };
@@ -23,13 +23,7 @@ class UsersPage extends React.Component {
         this.state = {
             userList: [],
             currentPageIndex: 1,
-            query: {
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                subscription: '',
-            },
+            query: '',
             lastQuery: this.query,
             showModifyUserModal: false,
             userModify: {
@@ -75,16 +69,6 @@ class UsersPage extends React.Component {
         currentState[name] = value;
         this.setState({ userModify: currentState });
     };
-
-    changeQuery = (e) => {
-        e.persist();
-        const { query } = { ...this.state };
-        const currentState = query;
-        const { name, value } = e.target;
-        currentState[name] = value;
-        this.setState({ query: currentState });
-    };
-
 
     //Change on form fields
     change = (e) => {
@@ -213,7 +197,11 @@ class UsersPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'UserPage-content'}>
-                    <Link className='Link' to='/users/add'>Add User</Link>
+                    <div className={'Add-User-Button'}>
+                        <Link className='Link' to='/users/add'>
+                            <button>Add User</button>
+                        </Link>
+                    </div>
                     <Modal isOpen={this.state.showModifyUserModal}>
                         <h1>User Modification</h1>
                         <div className='ModifyUser-content'>
@@ -292,58 +280,36 @@ class UsersPage extends React.Component {
                         <p><button onClick={() => this.submitModifyUserModal()}>Submit</button></p>
                         <p><button onClick={() => this.cancelModifyUserModal()}>Cancel</button></p>
                     </Modal>
-                    <form>
-                        <div className='User-search'>
-                            <form>
-                            <input
-                                size='150%'
-                                name='firstName'
-                                placeholder='First Name'
-                                value={this.state.firstName}
-                                onChange={e => this.changeQuery(e)}
-                            />
-                            <input
-                                size='150%'
-                                name='lastName'
-                                placeholder='Last Name'
-                                value={this.state.lastName}
-                                onChange={e => this.changeQuery(e)}
-                            />
-                            <input
-                                size='150%'
-                                name='phone'
-                                placeholder='Phone Number'
-                                value={this.state.phone}
-                                onChange={e => this.changeQuery(e)}
-                            />
-                            <input
-                                size='150%'
-                                name='email'
-                                placeholder='Email'
-                                value={this.state.email}
-                                onChange={e => this.changeQuery(e)}
-                            />
-                            </form>
-                            <br/>
-                            <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
-                    </form>
-                    <Table className={'Table'}>
-                        <thead>
-                            {this.renderFields()}
-                        </thead>
-                        <tbody>
-                            {this.state.userList.map(this.renderElement)}
-                        </tbody>
-                    </Table>
+                    <div>
+                        <form className='User-search'>
+                            <div>
+                                <input className={'search-input-bar'}
+                                    size='150%'
+                                    name='query'
+                                    placeholder=''
+                                    value={this.state.query}
+                                    onChange={e => this.change(e)}
+                                />
+                                <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </form>
+                        <Table className={'Table'}>
+                            <thead>
+                                {this.renderFields()}
+                            </thead>
+                            <tbody>
+                                {this.state.userList.map(this.renderElement)}
+                            </tbody>
+                        </Table>
 
-                </div>
-                <div className={'Button-page-move'}>
-                    <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
-                    <button onClick={(e) => this.onClickNext(e)}> Next </button>
+                    </div>
+                    <div className={'Button-page-move'}>
+                        <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
+                        <button onClick={(e) => this.onClickNext(e)}> Next </button>
+                    </div>
                 </div>
             </div>
         )
