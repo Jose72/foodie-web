@@ -1,0 +1,60 @@
+.DeliveryPage {
+    background-color: #282c34;
+    text-align: center;
+}
+
+.DeliveryPage-content {
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    height: 100vh;
+}
+
+.DeliveryPage-header {
+    background-color: #282c34;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.DeliveryPage-footer {
+    background-color: #282c34;
+    clear: both;
+    min-height: 5vh;
+    display: flex;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(1px + 2vmin);
+    color: white;
+}
+
+.Delivery-search {
+    margin-top: 10%;
+    width: 100%;
+    top: 0;
+    #display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input-bar {
+    width: 55%;
+}
+
+.Button-page-move {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
