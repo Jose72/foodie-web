@@ -19,10 +19,17 @@ class LoginPage extends React.Component {
   onSubmit = (e) => {
       e.persist();
       e.preventDefault();
-
-      Auth.login(this.state.username, this.state.password)
-          .then(() => {window.location.reload()})
-          .catch((t) => {alert(t)})
+      if(this.validateForm()) {
+          Auth.login(this.state.username, this.state.password)
+              .then(() => {
+                  window.location.reload()
+              })
+              .catch((t) => {
+                  alert(t)
+              })
+      } else {
+          alert('Empty User or Password')
+      }
   };
 
   change = (e) => {
