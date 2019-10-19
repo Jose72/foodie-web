@@ -49,7 +49,7 @@ class Auth extends React.Component {
         return (localStorage.getItem('token') != null)
     }
 
-    getToken() { return localStorage.getItem('token')}
+    static getToken() { return localStorage.getItem('token')}
 
 }
 

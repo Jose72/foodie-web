@@ -32,6 +32,7 @@ class UserAdd extends React.Component{
             .then(() => {
                 alert('User Added Successfully');
                 console.log("User Added");
+
             })
             .catch((r) => {
                 alert(r)

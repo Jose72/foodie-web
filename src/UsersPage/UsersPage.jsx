@@ -166,7 +166,6 @@ class UsersPage extends React.Component {
         )
     }
 
-
     renderElement(user) {
         return (
             <tr className={'Table-content'} key={user.id}>
