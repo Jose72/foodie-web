@@ -107,6 +107,26 @@ class UserComm extends React.Component {
                 return Promise.reject(error)
             })
     }
+
+    static getUser(id){
+        return axios.get(API_URL + USER_ROUTE + id, {
+            headers: {
+                Authorization: "Bearer " + Auth.getToken()
+            }
+        })
+            .then(res => {
+                if (res.status === 200) {
+                    return res.data
+                } else {
+                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                return Promise.reject(error)
+            })
+    };
+
 }
 
 export {UserComm}

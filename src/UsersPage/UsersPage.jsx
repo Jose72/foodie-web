@@ -183,6 +183,11 @@ class UsersPage extends React.Component {
                 <td>
                     <button onClick={(e) => this.onClickModify(user, e)}> Modify </button>
                 </td>
+                <td>
+                    <Link className='Link' to={`/user/${user.id}`}>
+                        <button>View</button>
+                    </Link>
+                </td>
             </tr>
         )
     }
