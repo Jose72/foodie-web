@@ -12,6 +12,8 @@ class UserPage extends React.Component {
         this.state = {
             userId: props.match.params.id,
             user: {},
+            currentOrdersList: [],
+            canceledOrdersList: [],
             completeOrdersList: []
         };
     }
@@ -27,15 +29,66 @@ class UserPage extends React.Component {
         //TODO: get orders
     }
 
-    renderFields(){
+    renderFieldsCompleted(){
         return (
             <tr className={'Table-header'}>
                 <th style={{width: '10%'}}>Id</th>
+                <th style={{width: '10%'}}>Delivery Id</th>
+                <th style={{width: '10%'}}>Food Place</th>
+                <th style={{width: '10%'}}>Food</th>
+                <th style={{width: '10%'}}>Order time</th>
+                <th style={{width: '10%'}}>Delivery time</th>
+                <th style={{width: '10%'}}>Delivered at</th>
+                <th style={{width: '10%'}}>Price</th>
+                <th style={{width: '10%'}}>Payed with</th>
             </tr>
         )
     }
 
-    renderElement(order) {
+    renderFieldsCurrent(){
+        return (
+            <tr className={'Table-header'}>
+                <th style={{width: '10%'}}>Id</th>
+                <th style={{width: '10%'}}>Delivery Id</th>
+                <th style={{width: '10%'}}>Food Place</th>
+                <th style={{width: '10%'}}>Food</th>
+                <th style={{width: '10%'}}>Date</th>
+                <th style={{width: '10%'}}>Price</th>
+                <th style={{width: '10%'}}>Payed with</th>
+            </tr>
+        )
+    }
+
+    renderFieldsCanceled(){
+        return (
+            <tr className={'Table-header'}>
+                <th style={{width: '10%'}}>Id</th>
+                <th style={{width: '10%'}}>Food Place</th>
+                <th style={{width: '10%'}}>Food</th>
+                <th style={{width: '10%'}}>Order time</th>
+                <th style={{width: '10%'}}>Deliver at</th>
+                <th style={{width: '10%'}}>Price</th>
+            </tr>
+        )
+    }
+
+    renderElementCompleted(order) {
+        return (
+            <tr className={'Table-content'} key={order.id}>
+                <td>{order.id}</td>
+            </tr>
+        )
+    }
+
+    renderElementCurrent(order) {
+        return (
+            <tr className={'Table-content'} key={order.id}>
+                <td>{order.id}</td>
+            </tr>
+        )
+    }
+
+    renderElementCanceled(order) {
         return (
             <tr className={'Table-content'} key={order.id}>
                 <td>{order.id}</td>
@@ -48,6 +101,60 @@ class UserPage extends React.Component {
             return logo;
         }
         return this.state.user.pictureURL;
+    }
+
+    getCompletedOrdersTable() {
+        if (this.state.completeOrdersList.length > 0){
+            return(
+                <div>
+                    Complete Orders
+                    <Table className={'Table'}>
+                        <thead>
+                            {this.renderFieldsCompleted()}
+                        </thead>
+                        <tbody>
+                            {this.state.completeOrdersList.map(this.renderElementCompleted)}
+                        </tbody>
+                    </Table>
+                </div>
+            )
+        }
+    }
+
+    getCurrentOrdersTable() {
+        if (this.state.currentOrdersList.length > 0){
+            return(
+                <div>
+                    Current Orders
+                    <Table className={'Table'}>
+                        <thead>
+                        {this.renderFieldsCurrent()}
+                        </thead>
+                        <tbody>
+                        {this.state.currentOrdersList.map(this.renderElementCurrent)}
+                        </tbody>
+                    </Table>
+                </div>
+            )
+        }
+    }
+
+    getCanceledOrdersTable() {
+        if (this.state.canceledOrdersList.length > 0){
+            return(
+                <div>
+                    Complete Orders
+                    <Table className={'Table'}>
+                        <thead>
+                        {this.renderFieldsCanceled()}
+                        </thead>
+                        <tbody>
+                        {this.state.canceledOrdersList.map(this.renderElementCanceled)}
+                        </tbody>
+                    </Table>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -96,23 +203,18 @@ class UserPage extends React.Component {
                             {this.state.user.gratitudePoints}
                         </div>
                     </div>
-                    <div>
+                    <div className={'Tables'}>
                         <br/>
                         <br/>
-                        Orders
-                        <Table className={'Table'}>
-                            <thead>
-                                {this.renderFields()}
-                            </thead>
-                            <tbody>
-                                {this.state.completeOrdersList.map(this.renderElement)}
-                            </tbody>
-                        </Table>
+                        {this.getCurrentOrdersTable()}
+                        {this.getCanceledOrdersTable()}
+                        {this.getCompletedOrdersTable()}
                     </div>
                 </div>
             </div>
         )
     }
+
 }
 
 export {UserPage};
