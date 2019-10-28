@@ -50,7 +50,17 @@
 }
 
 .search-input-bar {
-    width: 55%;
+    width: 50%;
+}
+
+.search-add {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Search-User-Bar {
+    width: 100%;
 }
 
 .Button-page-move {
@@ -60,17 +70,3 @@
 }
 
 
-/*
-.Table-header {
-    background-color: #ffffff;
-    text-align: center;
-    display: flex;
-}
-
-.Table-content {
-    background-color: #ffffff;
-    text-align: center;
-    display: flex;
-}
-
- */

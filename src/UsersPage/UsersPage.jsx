@@ -4,6 +4,7 @@ import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
 import { Link } from "react-router-dom";
 import Modal from "reactstrap/es/Modal";
+import { UsersSort } from "./UserSort";
 
 const userModifyEmpty = {
     id: -1,
@@ -19,7 +20,7 @@ const userModifyEmpty = {
 class UsersPage extends React.Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
             userList: [],
             currentPageIndex: 1,
@@ -38,13 +39,15 @@ class UsersPage extends React.Component {
             }
         };
 
-        this.onSubmit =  this.onSubmit.bind(this);
-        this.renderElement = this.renderElement.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.renderTableElement = this.renderTableElement.bind(this);
+        this.renderTable = this.renderTable.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickModify = this.onClickModify.bind(this);
         this.submitModifyUserModal = this.submitModifyUserModal.bind(this);
         this.onClickPrevious = this.onClickPrevious.bind(this);
         this.onClickNext = this.onClickNext.bind(this);
+
     }
 
     //Search button
@@ -142,14 +145,16 @@ class UsersPage extends React.Component {
             })
             .catch((t) => {alert(t)});
 
-    }
+    };
+
 
     cancelModifyUserModal(){
         this.setState({showModifyUserModal: false});
         this.setState({userModify: userModifyEmpty})
     }
 
-    renderFields(){
+    //Table display
+    renderTableFields(){
         return (
             <tr className={'Table-header'}>
                 <th style={{width: '10%'}}>Id</th>
@@ -160,13 +165,11 @@ class UsersPage extends React.Component {
                 <th style={{width: '10%'}}>Subscription</th>
                 <th style={{width: '10%'}}>Reputation</th>
                 <th style={{width: '10%'}}>Gratitude Points</th>
-                <th style={{width: '2%'}}></th>
-                <th style={{width: '2%'}}></th>
             </tr>
         )
     }
 
-    renderElement(user) {
+    renderTableElement(user) {
         return (
             <tr className={'Table-content'} key={user.id}>
                 <td>{user.id}</td>
@@ -192,6 +195,27 @@ class UsersPage extends React.Component {
         )
     }
 
+    renderTable(){
+        if(this.state.userList.length > 0) {
+            return(
+                <div>
+                    <Table className={'Table'}>
+                        <thead>
+                        {this.renderTableFields()}
+                        </thead>
+                        <tbody>
+                        {this.state.userList.map(this.renderTableElement)}
+                        </tbody>
+                    </Table>
+                    <div className={'Button-page-move'}>
+                        <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
+                        <button onClick={(e) => this.onClickNext(e)}> Next </button>
+                    </div>
+                </div>
+            )
+        }
+    }
+
     render(){
         return (
             <div className={'UserPage'}>
@@ -201,11 +225,6 @@ class UsersPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'UserPage-content'}>
-                    <div className={'Add-User-Button'}>
-                        <Link className='Link' to='/users/add'>
-                            <button>Add User</button>
-                        </Link>
-                    </div>
                     <Modal isOpen={this.state.showModifyUserModal}>
                         <h1>User Modification</h1>
                         <div className='ModifyUser-content'>
@@ -284,36 +303,28 @@ class UsersPage extends React.Component {
                         <p><button onClick={() => this.submitModifyUserModal()}>Submit</button></p>
                         <p><button onClick={() => this.cancelModifyUserModal()}>Cancel</button></p>
                     </Modal>
-                    <div>
-                        <form className='User-search'>
-                            <div>
-                                <input className={'search-input-bar'}
-                                    size='150%'
-                                    name='query'
-                                    placeholder=''
-                                    value={this.state.query}
-                                    onChange={e => this.change(e)}
-                                />
-                                <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                                <br/>
-                                <br/>
-                                <br/>
-                            </div>
-                        </form>
-                        <Table className={'Table'}>
-                            <thead>
-                                {this.renderFields()}
-                            </thead>
-                            <tbody>
-                                {this.state.userList.map(this.renderElement)}
-                            </tbody>
-                        </Table>
+                    <div className={'search-add'}>
+                        <div className={'Search-User-Bar'}>
+                            <input className={'search-input-bar'}
+                                size='150%'
+                                name='query'
+                                placeholder=''
+                                value={this.state.query}
+                                onChange={e => this.change(e)}
+                            />
+                            <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Add-User-Button'}>
+                            <Link className='Link' to='/users/add'>
+                                <button>Add User</button>
+                            </Link>
+                        </div>
+                    </div>
+                    {this.renderTable()}
 
-                    </div>
-                    <div className={'Button-page-move'}>
-                        <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
-                        <button onClick={(e) => this.onClickNext(e)}> Next </button>
-                    </div>
                 </div>
             </div>
         )
