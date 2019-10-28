@@ -4,17 +4,18 @@ import { Auth } from '../utils/Authentication'
 
 import {API_URL} from "./Config";
 
-const USER_ROUTE = 'user/';
-const USERS_ROUTE = 'users/';
+const USER_ROUTE = 'user';
+const USERS_ROUTE = 'users';
 
 axios.defaults.headers.common['Content-Type'] =  'application/json';
 
 class UserComm extends React.Component {
 
-    static getUsers(p){
+    static getUsers(pIndex, pSize){
         return axios.get(API_URL + USERS_ROUTE, {
             params: {
-                page: p
+                p: pIndex,
+                pSize: pSize
                 },
             headers: {
                 Authorization: "Bearer " + Auth.getToken()
@@ -34,7 +35,7 @@ class UserComm extends React.Component {
     }
 
     static deleteUser(id){
-        return axios.delete(API_URL + USER_ROUTE + id, {
+        return axios.delete(API_URL + USER_ROUTE + '/' + id, {
             headers: {
                 Authorization: "Bearer " + Auth.getToken()
             }
@@ -53,7 +54,7 @@ class UserComm extends React.Component {
     };
 
     static modifyUser(user, opts){
-        return axios.put(API_URL + USER_ROUTE + user.id,
+        return axios.put(API_URL + USER_ROUTE + '/' + user.id,
             {
                     firstName: user.firstName,
                     lastName: user.lastName,
@@ -109,7 +110,7 @@ class UserComm extends React.Component {
     }
 
     static getUser(id){
-        return axios.get(API_URL + USER_ROUTE + id, {
+        return axios.get(API_URL + USER_ROUTE + '/' + id, {
             headers: {
                 Authorization: "Bearer " + Auth.getToken()
             }

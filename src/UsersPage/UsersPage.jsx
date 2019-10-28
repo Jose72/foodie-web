@@ -5,6 +5,7 @@ import { UserComm } from '../utils/UserComm'
 import { Link } from "react-router-dom";
 import Modal from "reactstrap/es/Modal";
 import { UsersSort } from "./UserSort";
+import queryString from 'query-string';
 
 const userModifyEmpty = {
     id: -1,
@@ -21,9 +22,11 @@ class UsersPage extends React.Component {
     constructor(props) {
         super(props);
 
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         this.state = {
             userList: [],
-            currentPageIndex: 1,
+            currentPageIndex: q.p,
+            pageSize: q.pSize,
             query: '',
             lastQuery: this.query,
             showModifyUserModal: false,
@@ -50,23 +53,77 @@ class UsersPage extends React.Component {
 
     }
 
+    componentDidMount() {
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        let pageIndex = q.p;
+        let pageSize = q.pSize;
+        console.log(q);
+        if (pageSize === undefined || pageIndex === undefined) {
+            this.props.history.push({
+                pathname: '/users',
+            });
+            this.setState({currentPageIndex: 1});
+            this.setState({pageSize: 10});
+        } else {
+            UserComm.getUsers(pageIndex, pageSize)
+                .then((u) => {
+                        console.log(u);
+                        this.setState({userList: u});
+                    }
+                )
+                .catch((t) => {
+                    alert(t)
+                });
+            this.setState({currentPageIndex: pageIndex});
+            this.setState({pageSize: pageSize});
+            console.log(q);
+            console.log(this.state.userList);
+            console.log('------------');
+        }
+    }
+
     //Search button
     onSubmit = (e) => {
         e.persist();
         e.preventDefault();
         //fetch query
-        UserComm.getUsers(this.state.currentPageIndex)
-            .then((u) => {
-                console.log(u);
-                this.setState({userList: u});
-                }
-            )
-            .catch((t) => {alert(t)});
+        this.props.history.push({
+            pathname: '/users',
+            search: '?' + 'p=' + this.state.currentPageIndex + '&' + 'pSize=' + this.state.pageSize,
+        });
+        window.location.reload();
     };
 
     onKeyPress = (e) => {
         if (e.key === 'Enter') {
             this.onSubmit(e);
+        }
+    };
+
+    //Next page of table
+    onClickNext = (e) => {
+        e.persist();
+        e.preventDefault();
+        console.log(this.state.currentPageIndex, this.state.pageSize);
+        this.props.history.push({
+            pathname: '/users',
+            search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) + 1).toString() + '&' + 'pSize=' + this.state.pageSize,
+        });
+        window.location.reload();
+    };
+
+    //Previous page of table
+    onClickPrevious = (e) => {
+        e.persist();
+        e.preventDefault();
+        if(parseInt(parseInt(this.state.currentPageIndex, 10) === 1)){
+        } else {
+            console.log(this.state.currentPageIndex, this.state.pageSize);
+            this.props.history.push({
+                pathname: '/users',
+                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) - 1).toString() + '&' + 'pSize=' + this.state.pageSize,
+            });
+            window.location.reload();
         }
     };
 
@@ -86,35 +143,7 @@ class UsersPage extends React.Component {
         this.setState({[e.target.name]:  e.target.value});
     };
 
-    //Next page of table
-    onClickNext = (e) => {
-        e.persist();
-        e.preventDefault();
-        UserComm.getUsers(this.state.currentPageIndex+1)
-            .then((u) => {
-                    console.log(u);
-                    this.setState({currentPageIndex: this.state.currentPageIndex+1});
-                    this.setState({userList: u});
-                }
-            )
-            .catch((t) => {});
-    };
 
-    //Previous page of table
-    onClickPrevious = (e) => {
-        e.persist();
-        e.preventDefault();
-        if (this.state.currentPageIndex > 1) {
-            UserComm.getUsers(this.state.currentPageIndex - 1)
-                .then((u) => {
-                        console.log(u);
-                        this.setState({currentPageIndex: this.state.currentPageIndex - 1});
-                        this.setState({userList: u});
-                    }
-                )
-                .catch((t) => {alert(t)});
-        }
-    };
 
 
     //Delete user
@@ -164,14 +193,14 @@ class UsersPage extends React.Component {
     renderTableFields(){
         return (
             <tr className={'Table-header'}>
-                <th style={{width: '10%'}}>Id</th>
-                <th style={{width: '10%'}}>First Name</th>
-                <th style={{width: '10%'}}>Last Name</th>
-                <th style={{width: '10%'}}>Phone</th>
-                <th style={{width: '10%'}}>Email</th>
-                <th style={{width: '10%'}}>Subscription</th>
-                <th style={{width: '10%'}}>Reputation</th>
-                <th style={{width: '10%'}}>Gratitude Points</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Id</th>
+                <th className={'Table-field'} style={{width: '10%'}}>First Name</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Last Name</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Phone</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Email</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Subscription</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Reputation</th>
+                <th className={'Table-field'} style={{width: '10%'}}>Gratitude Points</th>
             </tr>
         )
     }
@@ -179,21 +208,21 @@ class UsersPage extends React.Component {
     renderTableElement(user) {
         return (
             <tr className={'Table-content'} key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.phone}</td>
-                <td>{user.email}</td>
-                <td>{user.subscription}</td>
-                <td>{user.reputation}</td>
-                <td>{user.gratitudePoints}</td>
-                <td>
+                <td className={'Table-row'}>{user.id}</td>
+                <td className={'Table-row'}>{user.firstName}</td>
+                <td className={'Table-row'}>{user.lastName}</td>
+                <td className={'Table-row'}>{user.phone}</td>
+                <td className={'Table-row'}>{user.email}</td>
+                <td className={'Table-row'}>{user.subscription}</td>
+                <td className={'Table-row'}>{user.reputation}</td>
+                <td className={'Table-row'}>{user.gratitudePoints}</td>
+                <td className={'Table-row'}>
                     <button onClick={(e) => this.onClickDelete(user, e)}> Delete </button>
                 </td>
-                <td>
+                <td className={'Table-row'}>
                     <button onClick={(e) => this.onClickModify(user, e)}> Modify </button>
                 </td>
-                <td>
+                <td className={'Table-row'}>
                     <Link className='Link' to={`/user/${user.id}`}>
                         <button>View</button>
                     </Link>
@@ -206,6 +235,16 @@ class UsersPage extends React.Component {
         if(this.state.userList.length > 0) {
             return(
                 <div>
+                    <div className={'Table-entries-size'} >
+                        <label className={'Table-entries-size-label'}>Entries</label>
+                        <select className='Table-entries-size-input' name='pageSize' value={this.state.pageSize} onChange={e => this.change(e)}>
+                            <option value='5'>5</option>
+                            <option value='10'>10</option>
+                            <option value='25'>25</option>
+                            <option value='50'>50</option>
+                        </select>
+                        <br/>
+                    </div>
                     <Table className={'Table'}>
                         <thead>
                         {this.renderTableFields()}

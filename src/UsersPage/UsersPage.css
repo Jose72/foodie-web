@@ -64,4 +64,21 @@
     justify-content: center;
 }
 
+.Table-entries-size{
+    display: flex;
+    flex-direction: row;
+}
+
+.Table-row{
+    border: 1px black;
+    color: black;
+    background-color: #cbe1ff;
+}
+
+.Table-field{
+    border: 1px black;
+    color: white;
+    background-color: #485e67;
+}
+
 
