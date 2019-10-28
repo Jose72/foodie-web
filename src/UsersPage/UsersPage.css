@@ -42,25 +42,20 @@
 
 .User-search {
     margin-top: 10%;
-    width: 100%;
     top: 0;
-    #display: flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.search-input-bar {
-    width: 50%;
 }
 
 .search-add {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
 }
 
 .Search-User-Bar {
-    width: 100%;
+    width: 800px;
 }
 
 .Button-page-move {

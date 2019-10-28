@@ -64,6 +64,13 @@ class UsersPage extends React.Component {
             .catch((t) => {alert(t)});
     };
 
+    onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.onSubmit(e);
+        }
+    };
+
+
     changeUserModify = (e) => {
         e.persist();
         const { userModify } = { ...this.state };
@@ -303,14 +310,16 @@ class UsersPage extends React.Component {
                         <p><button onClick={() => this.submitModifyUserModal()}>Submit</button></p>
                         <p><button onClick={() => this.cancelModifyUserModal()}>Cancel</button></p>
                     </Modal>
+
                     <div className={'search-add'}>
                         <div className={'Search-User-Bar'}>
                             <input className={'search-input-bar'}
-                                size='150%'
+                                minLength={20}
+                                onKeyPress={(e) => this.onKeyPress(e)}
                                 name='query'
                                 placeholder=''
                                 value={this.state.query}
-                                onChange={e => this.change(e)}
+                                onChange={(e) => this.change(e)}
                             />
                             <button onClick={(e) => this.onSubmit(e)}> Search </button>
                             <br/>
@@ -323,6 +332,7 @@ class UsersPage extends React.Component {
                             </Link>
                         </div>
                     </div>
+
                     {this.renderTable()}
 
                 </div>
