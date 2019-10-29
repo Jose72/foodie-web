@@ -69,18 +69,36 @@ class UsersPage extends React.Component {
                 .then((u) => {
                         console.log(u);
                         this.setState({userList: u});
+                        this.setState({currentPageIndex: pageIndex});
+                        this.setState({pageSize: pageSize});
                     }
                 )
                 .catch((t) => {
-                    alert(t)
+                    alert(t);
                 });
-            this.setState({currentPageIndex: pageIndex});
-            this.setState({pageSize: pageSize});
-            console.log(q);
-            console.log(this.state.userList);
-            console.log('------------');
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        let q = queryString.parse(nextProps.location.search, {ignoreQueryPrefix: true});
+        let pageIndex = q.p;
+        let pageSize = q.pSize;
+        if(this.state.currentPageIndex !== pageIndex || this.state.pageSize !== pageSize) {
+            UserComm.getUsers(pageIndex, pageSize)
+                .then((u) => {
+                        console.log(pageIndex, pageSize);
+                        console.log(u);
+                        this.setState({userList: u});
+                        this.setState({currentPageIndex: pageIndex});
+                        this.setState({pageSize: pageSize});
+                    }
+                )
+                .catch((t) => {
+                    alert(t);
+                });
+        }
+    }
+
 
     //Search button
     onSubmit = (e) => {
