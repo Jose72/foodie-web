@@ -3,20 +3,8 @@ import './UsersPage.css';
 import { Table } from 'reactstrap';
 import { UserComm } from '../utils/UserComm'
 import { Link } from "react-router-dom";
-import Modal from "reactstrap/es/Modal";
-import { UsersSort } from "./UserSort";
 import queryString from 'query-string';
 
-const userModifyEmpty = {
-    id: -1,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    subscription: 'flat',
-    reputation: 0,
-    gratitudePoints: 0
-};
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -29,25 +17,12 @@ class UsersPage extends React.Component {
             pageSize: q.pSize,
             query: '',
             lastQuery: this.query,
-            showModifyUserModal: false,
-            userModify: {
-                id: -1,
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                subscription: '',
-                reputation: 0,
-                gratitudePoints: 0
-            }
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.renderTableElement = this.renderTableElement.bind(this);
         this.renderTable = this.renderTable.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
-        this.onClickModify = this.onClickModify.bind(this);
-        this.submitModifyUserModal = this.submitModifyUserModal.bind(this);
         this.onClickPrevious = this.onClickPrevious.bind(this);
         this.onClickNext = this.onClickNext.bind(this);
 
@@ -145,22 +120,11 @@ class UsersPage extends React.Component {
         }
     };
 
-
-    changeUserModify = (e) => {
-        e.persist();
-        const { userModify } = { ...this.state };
-        const currentState = userModify;
-        const { name, value } = e.target;
-        currentState[name] = value;
-        this.setState({ userModify: currentState });
-    };
-
     //Change on form fields
     change = (e) => {
         e.persist();
         this.setState({[e.target.name]:  e.target.value});
     };
-
 
 
 
@@ -174,6 +138,7 @@ class UsersPage extends React.Component {
                     .then((u) => {
                             console.log(u);
                             this.setState({userList: u})
+                            window.location.reload();
                         }
                     )
                     .catch((t) => {alert(t)});
@@ -181,31 +146,6 @@ class UsersPage extends React.Component {
             .catch((t) => {alert(t)});
         console.log('Delete')
     };
-
-    //Modify user
-    onClickModify(user, e){
-        e.persist();
-        e.preventDefault();
-        this.setState({showModifyUserModal: true, userModify: user});
-        console.log('Modify')
-
-    };
-
-    submitModifyUserModal(){
-        UserComm.modifyUser(this.state.userModify)
-            .then((t) => {
-                alert(t);
-                this.setState({showModifyUserModal: false, userModify: userModifyEmpty})
-            })
-            .catch((t) => {alert(t)});
-
-    };
-
-
-    cancelModifyUserModal(){
-        this.setState({showModifyUserModal: false});
-        this.setState({userModify: userModifyEmpty})
-    }
 
     //Table display
     renderTableFields(){
@@ -238,7 +178,9 @@ class UsersPage extends React.Component {
                     <button onClick={(e) => this.onClickDelete(user, e)}> Delete </button>
                 </td>
                 <td className={'Table-row'}>
-                    <button onClick={(e) => this.onClickModify(user, e)}> Modify </button>
+                    <Link className='Link' to={`/user/modify/${user.id}`}>
+                        <button>Modify User</button>
+                    </Link>
                 </td>
                 <td className={'Table-row'}>
                     <Link className='Link' to={`/user/${user.id}`}>
@@ -289,85 +231,6 @@ class UsersPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'UserPage-content'}>
-                    <Modal isOpen={this.state.showModifyUserModal}>
-                        <h1>User Modification</h1>
-                        <div className='ModifyUser-content'>
-                            <form>
-                                <label className='ModifyUser-label'>First Name</label>
-                                <br/>
-                                <input
-                                    size='150%'
-                                    name='firstName'
-                                    //placeholder='Username'
-                                    value={this.state.userModify.firstName}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Last Name</label>
-                                <br/>
-                                <input
-                                    name='lastName'
-                                    //placeholder='Password'
-                                    value={this.state.userModify.lastName}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Email</label>
-                                <br/>
-                                <input
-                                    name='email'
-                                    //placeholder='Password'
-                                    value={this.state.userModify.email}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Phone</label>
-                                <br/>
-                                <input
-                                    name='phone'
-                                    //placeholder='Password'
-                                    value={this.state.userModify.phone}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Subscription</label>
-                                <br/>
-                                <select name='subscription' value={this.state.userModify.subscription} onChange={e => this.changeUserModify(e)}>
-                                    <option value='flat'>flat</option>
-                                    <option value='premium'>premium</option>
-                                </select>
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Reputation</label>
-                                <br/>
-                                <input
-                                    name='reputation'
-                                    //placeholder='Password'
-                                    value={this.state.userModify.reputation}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                                <label className={'ModifyUser-label'}>Gratitude Points</label>
-                                <br/>
-                                <input
-                                    name='gratitudePoints'
-                                    //placeholder='Password'
-                                    value={this.state.userModify.gratitudePoints}
-                                    onChange={e => this.changeUserModify(e)}
-                                />
-                                <br/>
-                                <br/>
-                            </form>
-                        </div>
-                        <p><button onClick={() => this.submitModifyUserModal()}>Submit</button></p>
-                        <p><button onClick={() => this.cancelModifyUserModal()}>Cancel</button></p>
-                    </Modal>
-
                     <div className={'search-add'}>
                         <div className={'Search-User-Bar'}>
                             <input className={'search-input-bar'}
@@ -397,10 +260,6 @@ class UsersPage extends React.Component {
         )
     }
 
-
-    onClickCloseAddUserModal(){
-        this.setState({showUserModal: false})
-    }
 }
 
 export {UsersPage};

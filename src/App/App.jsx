@@ -4,6 +4,7 @@ import './App.css';
 import { LoginPage } from '../LoginPage'
 import { UsersPage } from '../UsersPage'
 import { UserAdd } from '../UsersPage'
+import { UserModify} from "../UsersPage";
 import { UserPage} from "../UsersPage";
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
@@ -32,7 +33,8 @@ class App extends React.Component {
               <ProtectedRoute exact path="/menu" component={MenuPage} />
               <ProtectedRoute exact path="/users" component={UsersPage} />
               <ProtectedRoute exact path="/users/add" component={UserAdd} />
-                <ProtectedRoute exact path="/user/:id" component={UserPage} />
+              <ProtectedRoute exact path="/user/:id" component={UserPage} />
+              <ProtectedRoute exact path="/user/modify/:id" component={UserModify} />
               <Route component={NotFound} />
             </Switch>
         </div>
