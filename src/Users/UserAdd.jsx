@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {UserComm} from "../utils";
-
+import{UserApi} from "../services";
 import './UserAdd.css';
 
 class UserAdd extends React.Component{
@@ -28,7 +27,7 @@ class UserAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        UserComm.addUser(this.state)
+        UserApi.addUser(this.state)
             .then(() => {
                 alert('User Added Successfully');
                 console.log("User Added");

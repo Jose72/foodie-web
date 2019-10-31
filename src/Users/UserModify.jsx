@@ -1,5 +1,5 @@
 import React from "react";
-import {UserComm} from "../utils";
+import {UserApi} from "../services";
 import {Link} from "react-router-dom";
 import './UserModify.css';
 
@@ -14,7 +14,7 @@ class UserModify extends React.Component{
     }
 
     componentDidMount() {
-        UserComm.getUser(this.state.userId)
+        UserApi.getUser(this.state.userId)
             .then((u) => {
                 this.setState({user: u})
             })
@@ -32,7 +32,7 @@ class UserModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        UserComm.modifyUser(this.state.user)
+        UserApi.modifyUser(this.state.user)
             .then(() => {
                 alert('User Updated Successfully');
             })

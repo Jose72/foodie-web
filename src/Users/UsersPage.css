@@ -1,4 +1,4 @@
-.UserPage {
+.UsersPage {
     background-color: #282c34;
     text-align: center;
 }
@@ -11,10 +11,9 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    height: 100vh;
 }
 
-.UserPage-header {
+.UsersPage-header {
     background-color: #282c34;
     min-height: 10vh;
     display: flex;
@@ -25,7 +24,7 @@
     color: white;
 }
 
-.UserPage-footer {
+.UsersPage-footer {
     background-color: #282c34;
     clear: both;
     min-height: 5vh;
@@ -64,15 +63,40 @@
     justify-content: center;
 }
 
-.Table-entries-size{
+.Table-panel{
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.Table-entries{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.Table-button-page-move-top{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.Table-entries-size-label{
+    display: flex;
+    flex-direction: row;
+    color: white;
 }
 
 .Table-row{
     border: 1px black;
     color: black;
     background-color: #cbe1ff;
+    font-size: medium;
 }
 
 .Table-field{
@@ -80,5 +104,4 @@
     color: white;
     background-color: #485e67;
 }
-
 

@@ -1,15 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { Auth } from '../utils/Authentication'
+import { Auth } from './Authentication'
 
-import {API_URL} from "./Config";
+import {API_URL} from "../utils/Config";
 
 const USER_ROUTE = 'user';
 const USERS_ROUTE = 'users';
 
 axios.defaults.headers.common['Content-Type'] =  'application/json';
 
-class UserComm extends React.Component {
+class UserApi extends React.Component {
 
     static getUsers(pIndex, pSize){
         return axios.get(API_URL + USERS_ROUTE, {
@@ -130,4 +130,4 @@ class UserComm extends React.Component {
 
 }
 
-export {UserComm}
+export {UserApi}

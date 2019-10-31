@@ -1,7 +1,7 @@
 import React from 'react';
 import './UsersPage.css';
 import { Table } from 'reactstrap';
-import { UserComm } from '../utils/UserComm'
+import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
 
@@ -40,7 +40,7 @@ class UsersPage extends React.Component {
             this.setState({currentPageIndex: 1});
             this.setState({pageSize: 10});
         } else {
-            UserComm.getUsers(pageIndex, pageSize)
+            UserApi.getUsers(pageIndex, pageSize)
                 .then((u) => {
                         console.log(u);
                         this.setState({userList: u});
@@ -59,7 +59,7 @@ class UsersPage extends React.Component {
         let pageIndex = q.p;
         let pageSize = q.pSize;
         if(this.state.currentPageIndex !== pageIndex || this.state.pageSize !== pageSize) {
-            UserComm.getUsers(pageIndex, pageSize)
+            UserApi.getUsers(pageIndex, pageSize)
                 .then((u) => {
                         console.log(pageIndex, pageSize);
                         console.log(u);
@@ -74,7 +74,6 @@ class UsersPage extends React.Component {
         }
     }
 
-
     //Search button
     onSubmit = (e) => {
         e.persist();
@@ -87,6 +86,7 @@ class UsersPage extends React.Component {
         window.location.reload();
     };
 
+    //Enter key on search bar
     onKeyPress = (e) => {
         if (e.key === 'Enter') {
             this.onSubmit(e);
@@ -126,18 +126,16 @@ class UsersPage extends React.Component {
         this.setState({[e.target.name]:  e.target.value});
     };
 
-
-
     //Delete user
     onClickDelete(user, e){
         e.persist();
         e.preventDefault();
-        UserComm.deleteUser(user.id)
+        UserApi.deleteUser(user.id)
             .then(() => {
-                UserComm.getUsers(this.state.currentPageIndex)
+                UserApi.getUsers(this.state.currentPageIndex)
                     .then((u) => {
                             console.log(u);
-                            this.setState({userList: u})
+                            this.setState({userList: u});
                             window.location.reload();
                         }
                     )
@@ -194,16 +192,21 @@ class UsersPage extends React.Component {
     renderTable(){
         if(this.state.userList.length > 0) {
             return(
-                <div>
-                    <div className={'Table-entries-size'} >
-                        <label className={'Table-entries-size-label'}>Entries</label>
-                        <select className='Table-entries-size-input' name='pageSize' value={this.state.pageSize} onChange={e => this.change(e)}>
-                            <option value='5'>5</option>
-                            <option value='10'>10</option>
-                            <option value='25'>25</option>
-                            <option value='50'>50</option>
-                        </select>
-                        <br/>
+                <div className={'Table'}>
+                    <div className={'Table-panel'} >
+                        <div className={'Table-entries'}>
+                            <label className={'Table-entries-size-label'}>Entries</label>
+                            <select className='Table-entries-size-input' name='pageSize' value={this.state.pageSize} onChange={e => this.change(e)}>
+                                <option value='5'>5</option>
+                                <option value='10'>10</option>
+                                <option value='25'>25</option>
+                                <option value='50'>50</option>
+                            </select>
+                        </div>
+                        <div className={'Table-button-page-move-top'}>
+                            <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
+                            <button onClick={(e) => this.onClickNext(e)}> Next </button>
+                        </div>
                     </div>
                     <Table className={'Table'}>
                         <thead>
@@ -224,17 +227,16 @@ class UsersPage extends React.Component {
 
     render(){
         return (
-            <div className={'UserPage'}>
-                <header className='UserPage-header'>
+            <div className={'UsersPage'}>
+                <header className='UsersPage-header'>
                     <h5>
                         User Menu
                     </h5>
                 </header>
-                <div className={'UserPage-content'}>
+                <div className={'UsersPage-content'}>
                     <div className={'search-add'}>
                         <div className={'Search-User-Bar'}>
                             <input className={'search-input-bar'}
-                                minLength={20}
                                 onKeyPress={(e) => this.onKeyPress(e)}
                                 name='query'
                                 placeholder=''

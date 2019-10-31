@@ -1,5 +1,5 @@
 import React from 'react';
-import { Auth } from '../utils/Authentication'
+import { Auth } from '../services/Authentication'
 
 import './LoginPage.css';
 

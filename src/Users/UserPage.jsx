@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserPage.css';
 import { Table } from 'reactstrap';
-import { UserComm } from '../utils/UserComm'
+import { UserApi } from '../services/UserApi'
 import logo from './logo192.png'
 
 
@@ -19,7 +19,7 @@ class UserPage extends React.Component {
     }
 
     componentDidMount() {
-        UserComm.getUser(this.state.userId)
+        UserApi.getUser(this.state.userId)
             .then((u) => {
                 this.setState({user: u})
             })

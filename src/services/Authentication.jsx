@@ -1,5 +1,5 @@
 import React from "react";
-import { API_URL }  from './Config'
+import { API_URL }  from '../utils/Config'
 
 class Auth extends React.Component {
 
