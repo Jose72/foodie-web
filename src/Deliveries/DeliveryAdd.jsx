@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {DeliveryComm} from "../utils";
+import {DeliveryApi} from "../services";
 
 import './DeliveryAdd.css';
 
@@ -28,7 +28,7 @@ class DeliveryAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        DeliveryComm.addDelivery(this.state)
+        DeliveryApi.addDelivery(this.state)
             .then(() => {
                 alert('Delivery Added Successfully');
                 console.log("Delivery Added");

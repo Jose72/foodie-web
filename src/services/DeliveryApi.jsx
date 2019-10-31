@@ -1,10 +1,10 @@
 import React from "react";
-import {API_URL} from "./Config";
+import {API_URL} from "../utils/Config";
 
 const DELIVERY_ROUTE = 'delivery/';
 const DELIVERIES_ROUTE = 'deliveries/';
 
-class DeliveryComm extends React.Component {
+class DeliveryApi extends React.Component {
 
     static getDeliveries(p){
         const requestOptions = {
@@ -93,4 +93,4 @@ class DeliveryComm extends React.Component {
 
 }
 
-export {DeliveryComm}
+export {DeliveryApi}

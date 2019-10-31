@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
 
 import './MenuPage.css';
-import {Auth} from "../utils";
+import {Auth} from "../services";
 
 
 class MenuPage extends React.Component {
@@ -22,7 +22,6 @@ class MenuPage extends React.Component {
                     <button className='Menu-button' onClick={() => this.onSubmit()}> Logout </button>
                 </header>
                 <div className='Menu-content'>
-                    <Link className='Link' to="/users">Users</Link>
                     <Link className='Link' to="/deliveries">Deliveries</Link>
                 </div>
             </div>

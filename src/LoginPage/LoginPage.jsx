@@ -1,5 +1,5 @@
 import React from 'react';
-import { Auth } from '../utils/Authentication'
+import { Auth } from '../services/Authentication'
 import { Redirect, Router} from 'react-router-dom';
 
 import './LoginPage.css';
