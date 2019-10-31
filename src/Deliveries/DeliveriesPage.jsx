@@ -11,6 +11,7 @@ class DeliveriesPage extends React.Component {
         this.state = {
             deliveryList: [],
             currentPageIndex: 1,
+            pageSize: 10,
             query: '',
             lastQuery: this.query,
 
@@ -29,7 +30,7 @@ class DeliveriesPage extends React.Component {
         e.persist();
         e.preventDefault();
         //fetch query
-        DeliveryApi.getDeliveries(this.state.currentPageIndex)
+        DeliveryApi.getDeliveries(this.state.currentPageIndex, this.state.pageSize)
             .then((d) => {
                     console.log(d);
                     this.setState({deliveryList: d});
