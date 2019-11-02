@@ -1,9 +1,9 @@
-.DeliveryPage {
+.DeliveriesPage {
     background-color: #282c34;
     text-align: center;
 }
 
-.DeliveryPage-content {
+.DeliveriesPage-content {
     background-color: #282c34;
     display: flex;
     flex-direction: column;
@@ -11,10 +11,9 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    height: 100vh;
 }
 
-.DeliveryPage-header {
+.DeliveriesPage-header {
     background-color: #282c34;
     min-height: 10vh;
     display: flex;
@@ -25,7 +24,7 @@
     color: white;
 }
 
-.DeliveryPage-footer {
+.DeliveriesPage-footer {
     background-color: #282c34;
     clear: both;
     min-height: 5vh;
@@ -42,19 +41,66 @@
 
 .Delivery-search {
     margin-top: 10%;
-    width: 100%;
     top: 0;
-    #display: flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.search-input-bar {
-    width: 55%;
+.search-add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.Search-Delivery-Bar {
+    width: 800px;
 }
 
 .Button-page-move {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.Table-panel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Table-entries{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.Table-button-page-move-top{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.Table-entries-size-label{
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+.Table-row{
+    border: 1px black;
+    color: black;
+    background-color: #cbe1ff;
+    font-size: medium;
+}
+
+.Table-field{
+    border: 1px black;
+    color: white;
+    background-color: #485e67;
 }
