@@ -42,6 +42,12 @@ class DeliveryModify extends React.Component{
 
     }
 
+    onClickCancel(e){
+        e.persist();
+        e.preventDefault();
+        this.props.history.goBack();
+    }
+
     render(){
         return(
             <div className={'ModifyDelivery'}>
@@ -141,9 +147,7 @@ class DeliveryModify extends React.Component{
                         <div className={'ModifyDelivery-buttons'}>
                             <button onClick={(e) => this.onSubmit(e)}> Modify </button>
                             {" "}
-                            <Link className='Link' to='/deliveries/'>
-                                <button>Cancel</button>
-                            </Link>
+                            <button onClick={(e) => this.onClickCancel(e)}>Cancel</button>
                         </div>
                     </form>
                 </div>
