@@ -8,7 +8,10 @@ class LoginPage extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: '' };
+            password: '',
+            hidePassword: true};
+
+        this.handleChangeChk = this.handleChangeChk.bind(this)
     }
 
   validateForm() {
@@ -36,6 +39,10 @@ class LoginPage extends React.Component {
       this.setState({[e.target.name]:  e.target.value})
   };
 
+  handleChangeChk(){
+      this.setState({hidePassword: !this.state.hidePassword})
+  }
+
   render(){
     return (
       <div className='Login'>
@@ -43,7 +50,7 @@ class LoginPage extends React.Component {
             <label className='Login-label'>Username</label>
             <br/>
             <input
-                size='150%'
+                className={'Login-input'}
                 name='username' 
                 //placeholder='Username'
                 value={this.state.username} 
@@ -54,12 +61,29 @@ class LoginPage extends React.Component {
             <br/>
             <label className={'Login-label'}>Password</label>
             <br/>
-            <input 
-                name='password' 
-                //placeholder='Password'
-                value={this.state.password}
-                onChange={e => this.change(e)} 
-            />
+            <div className={'password-container'}>
+                <input
+                    className={'Login-input'}
+                    name={'password'}
+                    type={this.state.hidePassword ? "password" : "text"}
+                    //placeholder='Password'
+                    value={this.state.password}
+                    onChange={e => this.change(e)}
+                />
+                <br/>
+                <br/>
+                <div className={'password-show'}>
+                    <input
+                        type="checkbox"
+                        defaultChecked={!this.state.hidePassword}
+                        onChange={this.handleChangeChk}
+                        placeholder={'Show'}
+                    />
+                    <br/>
+                    <br/>
+                    <label className={'Login-label'}>Show</label>
+                </div>
+            </div>
             <br/>
             <br/>
             <br/>
