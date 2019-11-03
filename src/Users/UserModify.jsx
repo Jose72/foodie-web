@@ -42,6 +42,12 @@ class UserModify extends React.Component{
 
     }
 
+    onClickCancel(e){
+        e.persist();
+        e.preventDefault();
+        this.props.history.goBack();
+    }
+
     render(){
         return(
             <div className={'ModifyUser'}>
@@ -131,9 +137,7 @@ class UserModify extends React.Component{
                         <div className={'ModifyUser-buttons'}>
                             <button onClick={(e) => this.onSubmit(e)}> Modify </button>
                             {" "}
-                            <Link className='Link' to='/users/'>
-                                <button>Cancel</button>
-                            </Link>
+                            <button onClick={(e) => this.onClickCancel(e)}>Cancel</button>
                         </div>
                     </form>
                 </div>

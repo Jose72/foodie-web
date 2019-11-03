@@ -42,14 +42,13 @@ class UserAdd extends React.Component{
     render(){
         return(
             <div className={'AddUser'}>
-                <div>
-                    <header className='AddUser-header'>
+                <div className='AddUser-header'>
+                    <header>
                         <h5>
                             Add New User
                         </h5>
                     </header>
                 </div>
-
                 <div className='AddUser-content'>
                     <form>
                         <div className={'AddUser-input-group'}>

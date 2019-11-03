@@ -1,6 +1,11 @@
+
 .AddUser {
     background-color: #282c34;
     text-align: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
 }
 
 .AddUser-content {
@@ -11,17 +16,18 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 
 .AddUser-header {
     background-color: #282c34;
-    flex-direction: column;
-    min-height: 10vh;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+    flex-direction: column;
+    display: flex;
 }
 
 .AddUser-buttons {
@@ -29,20 +35,6 @@
     justify-content: center;
 }
 
-.AddUser-footer {
-    background-color: #282c34;
-    clear: both;
-    min-height: 5vh;
-    display: flex;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(1px + 2vmin);
-    color: white;
-}
 .AddUser-search{
     margin-top: 10%;
     width: 100%;

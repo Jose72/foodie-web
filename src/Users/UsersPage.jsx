@@ -5,6 +5,11 @@ import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
 
+const user_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
+    'gratitudePoints'];
+
+const user_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
+    'Gratitude Points'];
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -33,7 +38,7 @@ class UsersPage extends React.Component {
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
-        if (pageSize === undefined || pageIndex === undefined) {
+        if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/users',
             });
@@ -43,7 +48,7 @@ class UsersPage extends React.Component {
             UserApi.getUsers(pageIndex, pageSize)
                 .then((u) => {
                         console.log(u);
-                        this.setState({userList: u});
+                        this.setState({userList: u.items});
                         this.setState({totalItems: u.totalItems});
                         this.setState({currentPageIndex: pageIndex});
                         this.setState({pageSize: pageSize});
@@ -78,19 +83,21 @@ class UsersPage extends React.Component {
     onClickNext = (e) => {
         e.persist();
         e.preventDefault();
-        console.log(this.state.currentPageIndex, this.state.pageSize);
-        this.props.history.push({
-            pathname: '/users',
-            search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) + 1).toString() + '&' + 'pSize=' + this.state.pageSize,
-        });
-        window.location.reload();
+        if (parseInt(this.state.currentPageIndex, 10) * parseInt(this.state.pageSize, 10) < parseInt(this.state.totalItems, 10)){
+            console.log(this.state.currentPageIndex, this.state.pageSize);
+            this.props.history.push({
+                pathname: '/users',
+                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) + 1).toString() + '&' + 'pSize=' + this.state.pageSize,
+            });
+            window.location.reload();
+        }
     };
 
     //Previous page of table
     onClickPrevious = (e) => {
         e.persist();
         e.preventDefault();
-        if(parseInt(parseInt(this.state.currentPageIndex, 10) === 1)){
+        if(parseInt(this.state.currentPageIndex, 10) <= 1){
         } else {
             console.log(this.state.currentPageIndex, this.state.pageSize);
             this.props.history.push({
@@ -140,15 +147,15 @@ class UsersPage extends React.Component {
                                 <option value='50'>50</option>
                             </select>
                         </div>
-                        <div className={'Table-button-page-move-top'}>
-                            <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
-                            <button onClick={(e) => this.onClickNext(e)}> Next </button>
-                        </div>
                     </div>
-
-                    <DisplayTable>
+                    <DisplayTable
+                        headers={user_headers}
+                        fields={user_fields}
+                        itemList={this.state.userList}
+                        route={'delivery'}
+                        onClickDelete={this.onClickDelete}
+                    >
                     </DisplayTable>
-
                     <div className={'Button-page-move'}>
                         <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
                         <button onClick={(e) => this.onClickNext(e)}> Next </button>
@@ -170,11 +177,11 @@ class UsersPage extends React.Component {
                     <div className={'search-add'}>
                         <div className={'Search-User-Bar'}>
                             <input className={'search-input-bar'}
-                                onKeyPress={(e) => this.onKeyPress(e)}
-                                name='query'
-                                placeholder=''
-                                value={this.state.query}
-                                onChange={(e) => this.change(e)}
+                                   onKeyPress={(e) => this.onKeyPress(e)}
+                                   name='query'
+                                   placeholder=''
+                                   value={this.state.query}
+                                   onChange={(e) => this.change(e)}
                             />
                             <button onClick={(e) => this.onSubmit(e)}> Search </button>
                             <br/>
