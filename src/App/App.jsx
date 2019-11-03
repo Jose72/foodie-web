@@ -8,7 +8,7 @@ import { HomePage } from '../HomePage'
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
-import { Auth } from '../utils/Authentication'
+import { Auth } from '../services/Authentication'
 
 
 const NotFound = () => <div>Not found</div>;
