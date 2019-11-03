@@ -1,4 +1,4 @@
-.Menu {
+.Page {
     background-color: #282c34;
     text-align: center;
     flex-direction: column;
@@ -6,7 +6,18 @@
     display: flex;
 }
 
-.Menu-content {
+.Page-header{
+    background-color: #282c34;
+    display: flex;
+    min-height: 5vh;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    top: 0;
+}
+
+.Page-content {
     background-color: #282c34;
     display: flex;
     flex-direction: column;
@@ -15,19 +26,10 @@
     font-size: calc(10px + 2vmin);
     color: white;
     margin-top: 10%;
-  }
-  
-.Menu-header {
-    background-color: #282c34;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    top: 0;
-  }
-  
-.Menu-footer {
+    margin-bottom: 0;
+}
+
+.Page-footer {
     background-color: #282c34;
     display: flex;
     clear: both;
@@ -40,6 +42,8 @@
     justify-content: center;
     font-size: calc(1px + 2vmin);
     color: white;
-  }
+}
 
-
+.Link {
+    color: #61dafb;
+}

@@ -5,6 +5,7 @@ import { LoginPage } from '../LoginPage'
 import { UsersPage } from '../UsersPage'
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
+import {StatisticsPage} from "../StatisticsPage";
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
@@ -29,6 +30,7 @@ class App extends React.Component {
               <PublicRoute path="/login" component={LoginPage} />
               <ProtectedRoute path="/menu" component={MenuPage} />
               <ProtectedRoute path="/users" component={UsersPage} />
+              <ProtectedRoute  path="/statistics" component={StatisticsPage} />
               <Route component={NotFound} />
             </Switch>
         </div>
