@@ -1,9 +1,16 @@
 import React from 'react';
 import './DeliveriesPage.css';
 import { Table } from 'reactstrap';
+import {DisplayTable} from "../components";
 import { DeliveryApi } from '../services/DeliveryApi'
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
+
+const delivery_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
+    'gratitudePoints', 'balance'];
+
+const delivery_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
+    'Gratitude Points', 'Balance'];
 
 class DeliveriesPage extends React.Component {
     constructor(props) {
@@ -20,7 +27,6 @@ class DeliveriesPage extends React.Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.renderTableElement = this.renderTableElement.bind(this);
         this.renderTable = this.renderTable.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickPrevious = this.onClickPrevious.bind(this);
@@ -33,37 +39,15 @@ class DeliveriesPage extends React.Component {
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
-        if (pageSize === undefined || pageIndex === undefined) {
+        if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/deliveries',
             });
             this.setState({currentPageIndex: 1});
             this.setState({pageSize: 10});
         } else {
-
             DeliveryApi.getDeliveries(pageIndex, pageSize)
                 .then((d) => {
-                        console.log(d);
-                        this.setState({deliveryList: d.items});
-                        this.setState({totalItems: d.totalItems});
-                        this.setState({currentPageIndex: pageIndex});
-                        this.setState({pageSize: pageSize});
-                    }
-                )
-                .catch((t) => {
-                    alert(t);
-                });
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        let q = queryString.parse(nextProps.location.search, {ignoreQueryPrefix: true});
-        let pageIndex = q.p;
-        let pageSize = q.pSize;
-        if(this.state.currentPageIndex !== pageIndex || this.state.pageSize !== pageSize) {
-            DeliveryApi.getDeliveries(pageIndex, pageSize)
-                .then((d) => {
-                        console.log(pageIndex, pageSize);
                         console.log(d);
                         this.setState({deliveryList: d.items});
                         this.setState({totalItems: d.totalItems});
@@ -150,51 +134,6 @@ class DeliveriesPage extends React.Component {
         console.log('Delete')
     };
 
-    renderTableFields(){
-        return (
-            <tr className={'Table-header'}>
-                <th className={'Table-field'} style={{width: '10%'}}>Id</th>
-                <th className={'Table-field'} style={{width: '10%'}}>First Name</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Last Name</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Phone</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Email</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Subscription</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Reputation</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Gratitude Points</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Balance</th>
-            </tr>
-        )
-    }
-
-    renderTableElement(delivery) {
-        return (
-            <tr className={'Table-content'} key={delivery.id}>
-                <td className={'Table-row'}>{delivery.id}</td>
-                <td className={'Table-row'}>{delivery.firstName}</td>
-                <td className={'Table-row'}>{delivery.lastName}</td>
-                <td className={'Table-row'}>{delivery.phone}</td>
-                <td className={'Table-row'}>{delivery.email}</td>
-                <td className={'Table-row'}>{delivery.subscription}</td>
-                <td className={'Table-row'}>{delivery.reputation}</td>
-                <td className={'Table-row'}>{delivery.gratitudePoints}</td>
-                <td className={'Table-row'}>{delivery.balance}</td>
-                <td className={'Table-row'}>
-                    <button onClick={(e) => this.onClickDelete(delivery, e)}> Delete </button>
-                </td>
-                <td className={'Table-row'}>
-                    <Link className='Link' to={`/delivery/modify/${delivery.id}`}>
-                        <button>Modify</button>
-                    </Link>
-                </td>
-                <td className={'Table-row'}>
-                    <Link className='Link' to={`/delivery/${delivery.id}`}>
-                        <button>View</button>
-                    </Link>
-                </td>
-            </tr>
-        )
-    }
-
     renderTable(){
         if(this.state.deliveryList.length > 0) {
             return(
@@ -210,14 +149,14 @@ class DeliveriesPage extends React.Component {
                             </select>
                         </div>
                     </div>
-                    <Table className={'Table'}>
-                        <thead>
-                        {this.renderTableFields()}
-                        </thead>
-                        <tbody>
-                        {this.state.deliveryList.map(this.renderTableElement)}
-                        </tbody>
-                    </Table>
+                    <DisplayTable
+                        headers={delivery_headers}
+                        fields={delivery_fields}
+                        itemList={this.state.deliveryList}
+                        route={'delivery'}
+                        onClickDelete={this.onClickDelete}
+                    >
+                    </DisplayTable>
                     <div className={'Button-page-move'}>
                         <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
                         <button onClick={(e) => this.onClickNext(e)}> Next </button>
