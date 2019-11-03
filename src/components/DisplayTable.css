@@ -1,0 +1,41 @@
+.Table-panel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Table-entries{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.Table-button-page-move-top{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.Table-entries-size-label{
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+.Table-row{
+    border: 1px black;
+    color: black;
+    background-color: #cbe1ff;
+    font-size: medium;
+}
+
+.Table-field{
+    border: 1px black;
+    color: white;
+    background-color: #485e67;
+}
