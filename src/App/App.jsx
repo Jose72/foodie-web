@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import './App.css';
-import { LoginPage } from '../Login'
+import { LoginPage } from '../LoginPage'
 import { UsersPage } from '../Users'
 import { UserAdd } from '../Users'
 import { UserModify} from "../Users";

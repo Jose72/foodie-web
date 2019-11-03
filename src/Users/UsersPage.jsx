@@ -1,6 +1,6 @@
 import React from 'react';
 import './UsersPage.css';
-import { Table } from 'reactstrap';
+import {DisplayTable} from "../components";
 import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
@@ -15,12 +15,12 @@ class UsersPage extends React.Component {
             userList: [],
             currentPageIndex: q.p,
             pageSize: q.pSize,
+            totalItems: 0,
             query: '',
             lastQuery: this.query,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.renderTableElement = this.renderTableElement.bind(this);
         this.renderTable = this.renderTable.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickPrevious = this.onClickPrevious.bind(this);
@@ -44,26 +44,7 @@ class UsersPage extends React.Component {
                 .then((u) => {
                         console.log(u);
                         this.setState({userList: u});
-                        this.setState({currentPageIndex: pageIndex});
-                        this.setState({pageSize: pageSize});
-                    }
-                )
-                .catch((t) => {
-                    alert(t);
-                });
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        let q = queryString.parse(nextProps.location.search, {ignoreQueryPrefix: true});
-        let pageIndex = q.p;
-        let pageSize = q.pSize;
-        if(this.state.currentPageIndex !== pageIndex || this.state.pageSize !== pageSize) {
-            UserApi.getUsers(pageIndex, pageSize)
-                .then((u) => {
-                        console.log(pageIndex, pageSize);
-                        console.log(u);
-                        this.setState({userList: u});
+                        this.setState({totalItems: u.totalItems});
                         this.setState({currentPageIndex: pageIndex});
                         this.setState({pageSize: pageSize});
                     }
@@ -145,50 +126,6 @@ class UsersPage extends React.Component {
         console.log('Delete')
     };
 
-    //Table display
-    renderTableFields(){
-        return (
-            <tr className={'Table-header'}>
-                <th className={'Table-field'} style={{width: '10%'}}>Id</th>
-                <th className={'Table-field'} style={{width: '10%'}}>First Name</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Last Name</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Phone</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Email</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Subscription</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Reputation</th>
-                <th className={'Table-field'} style={{width: '10%'}}>Gratitude Points</th>
-            </tr>
-        )
-    }
-
-    renderTableElement(user) {
-        return (
-            <tr className={'Table-content'} key={user.id}>
-                <td className={'Table-row'}>{user.id}</td>
-                <td className={'Table-row'}>{user.firstName}</td>
-                <td className={'Table-row'}>{user.lastName}</td>
-                <td className={'Table-row'}>{user.phone}</td>
-                <td className={'Table-row'}>{user.email}</td>
-                <td className={'Table-row'}>{user.subscription}</td>
-                <td className={'Table-row'}>{user.reputation}</td>
-                <td className={'Table-row'}>{user.gratitudePoints}</td>
-                <td className={'Table-row'}>
-                    <button onClick={(e) => this.onClickDelete(user, e)}> Delete </button>
-                </td>
-                <td className={'Table-row'}>
-                    <Link className='Link' to={`/user/modify/${user.id}`}>
-                        <button>Modify User</button>
-                    </Link>
-                </td>
-                <td className={'Table-row'}>
-                    <Link className='Link' to={`/user/${user.id}`}>
-                        <button>View</button>
-                    </Link>
-                </td>
-            </tr>
-        )
-    }
-
     renderTable(){
         if(this.state.userList.length > 0) {
             return(
@@ -208,14 +145,10 @@ class UsersPage extends React.Component {
                             <button onClick={(e) => this.onClickNext(e)}> Next </button>
                         </div>
                     </div>
-                    <Table className={'Table'}>
-                        <thead>
-                        {this.renderTableFields()}
-                        </thead>
-                        <tbody>
-                        {this.state.userList.map(this.renderTableElement)}
-                        </tbody>
-                    </Table>
+
+                    <DisplayTable>
+                    </DisplayTable>
+
                     <div className={'Button-page-move'}>
                         <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
                         <button onClick={(e) => this.onClickNext(e)}> Next </button>
