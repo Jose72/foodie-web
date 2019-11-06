@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StatisticsApi } from "../services";
+import {BChart} from "../components";
+import {ChartPanel} from "../components";
 import '../styles/PageStyles.css'
 
 
@@ -8,19 +10,86 @@ class StatisticsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+
             currentRegisteredUsers: 0,
             currentRegisteredDeliveries: 0,
             currentCompletedOrders: 0,
             currentCanceledOrders: 0,
-            
+
+
             listRegisteredUsers: [],
             listRegisteredDeliveries: [],
             listCompletedOrders: [],
             listCanceledOrders: [],
-        }
+        };
+
+        this.getListRegisteredUsers = this.getListRegisteredUsers.bind(this);
+        this.getListRegisteredDeliveries = this.getListRegisteredDeliveries.bind(this);
+        this.getListCompletedOrders = this.getListCompletedOrders.bind(this);
+        this.getListCanceledOrders = this.getListCanceledOrders.bind(this);
     }
 
     componentDidMount() {
+        this.getCurrentStatistics();
+    }
+
+    getYear() {
+        return new Date().getFullYear();
+    }
+
+    getMonth() {
+        return new Date().getMonth();
+    }
+
+    getCurrentStatistics(){
+        StatisticsApi.getCurrentStatistics()
+            .then((s) => {
+                    this.setState({currentRegisteredUsers: s.users});
+                    this.setState({currentRegisteredDeliveries: s.deliveries});
+                    this.setState({currentCompletedOrders: s.completedOrders});
+                    this.setState({currentCanceledOrders: s.canceledOrders});
+                }
+            )
+            .catch((t) => {
+                alert(t)
+                }
+            );
+    }
+
+    getListRegisteredUsers(year_from, month_from, year_to, month_to){
+        StatisticsApi.getUsersStatistics(year_from, month_from, year_to, month_to)
+            .then((s) => {
+                    console.log(s);
+                    this.setState({listRegisteredUsers: s});
+                }
+            )
+    }
+
+    getListRegisteredDeliveries(year_from, month_from, year_to, month_to){
+        StatisticsApi.getDeliveriesStatistics(year_from, month_from, year_to, month_to)
+            .then((s) => {
+                    console.log(s);
+                    this.setState({listRegisteredDeliveries: s});
+                }
+            )
+    }
+
+    getListCompletedOrders(year_from, month_from, year_to, month_to){
+        StatisticsApi.getCompletedOrdersStatistics(year_from, month_from, year_to, month_to)
+            .then((s) => {
+                    console.log(s);
+                    this.setState({listCompletedOrders: s});
+                }
+            )
+    }
+
+    getListCanceledOrders(year_from, month_from, year_to, month_to){
+        StatisticsApi.getCanceledOrdersStatistics(year_from, month_from, year_to, month_to)
+            .then((s) => {
+                    console.log(s);
+                    this.setState({listCanceledOrders: s});
+                }
+            )
     }
 
     render() {
@@ -36,16 +105,63 @@ class StatisticsPage extends React.Component {
                 </header>
                 <div className={'Page-content'}>
                     <div>
-                        Usuarios Registrados
+                        {this.getYear()} / {this.getMonth()}
+                        <br/>
+                        Usuarios Registrados {this.state.currentRegisteredUsers}
+                        <br/>
+                        Deliveris Registrados {this.state.currentRegisteredDeliveries}
+                        <br/>
+                        Pedidos Completedos {this.state.currentCompletedOrders}
+                        <br/>
+                        Pedidos Cancelados {this.state.currentCanceledOrders}
+                        <br/>
+                        <br/>
                     </div>
+                    <div>
+                        Usuarios Registrados
+                        <ChartPanel
+                            updateChart={this.getListRegisteredUsers}
+                            legend={'users'}
+                        >
+                        </ChartPanel>
+                        <BChart data={this.state.listRegisteredUsers}>
+                        </BChart>
+                    </div>
+                    <br/>
+                    <br/>
                     <div>
                         Deliveris Registrados
+                        <ChartPanel
+                            updateChart={this.getListRegisteredDeliveries}
+                            legend={'deliveries'}
+                        >
+                        </ChartPanel>
+                        <BChart data={this.state.listRegisteredDeliveries}>
+                        </BChart>
                     </div>
+                    <br/>
+                    <br/>
                     <div>
                         Pedidos Completados
+                        <ChartPanel
+                            updateChart={this.getListCompletedOrders}
+                            legend={'orders'}
+                        >
+                        </ChartPanel>
+                        <BChart data={this.state.listCompletedOrders}>
+                        </BChart>
                     </div>
+                    <br/>
+                    <br/>
                     <div>
                         Pedidos Cancelados
+                        <ChartPanel
+                            updateChart={this.getListCanceledOrders}
+                            legend={'orders'}
+                        >
+                        </ChartPanel>
+                        <BChart data={this.state.listCanceledOrders}>
+                        </BChart>
                     </div>
                 </div>
                 <footer className={'Page-footer'}>

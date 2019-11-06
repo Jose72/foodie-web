@@ -1,2 +1,3 @@
 export * from './DisplayTable';
-export * from './BackButton'
+export * from './BChart';
+export * from './ChartPanel';
