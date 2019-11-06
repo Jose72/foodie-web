@@ -11,14 +11,14 @@ class BChart extends React.Component {
 
     static defaultProps = {
         data: [],
-        legend: ''
+        legend: 'n'
     };
 
 
     render(){
         return(
             <BarChart
-                width={500}
+                width={800}
                 height={300}
                 data={this.props.data.map((d) => {
                     return(
@@ -30,11 +30,11 @@ class BChart extends React.Component {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="l" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey={'m'} fill="#8884d8" />
+                <Bar name={this.props.legend} dataKey={'m'} fill="#8884d8" />
             </BarChart>
         )
 

@@ -124,7 +124,9 @@ class StatisticsPage extends React.Component {
                             legend={'users'}
                         >
                         </ChartPanel>
-                        <BChart data={this.state.listRegisteredUsers}>
+                        <BChart data={this.state.listRegisteredUsers}
+                                legend={'users'}
+                        >
                         </BChart>
                     </div>
                     <br/>
@@ -133,10 +135,11 @@ class StatisticsPage extends React.Component {
                         Deliveris Registrados
                         <ChartPanel
                             updateChart={this.getListRegisteredDeliveries}
-                            legend={'deliveries'}
                         >
                         </ChartPanel>
-                        <BChart data={this.state.listRegisteredDeliveries}>
+                        <BChart data={this.state.listRegisteredDeliveries}
+                                legend={'deliveries'}
+                        >
                         </BChart>
                     </div>
                     <br/>
@@ -145,10 +148,11 @@ class StatisticsPage extends React.Component {
                         Pedidos Completados
                         <ChartPanel
                             updateChart={this.getListCompletedOrders}
-                            legend={'orders'}
                         >
                         </ChartPanel>
-                        <BChart data={this.state.listCompletedOrders}>
+                        <BChart data={this.state.listCompletedOrders}
+                                legend={'orders'}
+                        >
                         </BChart>
                     </div>
                     <br/>
@@ -157,10 +161,11 @@ class StatisticsPage extends React.Component {
                         Pedidos Cancelados
                         <ChartPanel
                             updateChart={this.getListCanceledOrders}
-                            legend={'orders'}
                         >
                         </ChartPanel>
-                        <BChart data={this.state.listCanceledOrders}>
+                        <BChart data={this.state.listCanceledOrders}
+                                legend={'orders'}
+                        >
                         </BChart>
                     </div>
                 </div>
