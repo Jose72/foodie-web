@@ -84,8 +84,6 @@ class ChartPanel extends React.Component {
                         <option key={m} value={m}> {m} </option>
                     )};
                 </select>
-                {" "}
-                {" "}
                 To
                 <select name='to_year' value={this.state.to_year} onChange={e => this.change(e)}>>
                     {years.map((m) =>
@@ -97,8 +95,8 @@ class ChartPanel extends React.Component {
                         <option key={m} value={m}> {m} </option>
                     )};
                 </select>
-
-                <button onClick={this.onClickDisplay}/>
+                {" "}{" "}
+                <button onClick={this.onClickDisplay}> Submit </button>
 
 
             </div>

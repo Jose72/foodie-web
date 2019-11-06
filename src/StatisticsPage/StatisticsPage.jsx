@@ -105,20 +105,28 @@ class StatisticsPage extends React.Component {
                 </header>
                 <div className={'Page-content'}>
                     <div>
-                        {this.getYear()} / {this.getMonth()}
+                        <h2>{this.getYear()} / {this.getMonth()}</h2>
                         <br/>
-                        Usuarios Registrados {this.state.currentRegisteredUsers}
                         <br/>
-                        Deliveris Registrados {this.state.currentRegisteredDeliveries}
+                        <div>
+                            Usuarios Registrados (totales): {this.state.currentRegisteredUsers}
+                            <br/><br/>
+                            Deliveris Registrados (totales): {this.state.currentRegisteredDeliveries}
+                        </div>
                         <br/>
-                        Pedidos Completedos {this.state.currentCompletedOrders}
+                        <div>
+                            Pedidos Completedos (este mes): {this.state.currentCompletedOrders}
+                            <br/><br/>
+                            Pedidos Cancelados (este mes): {this.state.currentCanceledOrders}
+                        </div>
                         <br/>
-                        Pedidos Cancelados {this.state.currentCanceledOrders}
+                        <br/>
                         <br/>
                         <br/>
                     </div>
                     <div>
-                        Usuarios Registrados
+                        <h3>Usuarios Registrados</h3>
+                        <br/>
                         <ChartPanel
                             updateChart={this.getListRegisteredUsers}
                             legend={'users'}
@@ -128,11 +136,12 @@ class StatisticsPage extends React.Component {
                                 legend={'users'}
                         >
                         </BChart>
+                        <br/>
+                        <br/>
                     </div>
-                    <br/>
-                    <br/>
                     <div>
-                        Deliveris Registrados
+                        <h3>Deliveris Registrados</h3>
+                        <br/>
                         <ChartPanel
                             updateChart={this.getListRegisteredDeliveries}
                         >
@@ -141,11 +150,12 @@ class StatisticsPage extends React.Component {
                                 legend={'deliveries'}
                         >
                         </BChart>
+                        <br/>
+                        <br/>
                     </div>
-                    <br/>
-                    <br/>
                     <div>
-                        Pedidos Completados
+                        <h3>Pedidos Completados</h3>
+                        <br/>
                         <ChartPanel
                             updateChart={this.getListCompletedOrders}
                         >
@@ -154,11 +164,11 @@ class StatisticsPage extends React.Component {
                                 legend={'orders'}
                         >
                         </BChart>
+                        <br/>
+                        <br/>
                     </div>
-                    <br/>
-                    <br/>
                     <div>
-                        Pedidos Cancelados
+                        <h3>Pedidos Cancelados</h3>
                         <ChartPanel
                             updateChart={this.getListCanceledOrders}
                         >
@@ -167,6 +177,8 @@ class StatisticsPage extends React.Component {
                                 legend={'orders'}
                         >
                         </BChart>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
                 <footer className={'Page-footer'}>
