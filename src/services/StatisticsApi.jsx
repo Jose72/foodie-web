@@ -26,10 +26,10 @@ class StatisticsApi extends React.Component {
         return this.getStatistics(period, from, to, '/orders/canceled')
     }
 
-    static getStatistics(period, from, to, route){
-        return axios.get(API_URL + route, {
+    static getStatistics(unit, from, to, route){
+        return axios.get(API_URL + STATISTICS_ROUTE + route, {
             params: {
-                period: period,
+                unit: unit,
                 from: from,
                 to: to,
             },

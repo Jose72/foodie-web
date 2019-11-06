@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
 import '../styles/PageStyles.css';
-import {Auth} from "../utils";
+import {Auth} from "../services";
 
 
 class MenuPage extends React.Component {
@@ -18,7 +18,7 @@ class MenuPage extends React.Component {
                     <h5>
                         Administrator Menu
                     </h5>
-                    <button className={'Page-button'} onClick={() => this.onSubmit()}> Logout </button>
+                    <button onClick={this.onSubmit}>Logout</button>
                 </header>
                 <div className={'Page-content'}>
                         <Link className='Link' to="/users">Users</Link>
