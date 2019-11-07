@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { API_URL }  from './Config'
+import { API_URL }  from '../utils/Config'
 
 class Auth extends React.Component {
 
@@ -11,7 +11,7 @@ class Auth extends React.Component {
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
                 localStorage.setItem('token', 'admin_token');
-                console.log("Loggin successful");
+                console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
         } else {
@@ -40,6 +40,8 @@ class Auth extends React.Component {
     static isAuthenticated(){
         return (localStorage.getItem('token') != null)
     }
+
+    static getToken() { return localStorage.getItem('token')}
 
 }
 

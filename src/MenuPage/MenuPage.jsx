@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
 
 import './MenuPage.css';
-import {Auth} from "../utils";
+import {Auth} from "../services";
 
 
 class MenuPage extends React.Component {
