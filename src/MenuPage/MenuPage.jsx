@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
 import '../styles/PageStyles.css';
+import './MenuPage.css';
 import {Auth} from "../services";
 
 
