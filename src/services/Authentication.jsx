@@ -10,7 +10,7 @@ class Auth extends React.Component {
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
                 localStorage.setItem('token', 'admin_token');
-                console.log("Loggin successful");
+                console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
         }
@@ -28,7 +28,7 @@ class Auth extends React.Component {
                 if (res.ok) {
                     let data = res.json();
                     localStorage.setItem('token', data['token']);
-                    console.log("Loggin successful");
+                    console.log("Login successful");
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
@@ -49,7 +49,7 @@ class Auth extends React.Component {
         return (localStorage.getItem('token') != null)
     }
 
-    getToken() { return localStorage.getItem('token')}
+    static getToken() { return localStorage.getItem('token')}
 
 }
 
