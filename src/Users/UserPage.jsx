@@ -3,6 +3,7 @@ import './UserPage.css';
 import { Table } from 'reactstrap';
 import { UserApi } from '../services/UserApi'
 import logo from './logo192.png'
+import  '../styles/PageStyles.css'
 
 
 class UserPage extends React.Component {
@@ -159,13 +160,13 @@ class UserPage extends React.Component {
 
     render() {
         return(
-            <div className={'UserPage'}>
-                <header className='UserPage-header'>
+            <div className={'Page'}>
+                <header className='Page-header'>
                     <h5>
                         User Page - Id N°{this.state.userId}
                     </h5>
                 </header>
-                <div className={'UserPage-content'}>
+                <div className={'Page-content'}>
                     <div className={'UserPage-info-container-display'}>
                         <div className={'UserPage-info-display'}>
                             <img

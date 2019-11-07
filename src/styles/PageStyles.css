@@ -1,41 +1,39 @@
-.UsersPage {
+.Page {
     background-color: #282c34;
     text-align: center;
-    height: 100%;
-    width: 100%;
     flex-direction: column;
+    height: 100vh;
     display: flex;
 }
 
-.UserPage-content {
+.Page-header{
     background-color: #282c34;
+    display: flex;
+    min-height: 5vh;
+    flex-direction: column;
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    top: 0;
 }
 
-.UsersPage-header {
+.Page-content {
     background-color: #282c34;
-    min-height: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    height: 100%;
-    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 0;
 }
 
-.UsersPage-footer {
+.Page-footer {
     background-color: #282c34;
+    display: flex;
     clear: both;
     min-height: 5vh;
-    display: flex;
     bottom: 0;
     position: fixed;
     width: 100%;
@@ -46,37 +44,38 @@
     color: white;
 }
 
-.User-search {
-    margin-top: 10%;
-    top: 0;
-    display: flex;
-    align-items: center;
+.Link {
+    color: #61dafb;
 }
 
-.search-add {
+.Page-input-group{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: table;
+}
+
+.Page-input{
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Page-label{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.Page-search-add {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
 
-.Search-User-Bar {
+.Page-search-bar{
     width: 800px;
 }
-
-.Button-page-move {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.Table-panel{
-    background-color: #282c34;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-
-
-

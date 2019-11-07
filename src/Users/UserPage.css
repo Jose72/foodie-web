@@ -1,34 +1,3 @@
-.UserPage{
-    background-color: #282c34;
-    text-align: center;
-    margin-top: 0;
-}
-
-.UserPage-content {
-    background-color: #282c34;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    height: 100vh;
-    margin-top: 0;
-}
-
-.UserPage-header {
-    background-color: #282c34;
-    min-height: 5vh;
-    display: flex;
-    height: 5%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: #ddc8ff;
-    margin: 0;
-    padding: 0;
-}
 
 .UserPage-label{
     color: rgba(156, 147, 159, 0.92);

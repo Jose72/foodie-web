@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import{UserApi} from "../services";
-import './UserAdd.css';
+import  '../styles/PageStyles.css'
 
 class UserAdd extends React.Component{
     constructor(props) {
@@ -41,19 +41,19 @@ class UserAdd extends React.Component{
 
     render(){
         return(
-            <div className={'AddUser'}>
-                <div className='AddUser-header'>
+            <div className={'Page'}>
+                <div className='Page-header'>
                     <header>
                         <h5>
                             Add New User
                         </h5>
                     </header>
                 </div>
-                <div className='AddUser-content'>
+                <div className='Page-content'>
                     <form>
-                        <div className={'AddUser-input-group'}>
-                            <label className='AddUser-label'>First Name</label>
-                            <input className='AddUser-input'
+                        <div className={'Page-input-group'}>
+                            <label className='Page-label'>First Name</label>
+                            <input className='Page-input'
                                 size='150%'
                                 name='firstName'
                                 //placeholder='Username'
@@ -63,9 +63,9 @@ class UserAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddUser-input-group'}>
-                            <label className={'AddUser-label'}>Last Name</label>
-                            <input className='AddUser-input'
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Last Name</label>
+                            <input className='Page-input'
                                 name='lastName'
                                 //placeholder='Password'
                                 value={this.state.lastName}
@@ -74,9 +74,9 @@ class UserAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddUser-input-group'}>
-                            <label className={'AddUser-label'}>Email</label>
-                            <input className='AddUser-input'
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Email</label>
+                            <input className='Page-input'
                                 name='email'
                                 value={this.state.email}
                                 onChange={e => this.change(e)}
@@ -84,9 +84,9 @@ class UserAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddUser-input-group'} >
-                            <label className={'AddUser-label'}>Phone</label>
-                            <input className='AddUser-input'
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Phone</label>
+                            <input className='Page-input'
                                 name='phone'
                                 value={this.state.phone}
                                 onChange={e => this.change(e)}
@@ -94,9 +94,9 @@ class UserAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddUser-input-group'}>
-                            <label className={'AddUser-label'}>Subscription</label>
-                            <select className='AddUser-input' name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Subscription</label>
+                            <select className='Page-input' name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
                                 <option value='flat'>flat</option>
                                 <option value='premium'>premium</option>
                             </select>

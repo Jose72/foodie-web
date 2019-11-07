@@ -2,6 +2,7 @@ import React from "react";
 import {UserApi} from "../services";
 import {Link} from "react-router-dom";
 import './UserModify.css';
+import  '../styles/PageStyles.css'
 
 class UserModify extends React.Component{
     constructor(props) {
@@ -50,16 +51,16 @@ class UserModify extends React.Component{
 
     render(){
         return(
-            <div className={'ModifyUser'}>
+            <div className={'Page'}>
                 <div>
-                    <header className='ModifyUser-header'>
+                    <header className='Page-header'>
                         <h5>
                             Modify User {this.state.user.id}
                         </h5>
                     </header>
                 </div>
 
-                <div className='ModifyUser-content'>
+                <div className='Page-content'>
                     <form>
                         <div className={'ModifyUser-input-group'}>
                             <label className='ModifyUser-label'>First Name</label>
