@@ -1,15 +1,14 @@
 import React from 'react';
-import './DeliveriesPage.css';
-import { Table } from 'reactstrap';
 import {DisplayTable} from "../components";
 import { DeliveryApi } from '../services/DeliveryApi'
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
+import '../styles/PageStyles.css'
 
-const delivery_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
+const delivery_fields = ['id', 'firstName','lastName', 'phone', 'email', 'reputation',
     'gratitudePoints', 'balance'];
 
-const delivery_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
+const delivery_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Reputation',
     'Gratitude Points', 'Balance'];
 
 class DeliveriesPage extends React.Component {
@@ -168,15 +167,15 @@ class DeliveriesPage extends React.Component {
 
     render(){
         return (
-            <div className={'DeliveriesPage'}>
-                <header className='DeliveriesPage-header'>
+            <div className={'Page'}>
+                <header className='Page-header'>
                     <h5>
                         Delivery Menu
                     </h5>
                 </header>
-                <div className={'DeliveriesPage-content'}>
-                    <div className={'search-add'}>
-                        <div className={'Search-Delivery-Bar'}>
+                <div className={'Page-content'}>
+                    <div className={'Page-search-add'}>
+                        <div className={'Page-search-bar'}>
                             <input className={'search-input-bar'}
                                    onKeyPress={(e) => this.onKeyPress(e)}
                                    name='query'

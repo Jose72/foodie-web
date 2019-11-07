@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {DeliveryApi} from "../services";
-
-import './DeliveryAdd.css';
+import '../styles/PageStyles.css'
 
 class DeliveryAdd extends React.Component{
     constructor(props) {
@@ -41,20 +40,20 @@ class DeliveryAdd extends React.Component{
 
     render(){
         return(
-            <div className={'AddDelivery'}>
+            <div className={'Page'}>
                 <div>
-                    <header className='AddDelivery-header'>
+                    <header className='Page-header'>
                         <h5>
                             Add New Delivery
                         </h5>
                     </header>
                 </div>
 
-                <div className='AddDelivery-content'>
+                <div className='Page-content'>
                     <form>
-                        <div className={'AddDelivery-input-group'}>
-                            <label className='AddDelivery-label'>First Name</label>
-                            <input className='AddDelivery-input'
+                        <div className={'Page-input-group'}>
+                            <label className='Page-label'>First Name</label>
+                            <input className='Page-input'
                                    size='150%'
                                    name='firstName'
                                 //placeholder='Username'
@@ -64,9 +63,9 @@ class DeliveryAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddDelivery-input-group'}>
-                            <label className={'AddDelivery-label'}>Last Name</label>
-                            <input className='AddDelivery-input'
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Last Name</label>
+                            <input className='Page-input'
                                    name='lastName'
                                 //placeholder='Password'
                                    value={this.state.lastName}
@@ -75,9 +74,9 @@ class DeliveryAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddDelivery-input-group'}>
-                            <label className={'AddDelivery-label'}>Email</label>
-                            <input className='AddDelivery-input'
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Email</label>
+                            <input className='Page-input'
                                    name='email'
                                    value={this.state.email}
                                    onChange={e => this.change(e)}
@@ -85,9 +84,9 @@ class DeliveryAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddDelivery-input-group'} >
-                            <label className={'AddDelivery-label'}>Phone</label>
-                            <input className='AddDelivery-input'
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Phone</label>
+                            <input className='Page-input'
                                    name='phone'
                                    value={this.state.phone}
                                    onChange={e => this.change(e)}
@@ -95,16 +94,7 @@ class DeliveryAdd extends React.Component{
                             <br/>
                             <br/>
                         </div>
-                        <div className={'AddDelivery-input-group'}>
-                            <label className={'AddDelivery-label'}>Subscription</label>
-                            <select className='AddDelivery-input' name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
-                                <option value='flat'>flat</option>
-                                <option value='premium'>premium</option>
-                            </select>
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'AddDelivery-buttons'}>
+                        <div className={'Page-buttons'}>
                             <button onClick={(e) => this.onSubmit(e)}> Add </button>
                             {" "}
                             <Link className='Link' to='/deliveries/'>

@@ -3,6 +3,7 @@ import './DeliveryPage.css';
 import { Table } from 'reactstrap';
 import { DeliveryApi } from '../services/DeliveryApi'
 import logo from './logo192.png'
+import '../styles/PageStyles.css'
 
 
 class DeliveryPage extends React.Component {
@@ -119,13 +120,13 @@ class DeliveryPage extends React.Component {
 
     render() {
         return(
-            <div className={'DeliveryPage'}>
-                <header className='DeliveryPage-header'>
+            <div className={'Page'}>
+                <header className='Page-header'>
                     <h5>
                         Delivery Page - Id N°{this.state.deliveryId}
                     </h5>
                 </header>
-                <div className={'DeliveryPage-content'}>
+                <div className={'Page-content'}>
                     <div className={'DeliveryPage-info-container-display'}>
                         <div className={'DeliveryPage-info-display'}>
                             <img
@@ -151,11 +152,6 @@ class DeliveryPage extends React.Component {
                             <label className={'DeliveryPage-label'}>Reputation</label>
                             <br/>
                             {this.state.delivery.reputation}
-                            <br/>
-                            <br/>
-                            <label className={'DeliveryPage-label'}>Subscription</label>
-                            <br/>
-                            {this.state.delivery.subscription}
                             <br/>
                             <br/>
                             <label className={'DeliveryPage-label'}>Gratitude Points</label>
