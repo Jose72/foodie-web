@@ -22,6 +22,7 @@ class MenuPage extends React.Component {
                     <button className='Menu-button' onClick={() => this.onSubmit()}> Logout </button>
                 </header>
                 <div className='Menu-content'>
+                    <Link className='Link' to="/users">Users</Link>
                     <Link className='Link' to="/deliveries">Deliveries</Link>
                 </div>
             </div>

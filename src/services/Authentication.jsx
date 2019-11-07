@@ -10,12 +10,11 @@ class Auth extends React.Component {
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
                 localStorage.setItem('token', 'admin_token');
-                console.log("Loggin successful");
+                console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
         }
 
-        console.log("Login");
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json',
@@ -28,7 +27,7 @@ class Auth extends React.Component {
                 if (res.ok) {
                     let data = res.json();
                     localStorage.setItem('token', data['token']);
-                    console.log("Loggin successful");
+                    console.log("Login successful");
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
