@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { API_URL }  from '../utils/Config'
 
 class Auth extends React.Component {
@@ -14,22 +13,30 @@ class Auth extends React.Component {
                 console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
-        } else {
-            return axios.post(API_URL + 'auth/', {username, password})
-                .then(res => {
-                    if (res.ok) {
-                        let data = res.json();
-                        localStorage.setItem('token', data['token']);
-                        console.log("Loggin successful");
-                    } else {
-                        return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                    return Promise.reject(error)
-                })
         }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({username, password})
+        };
+        console.log(requestOptions);
+        return fetch(API_URL + 'auth/', requestOptions)
+            .then(res => {
+                if (res.ok) {
+                    let data = res.json();
+                    localStorage.setItem('token', data['token']);
+                    console.log("Login successful");
+                } else {
+                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                return Promise.reject(error)
+            })
+
     }
 
     static logout(){
