@@ -1,6 +1,9 @@
 .Menu {
     background-color: #282c34;
     text-align: center;
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
 }
 
 .Menu-content {
@@ -11,25 +14,24 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    height: 100vh;
+    margin-top: 10%;
   }
   
 .Menu-header {
     background-color: #282c34;
-    min-height: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+    top: 0;
   }
   
-.Menu-footer{
+.Menu-footer {
     background-color: #282c34;
+    display: flex;
     clear: both;
     min-height: 5vh;
-    display: flex;
     bottom: 0;
     position: fixed;
     width: 100%;
@@ -41,6 +43,3 @@
   }
 
 
-.Link {
-    color: #61dafb;
-  }

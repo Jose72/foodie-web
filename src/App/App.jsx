@@ -12,6 +12,7 @@ import { UserModify} from "../Users";
 import { UserPage} from "../Users";
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
+import {StatisticsPage} from "../StatisticsPage";
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
@@ -34,6 +35,8 @@ class App extends React.Component {
             <Switch>
               <PublicRoute exact path="/" component={HomePage} />
               <PublicRoute path="/login" component={LoginPage} />
+              <ProtectedRoute path="/menu" component={MenuPage} />
+              <ProtectedRoute exact path="/statistics" component={StatisticsPage} />
               <ProtectedRoute exact path="/menu" component={MenuPage} />
               <ProtectedRoute exact path="/deliveries" component={DeliveriesPage} />
               <ProtectedRoute exact path="/deliveries/add" component={DeliveryAdd} />
