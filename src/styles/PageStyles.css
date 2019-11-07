@@ -47,3 +47,35 @@
 .Link {
     color: #61dafb;
 }
+
+.Page-input-group{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: table;
+}
+
+.Page-input{
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.Page-label{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.Page-search-add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.Page-search-bar{
+    width: 800px;
+}

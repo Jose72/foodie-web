@@ -23,6 +23,7 @@ class MenuPage extends React.Component {
                 </header>
                 <div className='Menu-content'>
                     <Link className='Link' to="/users">Users</Link>
+                    <Link className='Link' to="/shops">Shops</Link>
                 </div>
             </div>
         )
