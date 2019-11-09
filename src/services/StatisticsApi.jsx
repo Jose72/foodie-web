@@ -13,7 +13,7 @@ class StatisticsApi extends React.Component {
     static getCurrentStatistics(){
         return axios.get(API_URL + STATISTICS_ROUTE, {
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
@@ -54,7 +54,7 @@ class StatisticsApi extends React.Component {
                 month_to: month_to
             },
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
