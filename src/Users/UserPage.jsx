@@ -2,7 +2,7 @@ import React from 'react';
 import './UserPage.css';
 import { Table } from 'reactstrap';
 import { UserApi } from '../services/UserApi'
-import logo from './logo192.png'
+import logo from '../styles/logo192.png'
 import  '../styles/PageStyles.css'
 
 

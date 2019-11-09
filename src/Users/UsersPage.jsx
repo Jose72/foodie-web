@@ -8,7 +8,7 @@ import  '../styles/PageStyles.css'
 const user_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
     'gratitudePoints'];
 
-const user_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
+const user_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
     'Gratitude Points'];
 
 class UsersPage extends React.Component {

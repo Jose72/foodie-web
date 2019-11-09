@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import {Link} from "react-router-dom";
 import './DisplayTable.css'
+import logo from '../styles/logo192.png'
 
 
 
@@ -17,7 +18,8 @@ class DisplayTable extends React.Component {
         itemList: [],
         route: '',
         fields: [],
-        headers: []
+        headers: [],
+        buttons: [],
     };
 
     onClickDelete(){
@@ -29,11 +31,47 @@ class DisplayTable extends React.Component {
         })
     }
 
+    getImage(item) {
+        if(item['picture'] === null){
+            return logo;
+        }
+        return item['picture'];
+    }
+
+    renderPicture(item){
+        return(
+            <td className={'Table-row'} key={'picture'}>
+                <img
+                src={this.getImage(item)}
+                alt={'picture'}
+                width={'100px'}
+                height={'100px'}/>
+            </td>
+        )
+    }
+
+    renderTableElementValue(item, key){
+        if(key === 'picture'){
+            return(
+                this.renderPicture(item)
+            )
+        } else{
+            return(
+                <td className={'Table-row'} key={key}>
+                    {item[key.toString()]}
+                </td>
+            )
+        }
+    }
+
     renderTableElement(item) {
         return (
             <tr key={item.id}>
+                {this.renderPicture(item)}
                 {this.props.fields.map((key) => {
-                    return <td className={'Table-row'} key={key}>{item[key.toString()]}</td>
+                    return(
+                        this.renderTableElementValue(item, key)
+                    )
                 })}
                 <td className={'Table-row'}>
                     <button onClick={(e) => this.props.onClickDelete(item, e)}> Delete </button>
@@ -43,11 +81,15 @@ class DisplayTable extends React.Component {
                         <button>Modify</button>
                     </Link>
                 </td>
-                <td className={'Table-row'}>
-                    <Link className='Link' to={this.props.route+`/${item.id}`}>
-                        <button>View</button>
-                    </Link>
-                </td>
+                {this.props.buttons.map((b) => {
+                    return (
+                        <td className={'Table-row'} key={b.key}>
+                            <Link className='Link' to={b.route+`${item.id}`}>
+                                <button>{b.text}</button>
+                            </Link>
+                        </td>
+                    )
+                })}
             </tr>
         )
     }

@@ -8,7 +8,7 @@ import '../styles/PageStyles.css'
 const delivery_fields = ['id', 'firstName','lastName', 'phone', 'email', 'reputation',
     'gratitudePoints', 'balance'];
 
-const delivery_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Reputation',
+const delivery_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Reputation',
     'Gratitude Points', 'Balance'];
 
 class DeliveriesPage extends React.Component {
@@ -41,6 +41,7 @@ class DeliveriesPage extends React.Component {
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/deliveries',
+                search: 'p=1&pSize=10'
             });
             this.setState({currentPageIndex: 1});
             this.setState({pageSize: 10});
