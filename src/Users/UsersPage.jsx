@@ -154,6 +154,7 @@ class UsersPage extends React.Component {
                         itemList={this.state.userList}
                         route={'user'}
                         onClickDelete={this.onClickDelete}
+                        buttons={[{text:'Orders', key: 'orders', route:'/orders?userId='}]}
                     >
                     </DisplayTable>
                     <div className={'Button-page-move'}>

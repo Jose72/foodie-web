@@ -5,9 +5,9 @@ import queryString from "query-string";
 import {OrderApi} from "../services";
 import {DisplayTable} from "../components";
 
-const order_fields = ['id', 'userId','deliveryId', 'state'];
+const order_fields = ['id', 'shopId', 'userId','deliveryId', 'state'];
 
-const order_headers = ['Id', 'User Id','Delivery Id', 'State'];
+const order_headers = ['Id', 'Shop Id', 'User Id','Delivery Id', 'State'];
 
 
 class OrdersPage extends React.Component{
@@ -34,18 +34,17 @@ class OrdersPage extends React.Component{
 
     componentDidMount() {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
-        let uid = q.id;
+        let uid = q.userId;
+        let did = q.deliveryId;
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
-                pathname: '/orders',
+                pathname: '/orders'
             });
-            this.setState({currentPageIndex: 1});
-            this.setState({pageSize: 10});
         } else {
-            OrderApi.getOrders(pageIndex, pageSize, uid, uid)
+            OrderApi.getOrders(pageIndex, pageSize, uid, did)
                 .then((r) => {
                         console.log(r);
                         this.setState({orderList: r.items});
@@ -155,26 +154,6 @@ class OrdersPage extends React.Component{
                     </h5>
                 </header>
                 <div className={'Page-content'}>
-                    <div className={'Page-search-add'}>
-                        <div className={'Page-search-bar'}>
-                            <input className={'search-input-bar'}
-                                   onKeyPress={(e) => this.onKeyPress(e)}
-                                   name='query'
-                                   placeholder=''
-                                   value={this.state.query}
-                                   onChange={(e) => this.change(e)}
-                            />
-                            <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Add-Order-Button'}>
-                            <Link className='Link' to='/orders/add'>
-                                <button>Add Order</button>
-                            </Link>
-                        </div>
-                    </div>
 
                     {this.renderTable()}
 

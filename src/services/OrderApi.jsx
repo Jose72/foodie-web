@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { Auth } from './Authentication'
 import {CommonApi} from "./CommonApi"
 import {API_URL} from "../utils/Config";
@@ -7,16 +6,15 @@ import {API_URL} from "../utils/Config";
 const ORDER_ROUTE = 'order';
 const ORDERS_ROUTE = 'orders';
 
-axios.defaults.headers.common['Content-Type'] =  'application/json';
-
 class OrderApi extends React.Component {
-    static getOrdersUser(pIndex, pSize, userId, deliveryId){
+
+    static getOrders(pIndex, pSize, userId, deliveryId){
 
         let params = {
             p: pIndex,
             pSize: pSize,
             userId: userId,
-            deliveryId: deliveryId,
+            deliveryId: deliveryId
         };
 
         let headers = {

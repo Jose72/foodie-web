@@ -17,7 +17,8 @@ class DisplayTable extends React.Component {
         itemList: [],
         route: '',
         fields: [],
-        headers: []
+        headers: [],
+        buttons: []
     };
 
     onClickDelete(){
@@ -48,6 +49,16 @@ class DisplayTable extends React.Component {
                         <button>View</button>
                     </Link>
                 </td>
+                {this.props.buttons.map((b) => {
+                    return (
+                        <td className={'Table-row'} key={b.key}>
+                            <Link className='Link' to={b.route+`${item.id}`}>
+                                <button>{b.text}</button>
+                            </Link>
+                        </td>
+                    )
+                })}
+
             </tr>
         )
     }
