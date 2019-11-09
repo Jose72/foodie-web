@@ -18,7 +18,7 @@ class UserApi extends React.Component {
                 pSize: pSize
                 },
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
             })
             .then(res => {
@@ -37,7 +37,7 @@ class UserApi extends React.Component {
     static deleteUser(id){
         return axios.delete(API_URL + USER_ROUTE + '/' + id, {
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
@@ -66,7 +66,7 @@ class UserApi extends React.Component {
             },
             {
                 headers: {
-                    Authorization: "Bearer " + Auth.getToken()
+                    Authorization: Auth.getToken()
                 }
             })
             .then(res => {
@@ -93,7 +93,7 @@ class UserApi extends React.Component {
             },
             {
                 headers: {
-                    Authorization: "Bearer " + Auth.getToken()
+                    Authorization: Auth.getToken()
                 }
             })
             .then(res => {
@@ -112,7 +112,7 @@ class UserApi extends React.Component {
     static getUser(id){
         return axios.get(API_URL + USER_ROUTE + '/' + id, {
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {

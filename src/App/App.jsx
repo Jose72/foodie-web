@@ -10,6 +10,7 @@ import { UsersPage } from '../Users'
 import { UserAdd } from '../Users'
 import { UserModify} from "../Users";
 import { UserPage} from "../Users";
+import { OrdersPage } from "../Orders"
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
 import {StatisticsPage} from "../StatisticsPage";
@@ -46,6 +47,7 @@ class App extends React.Component {
               <ProtectedRoute exact path="/users/add" component={UserAdd} />
               <ProtectedRoute exact path="/user/:id" component={UserPage} />
               <ProtectedRoute exact path="/user/modify/:id" component={UserModify} />
+              <ProtectedRoute exact path="/orders/:id" component={OrdersPage} />
               <Route component={NotFound} />
             </Switch>
         </div>

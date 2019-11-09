@@ -17,7 +17,7 @@ class DeliveryApi extends React.Component {
                 pSize: pSize
             },
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
@@ -36,7 +36,7 @@ class DeliveryApi extends React.Component {
     static deleteDelivery(id){
         return axios.delete(API_URL + DELIVERY_ROUTE + '/' + id, {
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
@@ -66,7 +66,7 @@ class DeliveryApi extends React.Component {
             },
             {
                 headers: {
-                    Authorization: "Bearer " + Auth.getToken()
+                    Authorization: Auth.getToken()
                 }
             })
             .then(res => {
@@ -93,7 +93,7 @@ class DeliveryApi extends React.Component {
             },
             {
                 headers: {
-                    Authorization: "Bearer " + Auth.getToken()
+                    Authorization: Auth.getToken()
                 }
             })
             .then(res => {
@@ -112,7 +112,7 @@ class DeliveryApi extends React.Component {
     static getDelivery(id){
         return axios.get(API_URL + DELIVERY_ROUTE + '/' + id, {
             headers: {
-                Authorization: "Bearer " + Auth.getToken()
+                Authorization: Auth.getToken()
             }
         })
             .then(res => {
