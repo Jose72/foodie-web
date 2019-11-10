@@ -13,10 +13,12 @@ class StatisticsApi extends React.Component {
     static getCurrentStatistics(){
         return axios.get(API_URL + STATISTICS_ROUTE, {
             headers: {
-                Authorization: Auth.getToken()
+                Authorization: Auth.getToken(),
+                'Access-Control-Allow-Origin': '*',
             }
         })
             .then(res => {
+                console.log(res);
                 if (res.status === 200) {
                     return res.data;
                 } else {
@@ -25,7 +27,7 @@ class StatisticsApi extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-                return Promise.reject(error)
+                return Promise.reject(error.toString())
             })
     }
 
@@ -34,7 +36,7 @@ class StatisticsApi extends React.Component {
     }
 
     static getDeliveriesStatistics(year_from, month_from, year_to, month_to){
-        return this.getStatistics(year_from, month_from, year_to, month_to, '/deliveries')
+        return this.getStatistics(year_from, month_from, year_to, month_to, '/deliverys') //TODO: typo deliveries
     }
 
     static getCompletedOrdersStatistics(year_from, month_from, year_to, month_to){
@@ -42,7 +44,7 @@ class StatisticsApi extends React.Component {
     }
 
     static getCanceledOrdersStatistics(year_from, month_from, year_to, month_to){
-        return this.getStatistics(year_from, month_from, year_to, month_to, '/orders/canceled')
+        return this.getStatistics(year_from, month_from, year_to, month_to, '/orders/cancelled')
     }
 
     static getStatistics(year_from, month_from, year_to, month_to, route){
@@ -66,7 +68,7 @@ class StatisticsApi extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-                return Promise.reject(error)
+                return Promise.reject(error.toString())
             })
     }
 

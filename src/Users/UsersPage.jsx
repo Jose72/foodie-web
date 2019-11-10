@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import queryString from 'query-string';
 import  '../styles/PageStyles.css'
 
-const user_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
+const user_fields = ['picture', 'id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
     'gratitudePoints'];
 
-const user_headers = ['Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
+const user_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
     'Gratitude Points'];
 
 class UsersPage extends React.Component {
@@ -118,19 +118,25 @@ class UsersPage extends React.Component {
     onClickDelete(user, e){
         e.persist();
         e.preventDefault();
-        UserApi.deleteUser(user.id)
-            .then(() => {
-                UserApi.getUsers(this.state.currentPageIndex)
-                    .then((u) => {
-                            console.log(u);
-                            this.setState({userList: u});
-                            window.location.reload();
-                        }
-                    )
-                    .catch((t) => {alert(t)});
-            })
-            .catch((t) => {alert(t)});
-        console.log('Delete')
+        if(window.confirm('Delete user?')) {
+            UserApi.deleteUser(user.id)
+                .then(() => {
+                    UserApi.getUsers(this.state.currentPageIndex)
+                        .then((u) => {
+                                console.log(u);
+                                this.setState({userList: u});
+                                window.location.reload();
+                            }
+                        )
+                        .catch((t) => {
+                            alert(t)
+                        });
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+            console.log('Delete')
+        }
     };
 
     renderTable(){
@@ -154,7 +160,7 @@ class UsersPage extends React.Component {
                         itemList={this.state.userList}
                         route={'user'}
                         onClickDelete={this.onClickDelete}
-                        buttons={[{text:'Orders', key: 'orders', route:'/orders?userId='}]}
+                        buttons={[{text:'Orders', key: 'orders', route:'/orders?p=1&pSize=10&userId='}]}
                     >
                     </DisplayTable>
                     <div className={'Button-page-move'}>

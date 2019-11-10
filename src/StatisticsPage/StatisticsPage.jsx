@@ -45,8 +45,9 @@ class StatisticsPage extends React.Component {
         StatisticsApi.getCurrentStatistics()
             .then((s) => {
                     this.setState({currentRegisteredUsers: s.users});
-                    this.setState({currentRegisteredDeliveries: s.deliveries});
-                    this.setState({currentCompletedOrders: s.completedOrders});
+                    //TODO: typos deliveries, completedOrders
+                    this.setState({currentRegisteredDeliveries: s.deliverys});
+                    this.setState({currentCompletedOrders: s.completeOrders});
                     this.setState({currentCanceledOrders: s.canceledOrders});
                 }
             )
@@ -59,7 +60,6 @@ class StatisticsPage extends React.Component {
     getListRegisteredUsers(year_from, month_from, year_to, month_to){
         StatisticsApi.getUsersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listRegisteredUsers: s});
                 }
             )
@@ -68,7 +68,6 @@ class StatisticsPage extends React.Component {
     getListRegisteredDeliveries(year_from, month_from, year_to, month_to){
         StatisticsApi.getDeliveriesStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listRegisteredDeliveries: s});
                 }
             )
@@ -77,7 +76,6 @@ class StatisticsPage extends React.Component {
     getListCompletedOrders(year_from, month_from, year_to, month_to){
         StatisticsApi.getCompletedOrdersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listCompletedOrders: s});
                 }
             )
@@ -86,7 +84,6 @@ class StatisticsPage extends React.Component {
     getListCanceledOrders(year_from, month_from, year_to, month_to){
         StatisticsApi.getCanceledOrdersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listCanceledOrders: s});
                 }
             )

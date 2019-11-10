@@ -41,7 +41,7 @@ class OrdersPage extends React.Component{
         console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
-                pathname: '/orders'
+                pathname: '/orders',
             });
         } else {
             OrderApi.getOrders(pageIndex, pageSize, uid, did)
