@@ -59,7 +59,6 @@ class StatisticsPage extends React.Component {
     getListRegisteredUsers(year_from, month_from, year_to, month_to){
         StatisticsApi.getUsersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listRegisteredUsers: s});
                 }
             )
@@ -68,7 +67,6 @@ class StatisticsPage extends React.Component {
     getListRegisteredDeliveries(year_from, month_from, year_to, month_to){
         StatisticsApi.getDeliveriesStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listRegisteredDeliveries: s});
                 }
             )
@@ -77,7 +75,6 @@ class StatisticsPage extends React.Component {
     getListCompletedOrders(year_from, month_from, year_to, month_to){
         StatisticsApi.getCompletedOrdersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listCompletedOrders: s});
                 }
             )
@@ -86,7 +83,6 @@ class StatisticsPage extends React.Component {
     getListCanceledOrders(year_from, month_from, year_to, month_to){
         StatisticsApi.getCanceledOrdersStatistics(year_from, month_from, year_to, month_to)
             .then((s) => {
-                    console.log(s);
                     this.setState({listCanceledOrders: s});
                 }
             )
