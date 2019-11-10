@@ -118,19 +118,25 @@ class UsersPage extends React.Component {
     onClickDelete(user, e){
         e.persist();
         e.preventDefault();
-        UserApi.deleteUser(user.id)
-            .then(() => {
-                UserApi.getUsers(this.state.currentPageIndex)
-                    .then((u) => {
-                            console.log(u);
-                            this.setState({userList: u});
-                            window.location.reload();
-                        }
-                    )
-                    .catch((t) => {alert(t)});
-            })
-            .catch((t) => {alert(t)});
-        console.log('Delete')
+        if(window.confirm('Delete user?')) {
+            UserApi.deleteUser(user.id)
+                .then(() => {
+                    UserApi.getUsers(this.state.currentPageIndex)
+                        .then((u) => {
+                                console.log(u);
+                                this.setState({userList: u});
+                                window.location.reload();
+                            }
+                        )
+                        .catch((t) => {
+                            alert(t)
+                        });
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+            console.log('Delete')
+        }
     };
 
     renderTable(){

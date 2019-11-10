@@ -10,7 +10,7 @@ import { UserAdd } from '../Users'
 import { UserModify} from "../Users";
 import { MenuPage } from '../MenuPage'
 import { HomePage } from '../HomePage'
-import {StatisticsPage} from "../StatisticsPage";
+import { StatisticsPage } from "../StatisticsPage";
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from '../utils/ProtectedRoute'
 import { PublicRoute } from '../utils/PublicRoute'
