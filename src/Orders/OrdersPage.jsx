@@ -4,6 +4,7 @@ import '../styles/PageStyles.css';
 import queryString from "query-string";
 import {OrderApi} from "../services";
 import {DisplayTable} from "../components";
+import {OrdersTable} from "../components/OrdersTable";
 
 const order_fields = ['id', 'shopId', 'userId','deliveryId', 'state'];
 
@@ -155,7 +156,14 @@ class OrdersPage extends React.Component{
                 </header>
                 <div className={'Page-content'}>
 
-                    {this.renderTable()}
+                    <OrdersTable
+                        headers={order_headers}
+                        fields={order_fields}
+                        itemList={this.state.orderList}
+                        route={'order'}
+                        onClickDelete={this.onClickDelete}
+                    >
+                    </OrdersTable>
 
                 </div>
             </div>
