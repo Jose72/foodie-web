@@ -36,7 +36,7 @@ class StatisticsApi extends React.Component {
     }
 
     static getDeliveriesStatistics(year_from, month_from, year_to, month_to){
-        return this.getStatistics(year_from, month_from, year_to, month_to, '/deliverys') //TODO: typo deliveries
+        return this.getStatistics(year_from, month_from, year_to, month_to, '/deliveries')
     }
 
     static getCompletedOrdersStatistics(year_from, month_from, year_to, month_to){
@@ -44,7 +44,7 @@ class StatisticsApi extends React.Component {
     }
 
     static getCanceledOrdersStatistics(year_from, month_from, year_to, month_to){
-        return this.getStatistics(year_from, month_from, year_to, month_to, '/orders/cancelled')
+        return this.getStatistics(year_from, month_from, year_to, month_to, '/orders/canceled')
     }
 
     static getStatistics(year_from, month_from, year_to, month_to, route){
