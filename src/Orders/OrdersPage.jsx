@@ -1,16 +1,8 @@
 import React from 'react';
-import { Route, Link, Redirect} from 'react-router-dom';
 import queryString from "query-string";
 import {OrderApi} from "../services";
-import {DisplayTable} from "../components";
-import {OrdersTable} from "../components/OrdersTable";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-
-const order_fields = ['id', 'shopId', 'userId','deliveryId', 'state'];
-
-const order_headers = ['Id', 'Shop Id', 'User Id','Delivery Id', 'State'];
-
 
 class OrdersPage extends React.Component{
     constructor(props) {
@@ -118,6 +110,11 @@ class OrdersPage extends React.Component{
                     />
 
                 </div>
+                <footer className='Home-footer'>
+                    <p>
+                        <small>&copy; Copyright 2019. Foodie Inc.</small>
+                    </p>
+                </footer>
             </div>
         )
     }
