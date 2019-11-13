@@ -1,6 +1,7 @@
 import React from 'react';
 import queryString from "query-string";
 import {OrderApi} from "../services";
+import {FoodieFooter} from "../components";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -85,13 +86,21 @@ class OrdersPage extends React.Component{
     }
 
     render(){
-        const o_columns = [{Header: "Order Id", accessor: "id"},
-            {Header: "User Id", accessor: "userId"},
-            {Header: "Delivery Id", accessor: "deliveryId"},
+        const o_columns = [
+            {Header: "Order Id", accessor: "id"},
+            {Header: "Status", accessor: "status"},
             {Header: "Shop Id", accessor: "shopId"},
-            {Header: "Status", accessor: "status"}];
-        const p_columns = [{Header: "Product Id", accessor: "id"},
-            {Header: "Name", accessor: "name"}];
+            {Header: "User Id", accessor: "userId"},
+            {Header: "Created at", accessor: "createdAt"},
+            {Header: "Delivery Id", accessor: "deliveryId"}
+            ];
+
+        const p_columns = [
+            {Header: "Product Id", accessor: "id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Price", accessor: "price"},
+            {Header: "Units", accessor: "units"},
+        ];
         return (
             <div className={'Page'}>
                 <header className={'Page-header'}>
@@ -126,11 +135,7 @@ class OrdersPage extends React.Component{
                     />
 
                 </div>
-                <footer className='Home-footer'>
-                    <p>
-                        <small>&copy; Copyright 2019. Foodie Inc.</small>
-                    </p>
-                </footer>
+                <FoodieFooter/>
             </div>
         )
     }

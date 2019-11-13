@@ -68,16 +68,6 @@ class DisplayTable extends React.Component {
         }
     }
 
-    renderSubComponent(item){
-        if(this.props.subComponentKey.toString() !== ''){
-            return(
-                <div>
-                    item.id
-                </div>
-            )
-        }
-    }
-
     renderTableElement(item) {
         return (
             <tr key={item.id}>
@@ -119,7 +109,6 @@ class DisplayTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    SubComponent={(e) => {this.renderSubComponent(e)}}
                     {this.props.itemList.map(this.renderTableElement)}
                     </tbody>
                 </Table>

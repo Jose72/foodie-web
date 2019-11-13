@@ -6,6 +6,7 @@
     flex-direction: column;
     height: 100vh;
     display: flex;
+    min-height: 100vh;;
 }
 
 .Page-header{
@@ -17,6 +18,7 @@
     font-size: calc(10px + 2vmin);
     color: white;
     top: 0;
+    width: 100%;
 }
 
 .Page-content {
@@ -29,21 +31,24 @@
     color: white;
     margin-top: 10%;
     margin-bottom: 0;
+    padding-bottom: 5vh;
 }
 
 .Page-footer {
     background-color: #282c34;
     display: flex;
-    clear: both;
-    min-height: 15vh;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
     flex-direction: column;
+    clear: both;
+    min-height: 5vh;
+    width: 100%;
     align-items: center;
     justify-content: center;
     font-size: calc(1px + 2vmin);
     color: white;
+    position: absolute;
+    left:0;
+    bottom:0;
+    right:0;
 }
 
 .Link {
