@@ -45,14 +45,13 @@ class StatisticsPage extends React.Component {
         StatisticsApi.getCurrentStatistics()
             .then((s) => {
                     this.setState({currentRegisteredUsers: s.users});
-                    //TODO: typos deliveries, completedOrders
-                    this.setState({currentRegisteredDeliveries: s.deliverys});
-                    this.setState({currentCompletedOrders: s.completeOrders});
+                    this.setState({currentRegisteredDeliveries: s.deliveries});
+                    this.setState({currentCompletedOrders: s.completedOrders});
                     this.setState({currentCanceledOrders: s.canceledOrders});
                 }
             )
             .catch((t) => {
-                alert(t)
+                alert(t);
                 }
             );
     }
