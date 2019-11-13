@@ -90,11 +90,13 @@ class OrdersPage extends React.Component{
             {Header: "Delivery Id", accessor: "deliveryId"},
             {Header: "Shop Id", accessor: "shopId"},
             {Header: "Status", accessor: "status"}];
+        const p_columns = [{Header: "Product Id", accessor: "id"},
+            {Header: "Name", accessor: "name"}];
         return (
             <div className={'Page'}>
                 <header className={'Page-header'}>
                     <h5>
-                        Order Menu
+                        Order Page
                     </h5>
                 </header>
                 <div className={'Page-Table'}>
@@ -107,6 +109,18 @@ class OrdersPage extends React.Component{
                         columns={o_columns}
                         onPageChange={this.onPageChange}
                         onPageSizeChange={this.onPageSizeChange}
+                        SubComponent={(row) => {
+                            return (
+                                    <div>
+                                        <ReactTable
+                                            data={row.original.products}
+                                            columns={p_columns}
+                                            defaultPageSize={row.original.products.length}
+                                            showPagination={false}
+                                        />
+                                    </div>
+                            )
+                        }}
                     />
 
                 </div>
