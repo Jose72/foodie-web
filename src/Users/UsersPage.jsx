@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import queryString from 'query-string';
 import  '../styles/PageStyles.css'
 
-const user_fields = ['id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
+const user_fields = ['picture', 'id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
     'gratitudePoints'];
 
 const user_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
@@ -160,6 +160,7 @@ class UsersPage extends React.Component {
                         itemList={this.state.userList}
                         route={'user'}
                         onClickDelete={this.onClickDelete}
+                        buttons={[{text:'Orders', key: 'orders', route:'/orders?p=1&pSize=10&userId='}]}
                     >
                     </DisplayTable>
                     <div className={'Button-page-move'}>

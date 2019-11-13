@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
 import '../styles/PageStyles.css';
-import './MenuPage.css';
 import {Auth} from "../services";
+import {FoodieFooter} from "../components";
 
 
 class MenuPage extends React.Component {
@@ -26,9 +26,7 @@ class MenuPage extends React.Component {
                         <Link className='Link' to="/deliveries">Deliveries</Link>
                         <Link className='Link' to="/statistics">Statistics</Link>
                 </div>
-                <footer className={'Page-footer'}>
-                    Foodie
-                </footer>
+                <FoodieFooter/>
             </div>
         )
     }

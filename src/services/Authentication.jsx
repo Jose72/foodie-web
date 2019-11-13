@@ -41,7 +41,7 @@ class Auth extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-                return Promise.reject(error)
+                return Promise.reject(error.toString())
             })
     }
 

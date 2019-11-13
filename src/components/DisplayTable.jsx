@@ -20,6 +20,7 @@ class DisplayTable extends React.Component {
         fields: [],
         headers: [],
         buttons: [],
+        subComponentKey: ''
     };
 
     onClickDelete(){
@@ -39,19 +40,22 @@ class DisplayTable extends React.Component {
     }
 
     renderPicture(item){
-        return(
-            <td className={'Table-row'} key={'picture'}>
-                <img
-                src={this.getImage(item)}
-                alt={'picture'}
-                width={'100px'}
-                height={'100px'}/>
-            </td>
-        )
+        if(typeof item['picture'] !== undefined){
+            return(
+                <td className={'Table-row'} key={'picture'}>
+                    <img
+                    src={this.getImage(item)}
+                    alt={'picture'}
+                    width={'100px'}
+                    height={'100px'}/>
+                </td>
+            )
+        }
     }
 
     renderTableElementValue(item, key){
         if(key === 'picture'){
+            console.log('pic');
             return(
                 this.renderPicture(item)
             )
@@ -67,8 +71,9 @@ class DisplayTable extends React.Component {
     renderTableElement(item) {
         return (
             <tr key={item.id}>
-                {this.renderPicture(item)}
+
                 {this.props.fields.map((key) => {
+                    console.log(key);
                     return(
                         this.renderTableElementValue(item, key)
                     )
