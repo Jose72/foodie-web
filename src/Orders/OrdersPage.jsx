@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
-import '../styles/PageStyles.css';
 import queryString from "query-string";
 import {OrderApi} from "../services";
 import {DisplayTable} from "../components";
 import {OrdersTable} from "../components/OrdersTable";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 const order_fields = ['id', 'shopId', 'userId','deliveryId', 'state'];
 
@@ -19,17 +20,16 @@ class OrdersPage extends React.Component{
 
         this.state = {
             orderList: [],
-            currentPageIndex: q.p,
+            page: q.p,
             pageSize: q.pSize,
             totalItems: 0,
             query: '',
-            lastQuery: this.query,
+            pages: -1,
+            isLoading: true,
         };
 
-        this.onSubmit = this.onSubmit.bind(this);
-        this.renderTable = this.renderTable.bind(this);
-        this.onClickPrevious = this.onClickPrevious.bind(this);
-        this.onClickNext = this.onClickNext.bind(this);
+        this.onPageChange = this.onPageChange.bind(this);
+        this.onPageSizeChange = this.onPageSizeChange.bind(this);
 
     }
 
@@ -50,8 +50,10 @@ class OrdersPage extends React.Component{
                         console.log(r);
                         this.setState({orderList: r.items});
                         this.setState({totalItems: r.totalItems});
-                        this.setState({currentPageIndex: pageIndex});
+                        this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
+                        this.setState({pages: (Math.ceil(r.totalItems / pageSize))});
+                        console.log(this.state.pages);
                     }
                 )
                 .catch((t) => {
@@ -59,39 +61,6 @@ class OrdersPage extends React.Component{
                 });
         }
     }
-    
-    //Search button
-    onSubmit = (e) => {
-        e.persist();
-        e.preventDefault();
-        this.props.history.push({
-            pathname: '/orders',
-            search: '?' + 'p=' + this.state.currentPageIndex + '&' + 'pSize=' + this.state.pageSize,
-        });
-        window.location.reload();
-    };
-
-    //Enter key on search bar
-    onKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            this.onSubmit(e);
-        }
-    };
-
-    //Next page of table
-    onClickNext = (e) => {
-        e.persist();
-        e.preventDefault();
-        if (parseInt(this.state.currentPageIndex, 10) * parseInt(this.state.pageSize, 10) < parseInt(this.state.totalItems, 10)){
-            console.log(this.state.currentPageIndex, this.state.pageSize);
-            this.props.history.push({
-                pathname: '/orders',
-                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) + 1).toString() + '&' + 'pSize=' + this.state.pageSize,
-            });
-            window.location.reload();
-        }
-    };
-
 
     //Change on form fields
     change = (e) => {
@@ -99,71 +68,54 @@ class OrdersPage extends React.Component{
         this.setState({[e.target.name]:  e.target.value});
     };
 
-    //Previous page of table
-    onClickPrevious = (e) => {
-        e.persist();
-        e.preventDefault();
-        if(parseInt(this.state.currentPageIndex, 10) <= 1){
-        } else {
-            console.log(this.state.currentPageIndex, this.state.pageSize);
+    onPageChange(page){
+        page++;
+        console.log("Page change to ",page);
+        if(page <= this.state.pages && page >= 1) {
+            let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+            q.p = page;
             this.props.history.push({
                 pathname: '/orders',
-                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) - 1).toString() + '&' + 'pSize=' + this.state.pageSize,
+                search: new URLSearchParams(q).toString(),
             });
             window.location.reload();
         }
-    };
+    }
 
-    renderTable(){
-        if(this.state.orderList.length > 0) {
-            return(
-                <div className={'Table'}>
-                    <div className={'Table-panel'} >
-                        <div className={'Table-entries'}>
-                            <label className={'Table-entries-size-label'}>Entries</label>
-                            <select className='Table-entries-size-input' name='pageSize' value={this.state.pageSize} onChange={e => this.change(e)}>
-                                <option value='5'>5</option>
-                                <option value='10'>10</option>
-                                <option value='25'>25</option>
-                                <option value='50'>50</option>
-                            </select>
-                        </div>
-                    </div>
-                    <DisplayTable
-                        headers={order_headers}
-                        fields={order_fields}
-                        itemList={this.state.orderList}
-                        route={'order'}
-                        onClickDelete={this.onClickDelete}
-                    >
-                    </DisplayTable>
-                    <div className={'Button-page-move'}>
-                        <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
-                        <button onClick={(e) => this.onClickNext(e)}> Next </button>
-                    </div>
-                </div>
-            )
-        }
+    onPageSizeChange(pageSize){
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        q.pSize = pageSize;
+        this.props.history.push({
+            pathname: '/orders',
+            search: new URLSearchParams(q).toString(),
+        });
+        window.location.reload();
     }
 
     render(){
+        const o_columns = [{Header: "Order Id", accessor: "id"},
+            {Header: "User Id", accessor: "userId"},
+            {Header: "Delivery Id", accessor: "deliveryId"},
+            {Header: "Shop Id", accessor: "shopId"},
+            {Header: "Status", accessor: "status"}];
         return (
             <div className={'Page'}>
-                <header className='Page-header'>
+                <header className={'Page-header'}>
                     <h5>
                         Order Menu
                     </h5>
                 </header>
-                <div className={'Page-content'}>
-
-                    <OrdersTable
-                        headers={order_headers}
-                        fields={order_fields}
-                        itemList={this.state.orderList}
-                        route={'order'}
-                        onClickDelete={this.onClickDelete}
-                    >
-                    </OrdersTable>
+                <div className={'Page-Table'}>
+                    <ReactTable
+                        manual
+                        page={parseInt(this.state.page, 10) - 1}
+                        pageSize={this.state.pageSize}
+                        data={this.state.orderList}
+                        pages={this.state.pages}
+                        columns={o_columns}
+                        onPageChange={this.onPageChange}
+                        onPageSizeChange={this.onPageSizeChange}
+                    />
 
                 </div>
             </div>

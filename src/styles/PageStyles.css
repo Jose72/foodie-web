@@ -1,3 +1,5 @@
+
+
 .Page {
     background-color: #282c34;
     text-align: center;
@@ -78,4 +80,8 @@
 
 .Page-search-bar{
     width: 800px;
+}
+
+.Page-Table {
+    background-color: whitesmoke;
 }

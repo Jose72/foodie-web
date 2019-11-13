@@ -60,7 +60,6 @@ class OrdersTable extends React.Component {
         headers: [],
     };
 
-
     renderRow(item){
         return(
             <tr key={item.id}>
@@ -75,38 +74,27 @@ class OrdersTable extends React.Component {
     }
 
     render() {
+        const o_columns = [{Header: "Order Id", accessor: "id"},
+            {Header: "User Id", accessor: "userId"},
+            {Header: "Delivery Id", accessor: "deliveryId"},
+            {Header: "Shop Id", accessor: "shopId"},
+            {Header: "Status", accessor: "status"}];
         if(this.props.itemList.length > 0) {
             return(
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Order Id</th>
-                            <th>Shop Id</th>
-                            <th>User Id</th>
-                            <th>Delivery Id</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-toggle="collapse" data-target="#demo1" className="accordion-toggle">
-                            <td>OBS Name</td>
-                            <td>OBS Description</td>
-                            <td>hpcloud</td>
-                            <td>nova</td>
-                            <td> created</td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" className="hiddenRow">
-                                <div className="accordian-body collapse" id="demo1">
-                                    <h1>Hi from the hiddenRow</h1>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
+                <div>
+                    <ReactTable
+                        defaultPageSize={10}
+                        data={this.props.itemList}
+                        columns={o_columns}
+                        showPagination={true}
+                    />
+                </div>
             )
+        } else {
+            return null
         }
     }
+
 }
 
 export {OrdersTable}
