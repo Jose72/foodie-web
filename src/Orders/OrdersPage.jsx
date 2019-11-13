@@ -110,16 +110,18 @@ class OrdersPage extends React.Component{
                         onPageChange={this.onPageChange}
                         onPageSizeChange={this.onPageSizeChange}
                         SubComponent={(row) => {
-                            return (
-                                    <div>
-                                        <ReactTable
-                                            data={row.original.products}
-                                            columns={p_columns}
-                                            defaultPageSize={row.original.products.length}
-                                            showPagination={false}
-                                        />
-                                    </div>
-                            )
+                            if(row.original.products.length > 0){
+                                return (
+                                        <div>
+                                            <ReactTable
+                                                data={row.original.products}
+                                                columns={p_columns}
+                                                defaultPageSize={row.original.products.length}
+                                                showPagination={false}
+                                            />
+                                        </div>
+                                )
+                            }
                         }}
                     />
 
