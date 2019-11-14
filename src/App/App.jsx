@@ -8,7 +8,6 @@ import { LoginPage } from '../LoginPage'
 import { ShopsPage } from "../Shops";
 import { ShopAdd } from "../Shops";
 import { ShopModify } from "../Shops";
-import { ShopPage } from "../Shops";
 import { UsersPage } from '../Users'
 import { UserAdd } from '../Users'
 import { UserModify} from "../Users";
@@ -49,7 +48,6 @@ class App extends React.Component {
               <ProtectedRoute exact path="/orders/" component={OrdersPage} />
               <ProtectedRoute exact path="/shops" component={ShopsPage} />
               <ProtectedRoute exact path="/shops/add" component={ShopAdd} />
-              <ProtectedRoute exact path="/shop/:id" component={ShopPage} />
               <ProtectedRoute exact path="/shop/modify/:id" component={ShopModify} />
               <Route component={NotFound} />
             </Switch>

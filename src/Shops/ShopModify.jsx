@@ -1,6 +1,7 @@
 import React from "react";
 import {ShopApi} from "../services";
 import '../styles/PageStyles.css'
+import {FoodieFooter} from "../components";
 
 class ShopModify extends React.Component{
     constructor(props) {
@@ -13,7 +14,7 @@ class ShopModify extends React.Component{
     }
 
     componentDidMount() {
-        ShopApi.getShops(this.state.shopsId)
+        ShopApi.getShop(this.state.shopsId)
             .then((u) => {
                 this.setState({shops: u})
             })
@@ -33,7 +34,7 @@ class ShopModify extends React.Component{
         e.preventDefault();
         ShopApi.modifyShop(this.state.shops)
             .then(() => {
-                alert('Shops Updated Successfully');
+                alert('Shop Updated Successfully');
             })
             .catch((r) => {
                 alert(r)
@@ -53,7 +54,7 @@ class ShopModify extends React.Component{
                 <div>
                     <header className='Page-header'>
                         <h5>
-                            Modify Shops {this.state.shops.id}
+                            Modify Shop Id N°{this.state.shops.id}
                         </h5>
                     </header>
                 </div>
@@ -61,7 +62,7 @@ class ShopModify extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
-                            <label className='Page-label'>First Name</label>
+                            <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                    size='150%'
                                    name='name'
@@ -110,6 +111,7 @@ class ShopModify extends React.Component{
                         </div>
                     </form>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }
