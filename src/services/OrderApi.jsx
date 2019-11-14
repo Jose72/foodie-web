@@ -8,13 +8,14 @@ const ORDERS_ROUTE = 'orders';
 
 class OrderApi extends React.Component {
 
-    static getOrders(pIndex, pSize, userId, deliveryId){
+    static getOrders(pIndex, pSize, userId, deliveryId, shopId){
 
         let params = {
             p: pIndex,
             pSize: pSize,
             userId: userId,
-            deliveryId: deliveryId
+            deliveryId: deliveryId,
+            shopId: shopId
         };
 
         let headers = {

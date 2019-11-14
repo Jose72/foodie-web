@@ -5,6 +5,9 @@ import { DeliveriesPage } from "../Deliveries";
 import { DeliveryAdd } from "../Deliveries";
 import { DeliveryModify } from "../Deliveries";
 import { LoginPage } from '../LoginPage'
+import { ShopsPage } from "../Shops";
+import { ShopAdd } from "../Shops";
+import { ShopModify } from "../Shops";
 import { UsersPage } from '../Users'
 import { UserAdd } from '../Users'
 import { UserModify} from "../Users";
@@ -36,7 +39,6 @@ class App extends React.Component {
               <PublicRoute path="/login" component={LoginPage} />
               <ProtectedRoute path="/menu" component={MenuPage} />
               <ProtectedRoute exact path="/statistics" component={StatisticsPage} />
-              <ProtectedRoute exact path="/menu" component={MenuPage} />
               <ProtectedRoute exact path="/deliveries" component={DeliveriesPage} />
               <ProtectedRoute exact path="/deliveries/add" component={DeliveryAdd} />
               <ProtectedRoute exact path="/delivery/modify/:id" component={DeliveryModify} />
@@ -44,6 +46,9 @@ class App extends React.Component {
               <ProtectedRoute exact path="/users/add" component={UserAdd} />
               <ProtectedRoute exact path="/user/modify/:id" component={UserModify} />
               <ProtectedRoute exact path="/orders/" component={OrdersPage} />
+              <ProtectedRoute exact path="/shops" component={ShopsPage} />
+              <ProtectedRoute exact path="/shops/add" component={ShopAdd} />
+              <ProtectedRoute exact path="/shop/modify/:id" component={ShopModify} />
               <Route component={NotFound} />
             </Switch>
         </div>

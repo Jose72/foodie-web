@@ -30,6 +30,7 @@ class OrdersPage extends React.Component{
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         let uid = q.userId;
         let did = q.deliveryId;
+        let sid = q.shopId;
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
@@ -38,7 +39,7 @@ class OrdersPage extends React.Component{
                 pathname: '/orders',
             });
         } else {
-            OrderApi.getOrders(pageIndex, pageSize, uid, did)
+            OrderApi.getOrders(pageIndex, pageSize, uid, did, sid)
                 .then((r) => {
                         console.log(r);
                         this.setState({orderList: r.items});
