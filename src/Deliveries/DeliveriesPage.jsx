@@ -25,6 +25,8 @@ class DeliveriesPage extends React.Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
+        this.onPageChange = this.onPageChange.bind(this);
+        this.onPageSizeChange = this.onPageSizeChange.bind(this);
 
     }
 
