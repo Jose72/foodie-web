@@ -7,6 +7,7 @@ import  '../styles/PageStyles.css'
 import {FoodieFooter} from "../components";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import logo from "../styles/logo192.png";
 
 const user_fields = ['picture', 'id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
     'gratitudePoints'];
@@ -127,8 +128,31 @@ class UsersPage extends React.Component {
         window.location.reload();
     }
 
+    getImage(item) {
+        if(item['picture'] === null){
+            return logo;
+        }
+        return item['picture'];
+    }
+
+    renderPicture(item){
+        if(typeof item['picture'] !== undefined){
+            return(
+                <img
+                    src={this.getImage(item)}
+                    alt={'picture'}
+                    width={'100px'}
+                    height={'100px'}
+                />
+            )
+        }
+    }
+
     render(){
         const u_columns = [
+            {Header: "", Cell: row => {
+                return(this.renderPicture(row.original))
+                }},
             {Header: "User Id", accessor: "id"},
             {Header: "First Name", accessor: "firstName"},
             {Header: "Last Name", accessor: "lastName"},
