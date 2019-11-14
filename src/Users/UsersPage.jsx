@@ -163,7 +163,25 @@ class UsersPage extends React.Component {
                         Users Page
                     </h5>
                 </header>
-
+                <div className={'Page-search-add'}>
+                    <div className={'Page-search-bar'}>
+                        <input className={'search-input-bar'}
+                               onKeyPress={(e) => this.onKeyPress(e)}
+                               name='query'
+                               placeholder=''
+                               value={this.state.query}
+                               onChange={(e) => this.change(e)}
+                        />
+                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div className={'Page-add-button-container'}>
+                        <Link className='Link' to='/users/add'>
+                            <button>Add Delivery</button>
+                        </Link>
+                    </div>
+                </div>
                 <div className={'Page-Table'}>
                     <ReactTable
                         manual

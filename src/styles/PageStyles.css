@@ -78,12 +78,16 @@
 .Page-search-add {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .Page-search-bar{
-    width: 800px;
+    width: 50%;
+}
+
+.Page-add-button-container{
+    right: 0;
+    padding-right: 10%;
 }
 
 .Page-Table {
