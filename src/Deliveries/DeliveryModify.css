@@ -1,9 +1,9 @@
-.UserPage {
+.ModifyDelivery {
     background-color: #282c34;
     text-align: center;
 }
 
-.UserPage-content {
+.ModifyDelivery-content {
     background-color: #282c34;
     display: flex;
     flex-direction: column;
@@ -14,18 +14,22 @@
     height: 100vh;
 }
 
-.UserPage-header {
+.ModifyDelivery-header {
     background-color: #282c34;
-    min-height: 10vh;
-    display: flex;
     flex-direction: column;
+    min-height: 10vh;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
 }
 
-.UserPage-footer{
+.ModifyDelivery-buttons {
+    align-items: center;
+    justify-content: center;
+}
+
+.ModifyDelivery-footer {
     background-color: #282c34;
     clear: both;
     min-height: 5vh;
@@ -38,4 +42,24 @@
     justify-content: center;
     font-size: calc(1px + 2vmin);
     color: white;
+}
+
+.ModifyDelivery-input-group{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: table;
+}
+
+.ModifyDelivery-input{
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.ModifyDelivery-label{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }

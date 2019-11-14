@@ -1,7 +1,6 @@
 import React from 'react';
 import { Auth } from '../services/Authentication'
 import { Redirect, Router} from 'react-router-dom';
-
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
@@ -9,7 +8,10 @@ class LoginPage extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: '' };
+            password: '',
+            hidePassword: true};
+
+        this.handleChangeChk = this.handleChangeChk.bind(this)
     }
 
   validateForm() {
@@ -19,16 +21,27 @@ class LoginPage extends React.Component {
   onSubmit = (e) => {
       e.persist();
       e.preventDefault();
-
-      Auth.login(this.state.username, this.state.password)
-          .then(() => {window.location.reload()})
-          .catch((t) => {alert(t)})
+      if(this.validateForm()) {
+          Auth.login(this.state.username, this.state.password)
+              .then(() => {
+                  window.location.reload()
+              })
+              .catch((t) => {
+                  alert(t)
+              })
+      } else {
+          alert('Empty User or Password')
+      }
   };
 
   change = (e) => {
       e.persist();
       this.setState({[e.target.name]:  e.target.value})
   };
+
+  handleChangeChk(){
+      this.setState({hidePassword: !this.state.hidePassword})
+  }
 
   render(){
     return (
@@ -37,7 +50,7 @@ class LoginPage extends React.Component {
             <label className='Login-label'>Username</label>
             <br/>
             <input
-                size='150%'
+                className={'Login-input'}
                 name='username' 
                 //placeholder='Username'
                 value={this.state.username} 
@@ -48,12 +61,29 @@ class LoginPage extends React.Component {
             <br/>
             <label className={'Login-label'}>Password</label>
             <br/>
-            <input 
-                name='password' 
-                //placeholder='Password'
-                value={this.state.password}
-                onChange={e => this.change(e)} 
-            />
+            <div className={'password-container'}>
+                <input
+                    className={'Login-input'}
+                    name={'password'}
+                    type={this.state.hidePassword ? "password" : "text"}
+                    //placeholder='Password'
+                    value={this.state.password}
+                    onChange={e => this.change(e)}
+                />
+                <br/>
+                <br/>
+                <div className={'password-show'}>
+                    <input
+                        type="checkbox"
+                        defaultChecked={!this.state.hidePassword}
+                        onChange={this.handleChangeChk}
+                        placeholder={'Show'}
+                    />
+                    <br/>
+                    <br/>
+                    <label className={'Login-label'}>Show</label>
+                </div>
+            </div>
             <br/>
             <br/>
             <br/>

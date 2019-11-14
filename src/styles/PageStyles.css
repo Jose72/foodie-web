@@ -1,20 +1,25 @@
+
+
 .Page {
     background-color: #282c34;
     text-align: center;
     flex-direction: column;
-    height: 100vh;
     display: flex;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 5vh;
 }
 
 .Page-header{
     background-color: #282c34;
     display: flex;
-    min-height: 5vh;
+    min-height: 15vh;
     flex-direction: column;
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: white;
     top: 0;
+    width: 100%;
 }
 
 .Page-content {
@@ -26,22 +31,23 @@
     font-size: calc(10px + 2vmin);
     color: white;
     margin-top: 10%;
-    margin-bottom: 0;
 }
 
 .Page-footer {
     background-color: #282c34;
     display: flex;
-    clear: both;
-    min-height: 5vh;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
     flex-direction: column;
+    clear: both;
+    height: 5vh;
+    width: 100%;
     align-items: center;
     justify-content: center;
     font-size: calc(1px + 2vmin);
     color: white;
+    position: absolute;
+    left:0;
+    bottom:0;
+    right:0;
 }
 
 .Link {
@@ -49,7 +55,6 @@
 }
 
 .Page-input-group{
-    display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -61,6 +66,7 @@
     align-items: center;
     align-content: center;
     justify-content: center;
+    text-align: center;
 }
 
 .Page-label{
@@ -72,10 +78,20 @@
 .Page-search-add {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .Page-search-bar{
-    width: 800px;
+    width: 50%;
+}
+
+.Page-add-button-container{
+    right: 0;
+    padding-right: 10%;
+}
+
+.Page-Table {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
 }

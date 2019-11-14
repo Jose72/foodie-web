@@ -12,3 +12,20 @@
   flex-direction: column;
   color: aliceblue;
 }
+
+.Login-input{
+  text-align: center;
+}
+
+.password-container{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.password-show{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

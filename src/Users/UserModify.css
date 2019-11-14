@@ -1,0 +1,25 @@
+
+.ModifyUser-buttons {
+    align-items: center;
+    justify-content: center;
+}
+
+.ModifyUser-input-group{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: table;
+}
+
+.ModifyUser-input{
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.ModifyUser-label{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

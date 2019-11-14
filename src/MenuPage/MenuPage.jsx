@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Link, Redirect} from 'react-router-dom';
-
-import './MenuPage.css';
+import '../styles/PageStyles.css';
 import {Auth} from "../services";
+import {FoodieFooter} from "../components";
 
 
 class MenuPage extends React.Component {
@@ -14,17 +14,20 @@ class MenuPage extends React.Component {
 
     render(){
         return (
-            <div className='Menu'>
-                <header className='Menu-header'>
+            <div className={'Page'}>
+                <header className={'Page-header'}>
                     <h5>
-                        Administrator Menu   
+                        Administrator Menu
                     </h5>
-                    <button className='Menu-button' onClick={() => this.onSubmit()}> Logout </button>
+                    <button onClick={this.onSubmit}>Logout</button>
                 </header>
-                <div className='Menu-content'>
-                    <Link className='Link' to="/users">Users</Link>
-                    <Link className='Link' to="/shops">Shops</Link>
+                <div className={'Page-content'}>
+                        <Link className='Link' to="/users?p=1&pSize=10">Users</Link>
+                        <Link className='Link' to="/deliveries?p=1&pSize=10">Deliveries</Link>
+                        <Link className='Link' to="/statistics">Statistics</Link>
+                        <Link className='Link' to="/shops?p=1&pSize=10">Shops</Link>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }

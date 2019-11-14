@@ -1,5 +1,8 @@
 import React from "react";
-import { API_URL }  from '../utils/Config'
+import axios from "axios";
+import { API_URL_LOGIN }  from '../utils/Config'
+
+axios.defaults.headers.common['Content-Type'] =  'application/json';
 
 class Auth extends React.Component {
 
@@ -9,35 +12,37 @@ class Auth extends React.Component {
         if (username === "admin" && password === "admin"){
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
-                localStorage.setItem('token', 'admin_token');
-                console.log("Loggin successful");
+                localStorage.setItem('token', 'token');
+                console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
         }
 
-        console.log("Login");
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({username, password})
-        };
-        console.log(requestOptions);
-        return fetch(API_URL + 'auth/', requestOptions)
+        return axios.post(API_URL_LOGIN,
+            {
+                email: username,
+                password: password
+            },
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(res => {
-                if (res.ok) {
-                    let data = res.json();
-                    localStorage.setItem('token', data['token']);
-                    console.log("Loggin successful");
+                console.log(res);
+                if (res.status === 200) {
+                    localStorage.setItem('token', res.data.token);
+                    console.log(res.data);
+                    return 'Login successful';
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
             })
             .catch(error => {
                 console.log(error);
-                return Promise.reject(error)
+                return Promise.reject(error.toString())
             })
-
     }
 
     static logout(){
