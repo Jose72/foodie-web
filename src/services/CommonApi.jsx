@@ -5,7 +5,7 @@ axios.defaults.headers.common['Content-Type'] =  'application/json';
 
 class CommonApi extends React.Component {
 
-    static get(route, params, headers) {
+    static get(route, params, headers, data) {
         return axios.get(route, {params: params, headers: headers})
             .then(res => {
                 if (res.status === 200) {
@@ -33,8 +33,8 @@ class CommonApi extends React.Component {
             })
     }
 
-    static put(route, params, headers) {
-        return axios.put(route, {params: params, headers: headers})
+    static put(route, params, headers, data) {
+        return axios.put(route, data,{params: params, headers: headers})
             .then(res => {
                 if (res.status === 200) {
                     return res.data;
@@ -47,8 +47,8 @@ class CommonApi extends React.Component {
             })
     }
 
-    static post(route, params, headers) {
-        return axios.post(route, {params: params, headers: headers})
+    static post(route, params, headers, data) {
+        return axios.post(route, data,{params: params, headers: headers})
             .then(res => {
                 if (res.status === 200) {
                     return res.data;
