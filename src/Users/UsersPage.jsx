@@ -130,8 +130,9 @@ class UsersPage extends React.Component {
             {Header: "First Name", accessor: "firstName"},
             {Header: "Last Name", accessor: "lastName"},
             {Header: "Phone", accessor: "phone"},
-            {Header: "Email", accessor: "subscription"},
+            {Header: "Email", accessor: "email"},
             {Header: "Signup Date", accessor: "signUpDate"},
+            {Header: "Subscription", accessor: "subscription"},
             {Header: "Reputation", accessor: "reputation"},
             {Header: "", Cell: row => {
                 return(
@@ -173,8 +174,8 @@ class UsersPage extends React.Component {
                         <br/>
                         <br/>
                     </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to='/users/add'>
+                    <div className={''}>
+                        <Link className='Link' to='/Page-add-button-containerusers/add'>
                             <button>Add Delivery</button>
                         </Link>
                     </div>
