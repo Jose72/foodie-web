@@ -1,18 +1,12 @@
 import React from 'react';
-import {DisplayTable} from "../components";
 import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
-import queryString from 'query-string';
-import  '../styles/PageStyles.css'
 import {FoodieFooter} from "../components";
+import {ImageDisplay} from "../components"
+import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-
-const user_fields = ['picture', 'id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
-    'gratitudePoints'];
-
-const user_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
-    'Gratitude Points'];
+import  '../styles/PageStyles.css'
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -129,6 +123,9 @@ class UsersPage extends React.Component {
 
     render(){
         const u_columns = [
+            {Header: "", Cell: row => {
+                return(ImageDisplay.renderPicture(row.original, "picture"))
+                }},
             {Header: "User Id", accessor: "id"},
             {Header: "First Name", accessor: "firstName"},
             {Header: "Last Name", accessor: "lastName"},
