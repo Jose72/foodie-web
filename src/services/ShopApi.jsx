@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import {Auth} from "../services";
 import {API_URL} from "../utils/Config";
+import {CommonApi} from "./CommonApi"
 
 const SHOP_ROUTE = 'shop';
 const SHOPS_ROUTE = 'shops';

@@ -1,9 +1,12 @@
 import React from 'react';
-import '../styles/PageStyles.css';
-import {DisplayTable} from "../components";
-import {ShopApi} from "../services";
+import {ShopApi, UserApi} from "../services";
 import { Link } from "react-router-dom";
+import {FoodieFooter} from "../components";
+import {ImageDisplay} from "../components"
 import queryString from 'query-string';
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import  '../styles/PageStyles.css'
 
 const shop_fields = ['id', 'name','phone', 'description', 'reputation'];
 
@@ -16,18 +19,16 @@ class ShopsPage extends React.Component {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         this.state = {
             shopList: [],
-            currentPageIndex: q.p,
+            page: q.p,
             pageSize: q.pSize,
             totalItems: 0,
             query: '',
-            lastQuery: this.query,
+            pages: -1,
+            isLoading: true,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.renderTable = this.renderTable.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
-        this.onClickPrevious = this.onClickPrevious.bind(this);
-        this.onClickNext = this.onClickNext.bind(this);
 
     }
 
@@ -40,7 +41,7 @@ class ShopsPage extends React.Component {
             this.props.history.push({
                 pathname: '/shops',
             });
-            this.setState({currentPageIndex: 1});
+            this.setState({page: 1});
             this.setState({pageSize: 10});
         } else {
             ShopApi.getShops(pageIndex, pageSize)
@@ -48,8 +49,9 @@ class ShopsPage extends React.Component {
                         console.log(d);
                         this.setState({shopList: d.items});
                         this.setState({totalItems: d.totalItems});
-                        this.setState({currentPageIndex: pageIndex});
+                        this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
+                        this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
                     }
                 )
                 .catch((t) => {
@@ -64,7 +66,7 @@ class ShopsPage extends React.Component {
         e.preventDefault();
         this.props.history.push({
             pathname: '/shops',
-            search: '?' + 'p=' + this.state.currentPageIndex + '&' + 'pSize=' + this.state.pageSize,
+            search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
         });
         window.location.reload();
     };
@@ -76,94 +78,79 @@ class ShopsPage extends React.Component {
         }
     };
 
-    //Next page of table
-    onClickNext = (e) => {
-        e.persist();
-        e.preventDefault();
-        if (parseInt(this.state.currentPageIndex, 10) * parseInt(this.state.pageSize, 10) < parseInt(this.state.totalItems, 10)){
-            console.log(this.state.currentPageIndex, this.state.pageSize);
-            this.props.history.push({
-                pathname: '/shops',
-                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) + 1).toString() + '&' + 'pSize=' + this.state.pageSize,
-            });
-            window.location.reload();
-        }
-    };
-
-
     //Change on form fields
     change = (e) => {
         e.persist();
         this.setState({[e.target.name]:  e.target.value});
     };
 
-    //Previous page of table
-    onClickPrevious = (e) => {
-        e.persist();
-        e.preventDefault();
-        if(parseInt(this.state.currentPageIndex, 10) <= 1){
-        } else {
-            console.log(this.state.currentPageIndex, this.state.pageSize);
+    //Delete Shop
+    onClickDelete(shop){
+        if(window.confirm('Delete shop?')) {
+            console.log(shop);
+            ShopApi.deleteShop(shop.id)
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+        }
+    };
+
+    onPageChange(page){
+        page++;
+        if(page <= this.state.pages && page >= 1) {
+            let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+            q.p = page;
             this.props.history.push({
                 pathname: '/shops',
-                search: '?' + 'p=' + (parseInt(this.state.currentPageIndex, 10) - 1).toString() + '&' + 'pSize=' + this.state.pageSize,
+                search: new URLSearchParams(q).toString(),
             });
             window.location.reload();
         }
-    };
+    }
 
-    //Delete Shop
-    onClickDelete(shop, e){
-        e.persist();
-        e.preventDefault();
-        ShopApi.deleteShop(shop.id)
-            .then(() => {
-                ShopApi.getShops(this.state.currentPageIndex, this.state.pageSize)
-                    .then((d) => {
-                            console.log(d);
-                            this.setState({shopList: d});
-                            window.location.reload();
-                        }
-                    )
-                    .catch((t) => {alert(t)});
-            })
-            .catch((t) => {alert(t)});
-        console.log('Delete')
-    };
-
-    renderTable(){
-        if(this.state.shopList.length > 0) {
-            return(
-                <div className={'Table'}>
-                    <div className={'Table-panel'} >
-                        <div className={'Table-entries'}>
-                            <label className={'Table-entries-size-label'}>Entries</label>
-                            <select className='Table-entries-size-input' name='pageSize' value={this.state.pageSize} onChange={e => this.change(e)}>
-                                <option value='5'>5</option>
-                                <option value='10'>10</option>
-                                <option value='25'>25</option>
-                                <option value='50'>50</option>
-                            </select>
-                        </div>
-                    </div>
-                    <DisplayTable
-                        headers={shop_headers}
-                        fields={shop_fields}
-                        itemList={this.state.shopList}
-                        route={'shop'}
-                        onClickDelete={this.onClickDelete}
-                    >
-                    </DisplayTable>
-                    <div className={'Button-page-move'}>
-                        <button onClick={(e) => this.onClickPrevious(e)}> Prev </button>
-                        <button onClick={(e) => this.onClickNext(e)}> Next </button>
-                    </div>
-                </div>
-            )
-        }
+    onPageSizeChange(pageSize){
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        q.pSize = pageSize;
+        this.props.history.push({
+            pathname: '/shops',
+            search: new URLSearchParams(q).toString(),
+        });
+        window.location.reload();
     }
 
     render(){
+        const s_columns = [
+            {Header: "", Cell: row => {
+                    return(ImageDisplay.renderPicture(row.original, "picture"))
+                }},
+            {Header: "Shop Id", accessor: "id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Phone", accessor: "phone"},
+            {Header: "Description", accessor: "description"},
+            {Header: "Reputation", accessor: "reputation"},
+            {Header: "", Cell: row => {
+                    return(
+                        <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
+                    )
+                }},
+            {Header: "", Cell: row => {
+                    return(
+                        <Link className='Link' to={`shop/modify/${row.original.id}`}>
+                            <button>Modify</button>
+                        </Link>
+                    )
+                }},
+            {Header: "", Cell: row => {
+                    return(
+                        <Link className='Link' to={`/orders?p=1&pSize=10&shopId=${row.original.id}`}>
+                            <button>Orders</button>
+                        </Link>
+                    )
+                }}
+        ];
         return (
             <div className={'Page'}>
                 <header className='Page-header'>
@@ -171,31 +158,40 @@ class ShopsPage extends React.Component {
                         Shop Menu
                     </h5>
                 </header>
-                <div className={'Page-content'}>
-                    <div className={'Page-search-add'}>
-                        <div className={'Page-search-bar'}>
-                            <input className={'Page-search-input-bar'}
-                                   onKeyPress={(e) => this.onKeyPress(e)}
-                                   name='query'
-                                   placeholder=''
-                                   value={this.state.query}
-                                   onChange={(e) => this.change(e)}
-                            />
-                            <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Add-Delivery-Button'}>
-                            <Link className='Link' to='/shops/add'>
-                                <button>Add Shop</button>
-                            </Link>
-                        </div>
+                <div className={'Page-search-add'}>
+                    <div className={'Page-search-bar'}>
+                        <input className={'Page-search-input-bar'}
+                               onKeyPress={(e) => this.onKeyPress(e)}
+                               name='query'
+                               placeholder=''
+                               value={this.state.query}
+                               onChange={(e) => this.change(e)}
+                        />
+                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
-
-                    {this.renderTable()}
-
+                    <div className={'Page-add-button-container'}>
+                        <Link className='Link' to='/shops/add'>
+                            <button>Add Shop</button>
+                        </Link>
+                    </div>
                 </div>
+                <div className={'Page-Table'}>
+                    <ReactTable
+                        manual
+                        page={parseInt(this.state.page, 10) - 1}
+                        pageSize={this.state.pageSize}
+                        data={this.state.shopList}
+                        pages={this.state.pages}
+                        columns={s_columns}
+                        onPageChange={this.onPageChange}
+                        onPageSizeChange={this.onPageSizeChange}
+                        showPagination={true}
+                    />
+                </div>
+                <FoodieFooter/>
             </div>
         )
     }

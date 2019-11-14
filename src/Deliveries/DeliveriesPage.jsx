@@ -7,7 +7,6 @@ import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import  '../styles/PageStyles.css'
-import {UserApi} from "../services";
 
 class DeliveriesPage extends React.Component {
     constructor(props) {
@@ -85,16 +84,38 @@ class DeliveriesPage extends React.Component {
     onClickDelete(delivery){
         if(window.confirm('Delete user?')) {
             console.log(delivery);
-            UserApi.deleteUser(delivery.id)
+            DeliveryApi.deleteDelivery(delivery.id)
                 .then(() => {
                     window.location.reload();
                 })
                 .catch((t) => {
                     alert(t)
                 });
-            console.log('Delete')
         }
     };
+
+    onPageChange(page){
+        page++;
+        if(page <= this.state.pages && page >= 1) {
+            let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+            q.p = page;
+            this.props.history.push({
+                pathname: '/deliveries',
+                search: new URLSearchParams(q).toString(),
+            });
+            window.location.reload();
+        }
+    }
+
+    onPageSizeChange(pageSize){
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        q.pSize = pageSize;
+        this.props.history.push({
+            pathname: '/deliveries',
+            search: new URLSearchParams(q).toString(),
+        });
+        window.location.reload();
+    }
 
     render(){
         const d_columns = [
