@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Auth } from './Authentication'
+import {CommonApi} from "./CommonApi"
 
 import {API_URL} from "../utils/Config";
 
@@ -12,120 +13,79 @@ axios.defaults.headers.common['Content-Type'] =  'application/json';
 class UserApi extends React.Component {
 
     static getUsers(pIndex, pSize){
-        return axios.get(API_URL + USERS_ROUTE, {
-            params: {
-                p: pIndex,
-                pSize: pSize
-                },
-            headers: {
-                Authorization: Auth.getToken()
-            }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.data;
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+
+        let params = {
+            p: pIndex,
+            pSize: pSize,
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.get(API_URL + USERS_ROUTE, params, headers);
     }
 
     static deleteUser(id){
-        return axios.delete(API_URL + USER_ROUTE + '/' + id, {
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    console.log("Delete Successful");
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.delete(API_URL + USER_ROUTE + '/' + id, params, headers);
     };
 
-    static modifyUser(user, opts){
-        return axios.put(API_URL + USER_ROUTE + '/' + user.id,
-            {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    phone: user.phone,
-                    subscription: user.subscription,
-                    reputation: user.reputation,
-                    gratitudePoints: user.gratitudePoints
-            },
-            {
-                headers: {
-                    Authorization: Auth.getToken()
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    return Promise.resolve('Update Successful')
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+    static modifyUser(user){
+
+        let params = {};
+
+        let data = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phone: user.phone,
+            subscription: user.subscription,
+            reputation: user.reputation,
+            gratitudePoints: user.gratitudePoints
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.put(API_URL + USER_ROUTE + '/' + user.id, params, headers, data);
     }
 
-    static addUser(user, opts){
-        return axios.post(API_URL + USER_ROUTE,
-            {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                phone: user.phone,
-                subscription: user.subscription
-            },
-            {
-                headers: {
-                    Authorization: Auth.getToken()
-                }
-            })
-            .then(res => {
-                if (res.ok) {
-                    console.log("Add Successful");
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+    static addUser(user){
+
+        let params = {};
+
+        let data = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phone: user.phone,
+            subscription: user.subscription
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + USER_ROUTE, params, headers, data);
     }
 
     static getUser(id){
-        return axios.get(API_URL + USER_ROUTE + '/' + id, {
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.data
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.get(API_URL + USER_ROUTE + '/' + id, params, headers);
     };
 
 }

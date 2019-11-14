@@ -22,8 +22,8 @@ class MenuPage extends React.Component {
                     <button onClick={this.onSubmit}>Logout</button>
                 </header>
                 <div className={'Page-content'}>
-                        <Link className='Link' to="/users">Users</Link>
-                        <Link className='Link' to="/deliveries">Deliveries</Link>
+                        <Link className='Link' to="/users?p=1&pSize=10">Users</Link>
+                        <Link className='Link' to="/deliveries?p=1&pSize=10">Deliveries</Link>
                         <Link className='Link' to="/statistics">Statistics</Link>
                 </div>
                 <FoodieFooter/>
