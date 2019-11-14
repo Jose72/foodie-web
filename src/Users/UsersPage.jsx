@@ -1,19 +1,12 @@
 import React from 'react';
-import {DisplayTable} from "../components";
 import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
-import queryString from 'query-string';
-import  '../styles/PageStyles.css'
 import {FoodieFooter} from "../components";
+import {ImageDisplay} from "../components"
+import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import logo from "../styles/logo192.png";
-
-const user_fields = ['picture', 'id', 'firstName','lastName', 'phone', 'email', 'subscription', 'reputation',
-    'gratitudePoints'];
-
-const user_headers = ['Picture', 'Id', 'First Name','Last Name', 'Phone', 'Email', 'Subscription', 'Reputation',
-    'Gratitude Points'];
+import  '../styles/PageStyles.css'
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -128,30 +121,10 @@ class UsersPage extends React.Component {
         window.location.reload();
     }
 
-    getImage(item) {
-        if(item['picture'] === null){
-            return logo;
-        }
-        return item['picture'];
-    }
-
-    renderPicture(item){
-        if(typeof item['picture'] !== undefined){
-            return(
-                <img
-                    src={this.getImage(item)}
-                    alt={'picture'}
-                    width={'100px'}
-                    height={'100px'}
-                />
-            )
-        }
-    }
-
     render(){
         const u_columns = [
             {Header: "", Cell: row => {
-                return(this.renderPicture(row.original))
+                return(ImageDisplay.renderPicture(row.original, "picture"))
                 }},
             {Header: "User Id", accessor: "id"},
             {Header: "First Name", accessor: "firstName"},
