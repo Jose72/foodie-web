@@ -34,7 +34,7 @@ class UserApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.delete(API_URL + USER_ROUTE + '/' + id, params, headers);
+        return CommonApi.delete(API_URL + USER_ROUTE + '?id=' + id, params, headers);
     };
 
     static modifyUser(user){
@@ -42,12 +42,13 @@ class UserApi extends React.Component {
         let params = {};
 
         let data = {
+            name: user.firstName + " " + user.lastName,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            phone: user.phone,
+            phone_number: user.phone_number,
             subscription: user.subscription,
-            reputation: user.reputation,
+            rating: user.rating,
             gratitudePoints: user.gratitudePoints
         };
 
@@ -63,11 +64,15 @@ class UserApi extends React.Component {
         let params = {};
 
         let data = {
+            name: user.firstName + " " + user.lastName,
             firstName: user.firstName,
             lastName: user.lastName,
+            password: user.password,
             email: user.email,
-            phone: user.phone,
-            subscription: user.subscription
+            phone_number_number: user.phone_number,
+            suscripcion: user.subscription,
+            picture: '',
+            firebase_uid: user.email,
         };
 
         let headers = {

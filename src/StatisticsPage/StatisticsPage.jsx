@@ -38,7 +38,7 @@ class StatisticsPage extends React.Component {
     }
 
     getMonth() {
-        return new Date().getMonth();
+        return new Date().getMonth() + 1;
     }
 
     getCurrentStatistics(){

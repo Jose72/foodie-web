@@ -87,7 +87,7 @@ class UsersPage extends React.Component {
     onClickDelete(user){
         if(window.confirm('Delete user?')) {
             console.log(user);
-            UserApi.deleteUser(user.id)
+            UserApi.deleteUser(user.user_id)
                 .then(() => {
                     window.location.reload();
                 })
@@ -126,14 +126,13 @@ class UsersPage extends React.Component {
             {Header: "", Cell: row => {
                 return(ImageDisplay.renderPicture(row.original, "picture"))
                 }},
-            {Header: "User Id", accessor: "id"},
-            {Header: "First Name", accessor: "firstName"},
-            {Header: "Last Name", accessor: "lastName"},
-            {Header: "Phone", accessor: "phone"},
+            {Header: "User Id", accessor: "user_id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Phone", accessor: "phone_number"},
             {Header: "Email", accessor: "email"},
-            {Header: "Signup Date", accessor: "signUpDate"},
-            {Header: "Subscription", accessor: "subscription"},
-            {Header: "Reputation", accessor: "reputation"},
+            {Header: "Signup Date", accessor: "created_at"},
+            {Header: "Subscription", accessor: "suscripcion"},
+            {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
                 return(
                     <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
@@ -141,14 +140,14 @@ class UsersPage extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`user/modify/${row.original.id}`}>
+                        <Link className='Link' to={`user/modify/${row.original.user_id}`}>
                             <button>Modify</button>
                         </Link>
                     )
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`/orders?p=1&pSize=10&userId=${row.original.id}`}>
+                        <Link className='Link' to={`/orders?p=1&pSize=10&user_id=${row.original.user_id}`}>
                             <button>Orders</button>
                         </Link>
                     )
@@ -171,6 +170,7 @@ class UsersPage extends React.Component {
                                onChange={(e) => this.change(e)}
                         />
                         <button onClick={(e) => this.onSubmit(e)}> Search </button>
+                        <br/>
                         <br/>
                         <br/>
                     </div>

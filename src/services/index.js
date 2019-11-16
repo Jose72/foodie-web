@@ -5,3 +5,4 @@ export * from './DeliveryApi';
 export * from './UserApi';
 export * from './OrderApi';
 export * from './CommonApi';
+export * from './ApiErrorHandler'

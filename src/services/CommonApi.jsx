@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+import {ApiErrorHandler} from "./ApiErrorHandler";
 
 axios.defaults.headers.common['Content-Type'] =  'application/json';
+
+
 
 class CommonApi extends React.Component {
 
@@ -11,11 +14,11 @@ class CommonApi extends React.Component {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                    return ApiErrorHandler.handle(res);
                 }
             })
             .catch(error => {
-                return Promise.reject(error)
+                return ApiErrorHandler.handle(error.response);
             })
     }
 
@@ -25,11 +28,11 @@ class CommonApi extends React.Component {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                    return Promise.reject(res.toString());
                 }
             })
             .catch(error => {
-                return Promise.reject(error)
+                return ApiErrorHandler.handle(error.response);
             })
     }
 
@@ -39,11 +42,11 @@ class CommonApi extends React.Component {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                    return ApiErrorHandler.handle(res);
                 }
             })
             .catch(error => {
-                return Promise.reject(error)
+                return ApiErrorHandler.handle(error.response);
             })
     }
 
@@ -53,11 +56,11 @@ class CommonApi extends React.Component {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
+                    return ApiErrorHandler.handle(res);
                 }
             })
             .catch(error => {
-                return Promise.reject(error)
+                return ApiErrorHandler.handle(error.response);
             })
     }
 }

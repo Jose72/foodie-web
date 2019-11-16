@@ -10,6 +10,7 @@ class UserAdd extends React.Component{
         this.state = {
             firstName: '',
             lastName: '',
+            password: '',
             email: '',
             phone: '',
             subscription: 'flat',
@@ -70,6 +71,16 @@ class UserAdd extends React.Component{
                                 //placeholder='Password'
                                 value={this.state.lastName}
                                 onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Password</label>
+                            <input className='Page-input'
+                                   name='password'
+                                   value={this.state.password}
+                                   onChange={e => this.change(e)}
                             />
                             <br/>
                             <br/>
