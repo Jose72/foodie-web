@@ -175,8 +175,8 @@ class UsersPage extends React.Component {
                         <br/>
                     </div>
                     <div className={''}>
-                        <Link className='Link' to='/Page-add-button-containerusers/add'>
-                            <button>Add Delivery</button>
+                        <Link className='Link' to='/users/add'>
+                            <button>Add User</button>
                         </Link>
                     </div>
                 </div>
