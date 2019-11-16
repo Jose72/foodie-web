@@ -12,8 +12,8 @@ class UserAdd extends React.Component{
             lastName: '',
             password: '',
             email: '',
-            phone: '',
-            subscription: 'flat',
+            phone_number: '',
+            suscripcion: 'flat',
             };
 
             this.onSubmit = this.onSubmit.bind(this);
@@ -96,18 +96,18 @@ class UserAdd extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Phone</label>
+                            <label className={'Page-label'}>phone_number</label>
                             <input className='Page-input'
-                                name='phone'
-                                value={this.state.phone}
+                                name='phone_number'
+                                value={this.state.phone_number}
                                 onChange={e => this.change(e)}
                             />
                             <br/>
                             <br/>
                         </div>
                         <div className={'Page-input-group'}>
-                            <label className={'Page-label'}>Subscription</label>
-                            <select className='Page-input' name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
+                            <label className={'Page-label'}>suscripcion</label>
+                            <select className='Page-input' name='suscripcion' value={this.state.suscripcion} onChange={e => this.change(e)}>
                                 <option value='flat'>flat</option>
                                 <option value='premium'>premium</option>
                             </select>

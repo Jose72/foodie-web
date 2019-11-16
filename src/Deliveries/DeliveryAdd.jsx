@@ -10,9 +10,9 @@ class DeliveryAdd extends React.Component{
         this.state = {
             firstName: '',
             lastName: '',
+            password: '',
             email: '',
-            phone: '',
-            subscription: 'flat',
+            phone_number: '',
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -75,6 +75,16 @@ class DeliveryAdd extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Password</label>
+                            <input className='Page-input'
+                                   name='password'
+                                   value={this.state.password}
+                                   onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Email</label>
                             <input className='Page-input'
                                    name='email'
@@ -85,10 +95,10 @@ class DeliveryAdd extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Phone</label>
+                            <label className={'Page-label'}>Phone_number</label>
                             <input className='Page-input'
-                                   name='phone'
-                                   value={this.state.phone}
+                                   name='phone_number'
+                                   value={this.state.phone_number}
                                    onChange={e => this.change(e)}
                             />
                             <br/>

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import {Auth} from "./Authentication";
 import {API_URL} from "../utils/Config";
+import {CommonApi} from "./CommonApi";
 
 const DELIVERY_ROUTE = 'delivery';
 const DELIVERIES_ROUTE = 'deliveries';
@@ -11,121 +12,79 @@ axios.defaults.headers.common['Content-Type'] =  'application/json';
 class DeliveryApi extends React.Component {
 
     static getDeliveries(pIndex, pSize){
-        return axios.get(API_URL + DELIVERIES_ROUTE, {
-            params: {
-                p: pIndex,
-                pSize: pSize
-            },
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.data;
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+
+        let params = {
+            p: pIndex,
+            pSize: pSize,
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.get(API_URL + DELIVERIES_ROUTE, params, headers);
     }
 
     static deleteDelivery(id){
-        return axios.delete(API_URL + DELIVERY_ROUTE + '/' + id, {
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    console.log("Delete Successful");
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.delete(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
 
     static modifyDelivery(delivery, opts){
-        return axios.put(API_URL + DELIVERY_ROUTE + '/' + delivery.id,
-            {
-                firstName: delivery.firstName,
-                lastName: delivery.lastName,
-                email: delivery.email,
-                phone: delivery.phone,
-                subscription: delivery.subscription,
-                reputation: delivery.reputation,
-                gratitudePoints: delivery.gratitudePoints,
-                balance: delivery.balance
-            },
-            {
-                headers: {
-                    Authorization: Auth.getToken()
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    return Promise.resolve('Update Successful')
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+        let params = {};
+
+        let data = {
+            name: delivery.firstName + " " + delivery.lastName,
+            firstName: delivery.firstName,
+            lastName: delivery.lastName,
+            email: delivery.email,
+            phone_number: delivery.phone_number,
+            rating: delivery.rating,
+            balance: delivery.balance,
+            gratitudePoints: delivery.gratitudePoints
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.put(API_URL + DELIVERY_ROUTE + '/' + delivery.user_id, params, headers, data);
     }
 
     static addDelivery(delivery, opts){
-        return axios.post(API_URL + DELIVERY_ROUTE,
-            {
-                firstName: delivery.firstName,
-                lastName: delivery.lastName,
-                email: delivery.email,
-                phone: delivery.phone,
-                subscription: delivery.subscription
-            },
-            {
-                headers: {
-                    Authorization: Auth.getToken()
-                }
-            })
-            .then(res => {
-                if (res.ok) {
-                    console.log("Add Successful");
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+        let params = {};
+
+        let data = {
+            name: delivery.firstName + " " + delivery.lastName,
+            firstName: delivery.firstName,
+            lastName: delivery.lastName,
+            password: delivery.password,
+            email: delivery.email,
+            phone_number: delivery.phone_number,
+            picture: 'https://user-images.githubusercontent.com/11250/39013954-f5091c3a-43e6-11e8-9cac-37cf8e8c8e4e.jpg',
+            firebase_uid: delivery.email,
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + DELIVERY_ROUTE, params, headers, data);
     }
 
     static getDelivery(id){
-        return axios.get(API_URL + DELIVERY_ROUTE + '/' + id, {
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.data
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error)
-            })
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.get(API_URL + DELIVERY_ROUTE + '/' + id, params, headers);
     };
 }
 

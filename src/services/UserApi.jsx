@@ -47,7 +47,7 @@ class UserApi extends React.Component {
             lastName: user.lastName,
             email: user.email,
             phone_number: user.phone_number,
-            subscription: user.subscription,
+            suscripcion: user.suscripcion,
             rating: user.rating,
             gratitudePoints: user.gratitudePoints
         };
@@ -56,7 +56,7 @@ class UserApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.put(API_URL + USER_ROUTE + '/' + user.id, params, headers, data);
+        return CommonApi.put(API_URL + USER_ROUTE + '/' + user.user_id, params, headers, data);
     }
 
     static addUser(user){
@@ -70,7 +70,7 @@ class UserApi extends React.Component {
             password: user.password,
             email: user.email,
             phone_number_number: user.phone_number,
-            suscripcion: user.subscription,
+            suscripcion: user.suscripcion,
             picture: '',
             firebase_uid: user.email,
         };

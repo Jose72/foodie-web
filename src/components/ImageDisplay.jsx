@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../styles/logo192.png'
+import axios from 'axios'
 
 class ImageDisplay extends React.Component {
     constructor(props) {
@@ -8,10 +9,17 @@ class ImageDisplay extends React.Component {
     }
 
     static getImage(item, field) {
-        if(item[field] === null){
+        return logo;
+        if(item[field] === null && item[field] === ''){
             return logo;
         }
-        return item[field];
+        axios.get(item[field])
+            .then((p) =>{
+                return p;
+            })
+            .catch((e) => {
+                return logo;
+            });
     }
 
     static renderPicture(item, field){

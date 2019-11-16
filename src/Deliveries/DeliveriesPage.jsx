@@ -124,14 +124,13 @@ class DeliveriesPage extends React.Component {
             {Header: "", Cell: row => {
                     return(ImageDisplay.renderPicture(row.original, "picture"))
                 }},
-            {Header: "Delivery Id", accessor: "id"},
-            {Header: "First Name", accessor: "firstName"},
-            {Header: "Last Name", accessor: "lastName"},
-            {Header: "Phone", accessor: "phone"},
+            {Header: "Delivery Id", accessor: "user_id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Phone_number", accessor: "phone_number"},
             {Header: "Email", accessor: "email"},
-            {Header: "Signup Date", accessor: "signUpDate"},
+            {Header: "Signup Date", accessor: "created_at"},
             {Header: "Balance", accessor: "balance"},
-            {Header: "Reputation", accessor: "reputation"},
+            {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
