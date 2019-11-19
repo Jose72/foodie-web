@@ -126,13 +126,13 @@ class ShopsPage extends React.Component {
     render(){
         const s_columns = [
             {Header: "", Cell: row => {
-                    return(ImageDisplay.renderPicture(row.original, "picture"))
+                    return(ImageDisplay.renderPicture(row.original, "photoURL"))
                 }},
             {Header: "Shop Id", accessor: "id"},
             {Header: "Name", accessor: "name"},
-            {Header: "Phone", accessor: "phone"},
+            {Header: "Address", accessor: "address"},
             {Header: "Description", accessor: "description"},
-            {Header: "Reputation", accessor: "reputation"},
+            {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>

@@ -42,10 +42,12 @@ class ShopApi extends React.Component {
 
         let data = {
             name: shop.name,
+            address: shop.address,
             description: shop.description,
             phone: shop.phone,
-            reputation: shop.reputation,
-            picture: shop.picture
+            photoURL: shop.photoURL,
+            latitude: shop.latitude,
+            longitude: shop.longitude,
         };
 
         let headers = {
@@ -60,11 +62,16 @@ class ShopApi extends React.Component {
         let params = {};
 
         let data = {
+            id: parseInt(shop.id,10),
             name: shop.name,
             address: shop.address,
             description: shop.description,
             phone: shop.phone,
-            picture: shop.picture
+            photoURL: shop.photoURL,
+            latitude: parseFloat(shop.latitude),
+            longitude: parseFloat(shop.longitude),
+            rating: 0,
+            menu: {shopId: parseInt(shop.id,10), items:[]},
         };
 
         let headers = {

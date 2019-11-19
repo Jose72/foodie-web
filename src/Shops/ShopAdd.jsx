@@ -9,10 +9,14 @@ class ShopAdd extends React.Component{
         super(props);
 
         this.state = {
+            id: '',
             name: '',
             address: '',
             phone: '',
             description: '',
+            longitude: '',
+            latitude: '',
+            photoURL: '',
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -52,6 +56,18 @@ class ShopAdd extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
+                            <label className='Page-label'>Id</label>
+                            <input className='Page-input'
+                                   size='150%'
+                                   name='id'
+                                //placeholder='Username'
+                                   value={this.state.id}
+                                   onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                    size='150%'
@@ -88,6 +104,36 @@ class ShopAdd extends React.Component{
                             <input className='Page-input'
                                    name='description'
                                    value={this.state.description}
+                                   onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Latitude</label>
+                            <input className='Page-input'
+                                   name='latitude'
+                                   value={this.state.latitude}
+                                   onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Longitude</label>
+                            <input className='Page-input'
+                                   name='longitude'
+                                   value={this.state.longitude}
+                                   onChange={e => this.change(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Picture</label>
+                            <input className='Page-input'
+                                   name='photoURL'
+                                   value={this.state.photoURL}
                                    onChange={e => this.change(e)}
                             />
                             <br/>
