@@ -138,14 +138,14 @@ class DeliveriesPage extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`delivery/modify/${row.original.id}`}>
+                        <Link className='Link' to={`delivery/modify/${row.original.user_id}`}>
                             <button>Modify</button>
                         </Link>
                     )
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`/orders?p=1&pSize=10&deliveryId=${row.original.id}`}>
+                        <Link className='Link' to={`/orders?p=1&pSize=10&deliveryId=${row.original.user_id}`}>
                             <button>Orders</button>
                         </Link>
                     )

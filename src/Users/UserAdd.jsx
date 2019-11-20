@@ -8,8 +8,7 @@ class UserAdd extends React.Component{
         super(props);
 
         this.state = {
-            firstName: '',
-            lastName: '',
+            name: '',
             password: '',
             email: '',
             phone_number: '',
@@ -53,23 +52,11 @@ class UserAdd extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
-                            <label className='Page-label'>First Name</label>
+                            <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                 size='150%'
-                                name='firstName'
-                                //placeholder='Username'
-                                value={this.state.firstName}
-                                onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'}>
-                            <label className={'Page-label'}>Last Name</label>
-                            <input className='Page-input'
-                                name='lastName'
-                                //placeholder='Password'
-                                value={this.state.lastName}
+                                name='name'
+                                value={this.state.name}
                                 onChange={e => this.change(e)}
                             />
                             <br/>
@@ -96,7 +83,7 @@ class UserAdd extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>phone_number</label>
+                            <label className={'Page-label'}>Phone</label>
                             <input className='Page-input'
                                 name='phone_number'
                                 value={this.state.phone_number}
