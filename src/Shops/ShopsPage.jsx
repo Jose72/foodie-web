@@ -126,7 +126,7 @@ class ShopsPage extends React.Component {
     render(){
         const s_columns = [
             {Header: "", Cell: row => {
-                    return(ImageDisplay.renderPicture(row.original, "photoURL"))
+                    return(ImageDisplay.renderPicture(row.original, "photoUrl"))
                 }},
             {Header: "Shop Id", accessor: "id"},
             {Header: "Name", accessor: "name"},

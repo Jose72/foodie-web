@@ -56,18 +56,6 @@ class ShopAdd extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
-                            <label className='Page-label'>Id</label>
-                            <input className='Page-input'
-                                   size='150%'
-                                   name='id'
-                                //placeholder='Username'
-                                   value={this.state.id}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                    size='150%'
@@ -84,16 +72,6 @@ class ShopAdd extends React.Component{
                             <input className='Page-input'
                                    name='address'
                                    value={this.state.address}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'}>
-                            <label className={'Page-label'}>Phone</label>
-                            <input className='Page-input'
-                                   name='phone'
-                                   value={this.state.phone}
                                    onChange={e => this.change(e)}
                             />
                             <br/>

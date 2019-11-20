@@ -33,7 +33,7 @@ class ShopApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.delete(API_URL + SHOP_ROUTE + '/' + id, params, headers);
+        return CommonApi.delete(API_URL + SHOP_ROUTE + '?id='  + id, params, headers);
     };
 
     static modifyShop(shop){
@@ -44,17 +44,16 @@ class ShopApi extends React.Component {
             name: shop.name,
             address: shop.address,
             description: shop.description,
-            phone: shop.phone,
-            photoURL: shop.photoURL,
-            latitude: shop.latitude,
-            longitude: shop.longitude,
+            photoUrl: shop.photoUrl,
+            coordinates: {latitude: parseFloat(shop.latitude), longitude: parseFloat(shop.longitude)},
+            rating: shop.rating,
         };
 
         let headers = {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.put(API_URL + SHOP_ROUTE + '/' + shop.id, params, headers, data);
+        return CommonApi.put(API_URL + SHOP_ROUTE + '?id='  + shop.id, params, headers, data);
     }
 
     static addShop(shop){
@@ -62,16 +61,12 @@ class ShopApi extends React.Component {
         let params = {};
 
         let data = {
-            id: parseInt(shop.id,10),
             name: shop.name,
             address: shop.address,
             description: shop.description,
-            phone: shop.phone,
-            photoURL: shop.photoURL,
-            latitude: parseFloat(shop.latitude),
-            longitude: parseFloat(shop.longitude),
+            photoUrl: 'https://p7.hiclipart.com/preview/3/10/517/computer-icons-shopping-cart-retail-sales-thumbnail.jpg',
+            coordinates: {latitude: parseFloat(shop.latitude), longitude: parseFloat(shop.longitude)},
             rating: 0,
-            menu: {shopId: parseInt(shop.id,10), items:[]},
         };
 
         let headers = {
@@ -89,7 +84,7 @@ class ShopApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.get(API_URL + SHOP_ROUTE + '/' + id, params, headers);
+        return CommonApi.get(API_URL + SHOP_ROUTE + '?id='  + id, params, headers);
     };
 
 
