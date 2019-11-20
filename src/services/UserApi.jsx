@@ -47,7 +47,7 @@ class UserApi extends React.Component {
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
             rating: user.rating,
-            gratitudePoints: user.gratitudePoints
+            favourPoints: user.favourPoints
         };
 
         let headers = {

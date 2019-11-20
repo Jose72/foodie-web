@@ -44,6 +44,7 @@ class DeliveryApi extends React.Component {
             phone_number: delivery.phone_number,
             rating: delivery.rating,
             balance: delivery.balance,
+            favourPoints: delivery.favourPoints,
         };
 
         let headers = {

@@ -131,6 +131,7 @@ class DeliveriesPage extends React.Component {
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Balance", accessor: "balance"},
             {Header: "Rating", accessor: "rating"},
+            {Header: "Favour Points", accessor: "favourPoints"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>

@@ -116,6 +116,16 @@ class DeliveryModify extends React.Component{
                             <br/>
                             <br/>
                         </div>
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Favour Points</label>
+                            <input className='Page-input'
+                                   name='favourPoints'
+                                   value={this.state.delivery.favourPoints}
+                                   onChange={e => this.update(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
                         <br/>
                         <br/>
                         <div className={'Page-buttons'}>
