@@ -102,7 +102,7 @@ class UserModify extends React.Component{
                         </div>
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Subscription</label>
-                            <select className='Page-input' name='subscripcion' value={this.state.subscripcion} onChange={e => this.update(e)}>
+                            <select className='Page-input' name='suscripcion' value={this.state.suscripcion} onChange={e => this.update(e)}>
                                 <option value='flat'>flat</option>
                                 <option value='premium'>premium</option>
                             </select>
