@@ -48,6 +48,13 @@ class ShopModify extends React.Component{
         this.props.history.goBack();
     }
 
+    update = (e) => {
+        e.persist();
+        let dummy = this.state.shop;
+        dummy[e.target.name] = e.target.value;
+        this.setState({shop: dummy})
+    };
+
     render(){
         return(
             <div className={'Page'}>
@@ -67,7 +74,7 @@ class ShopModify extends React.Component{
                                    size='150%'
                                    name='name'
                                    value={this.state.shop.name}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -77,7 +84,7 @@ class ShopModify extends React.Component{
                             <input className='Page-input'
                                    name='address'
                                    value={this.state.shop.address}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -87,17 +94,7 @@ class ShopModify extends React.Component{
                             <input className='Page-input'
                                    name='description'
                                    value={this.state.shop.description}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Phone</label>
-                            <input className='Page-input'
-                                   name='phone'
-                                   value={this.state.shop.phone}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -105,9 +102,9 @@ class ShopModify extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Picture</label>
                             <input className='Page-input'
-                                   name='photoURL'
-                                   value={this.state.shop.photoURL}
-                                   onChange={e => this.change(e)}
+                                   name='photoUrl'
+                                   value={this.state.shop.photoUrl}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -117,7 +114,7 @@ class ShopModify extends React.Component{
                             <input className='Page-input'
                                    name='latitude'
                                    value={this.state.shop.latitude}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -127,7 +124,17 @@ class ShopModify extends React.Component{
                             <input className='Page-input'
                                    name='longitude'
                                    value={this.state.shop.longitude}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Rating</label>
+                            <input className='Page-input'
+                                   name='rating'
+                                   value={this.state.shop.rating}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>

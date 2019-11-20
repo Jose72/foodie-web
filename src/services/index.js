@@ -4,5 +4,6 @@ export * from './StatisticsApi';
 export * from './DeliveryApi';
 export * from './UserApi';
 export * from './OrderApi';
+export * from './ShopMenuApi';
 export * from './CommonApi';
 export * from './ApiErrorHandler'
