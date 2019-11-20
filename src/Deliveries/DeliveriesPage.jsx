@@ -86,7 +86,7 @@ class DeliveriesPage extends React.Component {
     onClickDelete(delivery){
         if(window.confirm('Delete user?')) {
             console.log(delivery);
-            DeliveryApi.deleteDelivery(delivery.id)
+            DeliveryApi.deleteDelivery(delivery.user_id)
                 .then(() => {
                     window.location.reload();
                 })
