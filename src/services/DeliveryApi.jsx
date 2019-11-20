@@ -39,32 +39,29 @@ class DeliveryApi extends React.Component {
         let params = {};
 
         let data = {
-            name: delivery.firstName + " " + delivery.lastName,
-            firstName: delivery.firstName,
-            lastName: delivery.lastName,
+            name: delivery.name,
             email: delivery.email,
             phone_number: delivery.phone_number,
             rating: delivery.rating,
             balance: delivery.balance,
-            gratitudePoints: delivery.gratitudePoints
+            favourPoints: delivery.favourPoints,
         };
 
         let headers = {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.put(API_URL + DELIVERY_ROUTE + '/' + delivery.user_id, params, headers, data);
+        return CommonApi.put(API_URL + DELIVERY_ROUTE + '?id=' + delivery.user_id, params, headers, data);
     }
 
     static addDelivery(delivery, opts){
         let params = {};
 
         let data = {
-            name: delivery.firstName + " " + delivery.lastName,
-            firstName: delivery.firstName,
-            lastName: delivery.lastName,
+            name: delivery.name,
             password: delivery.password,
             email: delivery.email,
+            balance: 0,
             phone_number: delivery.phone_number,
             picture: 'https://user-images.githubusercontent.com/11250/39013954-f5091c3a-43e6-11e8-9cac-37cf8e8c8e4e.jpg',
             firebase_uid: delivery.email,
@@ -84,7 +81,7 @@ class DeliveryApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.get(API_URL + DELIVERY_ROUTE + '/' + id, params, headers);
+        return CommonApi.get(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
 }
 

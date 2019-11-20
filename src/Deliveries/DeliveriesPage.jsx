@@ -86,7 +86,7 @@ class DeliveriesPage extends React.Component {
     onClickDelete(delivery){
         if(window.confirm('Delete user?')) {
             console.log(delivery);
-            DeliveryApi.deleteDelivery(delivery.id)
+            DeliveryApi.deleteDelivery(delivery.user_id)
                 .then(() => {
                     window.location.reload();
                 })
@@ -131,6 +131,7 @@ class DeliveriesPage extends React.Component {
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Balance", accessor: "balance"},
             {Header: "Rating", accessor: "rating"},
+            {Header: "Favour Points", accessor: "favourPoints"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
@@ -138,14 +139,14 @@ class DeliveriesPage extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`delivery/modify/${row.original.id}`}>
+                        <Link className='Link' to={`delivery/modify/${row.original.user_id}`}>
                             <button>Modify</button>
                         </Link>
                     )
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`/orders?p=1&pSize=10&deliveryId=${row.original.id}`}>
+                        <Link className='Link' to={`/orders?p=1&pSize=10&deliveryId=${row.original.user_id}`}>
                             <button>Orders</button>
                         </Link>
                     )

@@ -2,6 +2,7 @@ import React from "react";
 import {DeliveryApi} from "../services";
 import {Link} from "react-router-dom";
 import '../styles/PageStyles.css'
+import {FoodieFooter} from "../components";
 
 class DeliveryModify extends React.Component{
     constructor(props) {
@@ -23,9 +24,11 @@ class DeliveryModify extends React.Component{
             })
     }
 
-    change = (e) => {
+    update = (e) => {
         e.persist();
-        this.setState({[e.target.name]:  e.target.value})
+        let dummy = this.state.delivery;
+        dummy[e.target.name] = e.target.value;
+        this.setState({delivery: dummy})
     };
 
 
@@ -54,7 +57,7 @@ class DeliveryModify extends React.Component{
                 <div>
                     <header className='Page-header'>
                         <h5>
-                            Modify Delivery {this.state.delivery.id}
+                            Modify Delivery {this.state.deliveryId}
                         </h5>
                     </header>
                 </div>
@@ -62,23 +65,13 @@ class DeliveryModify extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
-                            <label className='Page-label'>First Name</label>
+                            <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                    size='150%'
-                                   name='firstName'
+                                   name='name'
                                 //placeholder='Deliveryname'
-                                   value={this.state.delivery.firstName}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'}>
-                            <label className={'Page-label'}>Last Name</label>
-                            <input className='Page-input'
-                                   name='lastName'
-                                   value={this.state.delivery.lastName}
-                                   onChange={e => this.change(e)}
+                                   value={this.state.delivery.name}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -88,7 +81,7 @@ class DeliveryModify extends React.Component{
                             <input className='Page-input'
                                    name='email'
                                    value={this.state.delivery.email}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -96,30 +89,19 @@ class DeliveryModify extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Phone</label>
                             <input className='Page-input'
-                                   name='phone'
-                                   value={this.state.delivery.phone}
-                                   onChange={e => this.change(e)}
+                                   name='phone_number'
+                                   value={this.state.delivery.phone_number}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
                         <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Gratitude Points</label>
+                            <label className={'Page-label'}>Rating</label>
                             <input className='Page-input'
-                                   name='gratitudePoints'
-
-                                   value={this.state.delivery.gratitudePoints}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Reputation</label>
-                            <input className='Page-input'
-                                   name='reputation'
-                                   value={this.state.delivery.reputation}
-                                   onChange={e => this.change(e)}
+                                   name='rating'
+                                   value={this.state.delivery.rating}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -127,21 +109,35 @@ class DeliveryModify extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Balance</label>
                             <input className='Page-input'
-                                   name='reputation'
+                                   name='balance'
                                    value={this.state.delivery.balance}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Favour Points</label>
+                            <input className='Page-input'
+                                   name='favourPoints'
+                                   value={this.state.delivery.favourPoints}
+                                   onChange={e => this.update(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
                         <div className={'Page-buttons'}>
                             <button onClick={(e) => this.onSubmit(e)}> Modify </button>
                             {" "}
                             <button onClick={(e) => this.onClickCancel(e)}>Cancel</button>
                         </div>
+                        <br/>
+                        <br/>
                     </form>
                 </div>
+                <FoodieFooter />
             </div>
         )
     }

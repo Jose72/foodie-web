@@ -42,21 +42,19 @@ class UserApi extends React.Component {
         let params = {};
 
         let data = {
-            name: user.firstName + " " + user.lastName,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            name: user.name,
             email: user.email,
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
             rating: user.rating,
-            gratitudePoints: user.gratitudePoints
+            favourPoints: user.favourPoints
         };
 
         let headers = {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.put(API_URL + USER_ROUTE + '/' + user.user_id, params, headers, data);
+        return CommonApi.put(API_URL + USER_ROUTE + '?id=' + user.user_id, params, headers, data);
     }
 
     static addUser(user){
@@ -64,12 +62,10 @@ class UserApi extends React.Component {
         let params = {};
 
         let data = {
-            name: user.firstName + " " + user.lastName,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            name: user.name,
             password: user.password,
             email: user.email,
-            phone_number_number: user.phone_number,
+            phone_number: user.phone_number,
             suscripcion: user.suscripcion,
             picture: '',
             firebase_uid: user.email,
@@ -90,7 +86,7 @@ class UserApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.get(API_URL + USER_ROUTE + '/' + id, params, headers);
+        return CommonApi.get(API_URL + USER_ROUTE + '?id=' + id, params, headers);
     };
 
 }

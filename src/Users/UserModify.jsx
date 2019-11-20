@@ -1,12 +1,12 @@
 import React from "react";
 import {UserApi} from "../services";
-import {Link} from "react-router-dom";
-import './UserModify.css';
 import  '../styles/PageStyles.css'
 
 class UserModify extends React.Component{
     constructor(props) {
         super(props);
+
+        console.log(props.match.params.id);
 
         this.state = {
             userId: props.match.params.id,
@@ -23,6 +23,13 @@ class UserModify extends React.Component{
                 alert(t);
             })
     }
+
+    update = (e) => {
+        e.persist();
+        let dummy = this.state.user;
+        dummy[e.target.name] = e.target.value;
+        this.setState({user: dummy})
+    };
 
     change = (e) => {
         e.persist();
@@ -62,80 +69,72 @@ class UserModify extends React.Component{
 
                 <div className='Page-content'>
                     <form>
-                        <div className={'ModifyUser-input-group'}>
-                            <label className='ModifyUser-label'>First Name</label>
-                            <input className='ModifyUser-input'
+                        <div className={'Page-input-group'}>
+                            <label className='Page-label'>Name</label>
+                            <input className='Page-input'
                                    size='150%'
-                                   name='firstName'
-                                //placeholder='Username'
-                                   value={this.state.user.firstName}
-                                   onChange={e => this.change(e)}
+                                   name='name'
+                                   value={this.state.user.name}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-                        <div className={'ModifyUser-input-group'}>
-                            <label className={'ModifyUser-label'}>Last Name</label>
-                            <input className='ModifyUser-input'
-                                   name='lastName'
-                                   value={this.state.user.lastName}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'ModifyUser-input-group'}>
-                            <label className={'ModifyUser-label'}>Email</label>
-                            <input className='ModifyUser-input'
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Email</label>
+                            <input className='Page-input'
                                    name='email'
                                    value={this.state.user.email}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-                        <div className={'ModifyUser-input-group'} >
-                            <label className={'ModifyUser-label'}>Phone</label>
-                            <input className='ModifyUser-input'
-                                   name='phone'
-                                   value={this.state.user.phone}
-                                   onChange={e => this.change(e)}
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Phone</label>
+                            <input className='Page-input'
+                                   name='phone_number'
+                                   value={this.state.user.phone_number}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-                        <div className={'ModifyUser-input-group'}>
-                            <label className={'ModifyUser-label'}>Subscription</label>
-                            <select className='ModifyUser-input' name='subscription' value={this.state.subscription} onChange={e => this.change(e)}>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Subscription</label>
+                            <select className='Page-input'
+                                    name='suscripcion'
+                                    value={this.state.user.suscripcion}
+                                    onChange={e => this.update(e)}>
                                 <option value='flat'>flat</option>
                                 <option value='premium'>premium</option>
                             </select>
                             <br/>
                             <br/>
                         </div>
-                        <div className={'ModifyUser-input-group'} >
-                            <label className={'ModifyUser-label'}>Gratitude Points</label>
-                            <input className='ModifyUser-input'
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Gratitude Points</label>
+                            <input className='Page-input'
                                    name='gratitudePoints'
 
                                    value={this.state.user.gratitudePoints}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-                        <div className={'ModifyUser-input-group'} >
-                            <label className={'ModifyUser-label'}>Reputation</label>
-                            <input className='ModifyUser-input'
-                                   name='reputation'
-                                   value={this.state.user.reputation}
-                                   onChange={e => this.change(e)}
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Rating</label>
+                            <input className='Page-input'
+                                   name='rating'
+                                   value={this.state.user.rating}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
 
-                        <div className={'ModifyUser-buttons'}>
+                        <div className={'Page-buttons'}>
                             <button onClick={(e) => this.onSubmit(e)}> Modify </button>
                             {" "}
                             <button onClick={(e) => this.onClickCancel(e)}>Cancel</button>
