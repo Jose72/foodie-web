@@ -13,9 +13,9 @@ class OrderApi extends React.Component {
         let params = {
             p: pIndex,
             pSize: pSize,
-            userId: userId,
-            deliveryId: deliveryId,
-            shopId: shopId
+            user_id: userId,
+            delivery_id: deliveryId,
+            shop_id: shopId
         };
 
         let headers = {

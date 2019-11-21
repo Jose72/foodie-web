@@ -46,7 +46,7 @@ class App extends React.Component {
               <ProtectedRoute exact path="/users" component={UsersPage} />
               <ProtectedRoute exact path="/users/add" component={UserAdd} />
               <ProtectedRoute exact path="/user/modify/:id" component={UserModify} />
-              <ProtectedRoute exact path="/orders/" component={OrdersPage} />
+              <ProtectedRoute exact path="/orders" component={OrdersPage} />
               <ProtectedRoute exact path="/shops" component={ShopsPage} />
               <ProtectedRoute exact path="/shops/add" component={ShopAdd} />
               <ProtectedRoute exact path="/shop/modify/:id" component={ShopModify} />

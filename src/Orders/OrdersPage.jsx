@@ -28,9 +28,9 @@ class OrdersPage extends React.Component{
 
     componentDidMount() {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
-        let uid = q.userId;
-        let did = q.deliveryId;
-        let sid = q.shopId;
+        let uid = q.user_id;
+        let did = q.delivery_id;
+        let sid = q.shop_id;
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);

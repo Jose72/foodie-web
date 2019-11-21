@@ -147,7 +147,7 @@ class ShopsPage extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`/orders?p=1&pSize=10&shopId=${row.original.id}`}>
+                        <Link className='Link' to={`/orders?p=1&pSize=10&shop_id=${row.original.id}`}>
                             <button>Orders</button>
                         </Link>
                     )
