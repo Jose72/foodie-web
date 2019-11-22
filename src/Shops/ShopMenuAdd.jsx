@@ -12,10 +12,10 @@ class ShopMenuAdd extends React.Component{
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
 
         this.state = {
-            shopId: props.shopId,
+            shopId: props.match.params.shopId,
             name: '',
             description: '',
-            photoURL: '',
+            price: 0,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -30,10 +30,9 @@ class ShopMenuAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopMenuApi.addMenuFood(this.state)
+        ShopMenuApi.addMenuFood(this.state.shopId, this.state)
             .then(() => {
-                alert('Shop Added Successfully');
-                console.log("Shop Added");
+                alert('Food Added Successfully');
             })
             .catch((r) => {
                 alert(r)
@@ -55,23 +54,10 @@ class ShopMenuAdd extends React.Component{
                 <div className='Page-content'>
                     <form>
                         <div className={'Page-input-group'}>
-                            <label className='Page-label'>Id</label>
-                            <input className='Page-input'
-                                   size='150%'
-                                   name='id'
-                                //placeholder='Username'
-                                   value={this.state.id}
-                                   onChange={e => this.change(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
                                    size='150%'
                                    name='name'
-                                //placeholder='Username'
                                    value={this.state.name}
                                    onChange={e => this.change(e)}
                             />
@@ -89,10 +75,10 @@ class ShopMenuAdd extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'}>
-                            <label className={'Page-label'}>Picture</label>
+                            <label className={'Page-label'}>Price</label>
                             <input className='Page-input'
-                                   name='photoURL'
-                                   value={this.state.photoURL}
+                                   name='price'
+                                   value={this.state.price}
                                    onChange={e => this.change(e)}
                             />
                             <br/>

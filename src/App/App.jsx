@@ -52,7 +52,7 @@ class App extends React.Component {
               <ProtectedRoute exact path="/shop/modify/:id" component={ShopModify} />
               <ProtectedRoute exact path="/shop/:shopId/menu" component={ShopMenu} />
               <ProtectedRoute exact path="/shop/:shopId/menu/add" component={ShopMenuAdd} />
-              <ProtectedRoute exact path="/shop/:shopId/menu/modify" component={ShopMenuModify} />
+              <ProtectedRoute exact path="/shop/:shopId/menu/modify/:foodId" component={ShopMenuModify} />
               <Route component={NotFound} />
             </Switch>
         </div>
