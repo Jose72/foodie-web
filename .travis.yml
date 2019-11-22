@@ -17,18 +17,17 @@ cache:
   directories:
   - node_modules
 
+install: npm install
+
 script:
   - npm test
-  - npm run build
-  - docker build -f Dockerfile -t $DOCKER_USERNAME/7552-web-app .
-  - docker tag $DOCKER_USERNAME/7552-web-app registry.heroku.com/$HEROKU_APP_NAME/web
-
 
 deploy:
-  provider: script
-  script:
-    # push to dockerhub
-    docker push josemorelli/7552-web-app;
-    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-    heroku container:release web --app $HEROKU_APP_NAME
-  branch: master
+  - provider: script
+    script: sh deploy.sh
+    on:
+      branch: master
+  - provider: script
+    script: sh deploy_develop.sh
+    on:
+      branch: develop

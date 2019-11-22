@@ -1,0 +1,49 @@
+.Home {
+    background-color: #282c34;
+    text-align: center;
+}
+
+.Home-content {
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .Home-header {
+    background-color: #282c34;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .Home-footer {
+    background-color: #282c34;
+    clear: both;
+    min-height: 5vh;
+    display: flex;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(1px + 2vmin);
+    color: white;
+  }
+
+
+.Link {
+    color: #61dafb;
+  }
