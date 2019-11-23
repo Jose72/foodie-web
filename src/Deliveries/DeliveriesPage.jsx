@@ -1,7 +1,7 @@
 import React from 'react';
 import { DeliveryApi } from '../services/DeliveryApi'
 import { Link } from "react-router-dom";
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 import {ImageDisplay} from "../components"
 import queryString from 'query-string';
 import ReactTable from "react-table";
@@ -49,7 +49,8 @@ class DeliveriesPage extends React.Component {
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
-                        this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
+                        this.setState({pages: (Math.ceil(d.totalItems / pageSize))})
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -120,6 +121,7 @@ class DeliveriesPage extends React.Component {
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         const d_columns = [
             {Header: "", Cell: row => {
                     return(ImageDisplay.renderPicture(row.original, "picture"))

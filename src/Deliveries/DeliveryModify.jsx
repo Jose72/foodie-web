@@ -2,7 +2,7 @@ import React from "react";
 import {DeliveryApi} from "../services";
 import {Link} from "react-router-dom";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 
 class DeliveryModify extends React.Component{
     constructor(props) {
@@ -11,13 +11,15 @@ class DeliveryModify extends React.Component{
         this.state = {
             deliveryId: props.match.params.id,
             delivery: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         DeliveryApi.getDelivery(this.state.deliveryId)
             .then((u) => {
-                this.setState({delivery: u})
+                this.setState({delivery: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -52,6 +54,7 @@ class DeliveryModify extends React.Component{
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>

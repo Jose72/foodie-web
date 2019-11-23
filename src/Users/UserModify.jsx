@@ -1,6 +1,7 @@
 import React from "react";
 import {UserApi} from "../services";
 import  '../styles/PageStyles.css'
+import {Loader} from "../components";
 
 class UserModify extends React.Component{
     constructor(props) {
@@ -11,13 +12,15 @@ class UserModify extends React.Component{
         this.state = {
             userId: props.match.params.id,
             user: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         UserApi.getUser(this.state.userId)
             .then((u) => {
-                this.setState({user: u})
+                this.setState({user: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -57,6 +60,7 @@ class UserModify extends React.Component{
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>

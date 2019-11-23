@@ -1,7 +1,7 @@
 import React from "react";
 import {ShopMenuApi} from "../services";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 
 class ShopMenuModify extends React.Component{
     constructor(props) {
@@ -11,13 +11,15 @@ class ShopMenuModify extends React.Component{
             shopId: props.match.params.shopId,
             foodId: props.match.params.foodId,
             food: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         ShopMenuApi.getMenuFood(this.state.foodId)
             .then((u) => {
-                this.setState({food: u})
+                this.setState({food: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -57,6 +59,7 @@ class ShopMenuModify extends React.Component{
     };
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>

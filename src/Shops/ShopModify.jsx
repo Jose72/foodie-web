@@ -1,7 +1,7 @@
 import React from "react";
 import {ShopApi} from "../services";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 
 class ShopModify extends React.Component{
     constructor(props) {
@@ -10,13 +10,15 @@ class ShopModify extends React.Component{
         this.state = {
             shopsId: props.match.params.id,
             shop: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         ShopApi.getShop(this.state.shopsId)
             .then((u) => {
-                this.setState({shop: u})
+                this.setState({shop: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -56,6 +58,7 @@ class ShopModify extends React.Component{
     };
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>

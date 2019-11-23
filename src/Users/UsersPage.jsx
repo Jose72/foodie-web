@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserApi } from '../services/UserApi'
 import { Link } from "react-router-dom";
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 import {ImageDisplay} from "../components"
 import queryString from 'query-string';
 import ReactTable from "react-table";
@@ -50,6 +50,7 @@ class UsersPage extends React.Component {
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
                         this.setState({pages: (Math.ceil(u.totalItems / pageSize))});
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -122,6 +123,7 @@ class UsersPage extends React.Component {
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         const u_columns = [
             {Header: "", Cell: row => {
                 return(ImageDisplay.renderPicture(row.original, "picture"))

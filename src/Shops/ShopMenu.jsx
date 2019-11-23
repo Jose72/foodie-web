@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopMenuApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter, ImageDisplay} from "../components";
+import {FoodieFooter, ImageDisplay, Loader} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -53,6 +53,7 @@ class ShopMenu extends React.Component {
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
                         this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -123,6 +124,7 @@ class ShopMenu extends React.Component {
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         const m_columns = [
             {Header: "Food Id", accessor: "id"},
             {Header: "Name", accessor: "name"},

@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from "query-string";
 import {OrderApi} from "../services";
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -47,7 +47,7 @@ class OrdersPage extends React.Component{
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
                         this.setState({pages: (Math.ceil(r.totalItems / pageSize))});
-                        console.log(this.state.pages);
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -87,6 +87,7 @@ class OrdersPage extends React.Component{
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         const o_columns = [
             {Header: "Order Id", accessor: "id"},
             {Header: "Status", accessor: "status"},

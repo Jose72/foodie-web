@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { StatisticsApi } from "../services";
 import {BChart} from "../components";
 import {ChartPanel} from "../components";
+import {OptPanel} from "../components";
 import '../styles/PageStyles.css'
+import {Loader} from "../components/Loader";
 
 
 class StatisticsPage extends React.Component {
@@ -16,11 +18,12 @@ class StatisticsPage extends React.Component {
             currentCompletedOrders: 0,
             currentCanceledOrders: 0,
 
-
             listRegisteredUsers: [],
             listRegisteredDeliveries: [],
             listCompletedOrders: [],
             listCanceledOrders: [],
+
+            isLoading: true,
         };
 
         this.getListRegisteredUsers = this.getListRegisteredUsers.bind(this);
@@ -48,10 +51,12 @@ class StatisticsPage extends React.Component {
                     this.setState({currentRegisteredDeliveries: s.deliveries});
                     this.setState({currentCompletedOrders: s.completedOrders});
                     this.setState({currentCanceledOrders: s.canceledOrders});
+                    this.setState({isLoading: false});
                 }
             )
             .catch((t) => {
                 alert(t);
+                window.location.reload();
                 }
             );
     }
@@ -89,15 +94,14 @@ class StatisticsPage extends React.Component {
     }
 
     render() {
+        if (this.state.isLoading) return <Loader />;
         return (
             <div className={'Page'}>
                 <header className={'Page-header'}>
                     <h5>
                         Statistics
                     </h5>
-                    <Link to={'/menu'}>
-                        <button> Back </button>
-                    </Link>
+                    <OptPanel/>
                 </header>
                 <div className={'Page-content'}>
                     <div>

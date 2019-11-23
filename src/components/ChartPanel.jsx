@@ -13,10 +13,10 @@ class ChartPanel extends React.Component {
         super(props);
         let d = new Date();
         this.state = {
-            from_year: this.subtractDateYearMonth(d.getFullYear(), d.getMonth(), 5)['n_year'],
-            from_month: this.getMonthNameByNumber(this.subtractDateYearMonth(d.getFullYear(), d.getMonth(), 5)['n_month']),
+            from_year: this.subtractDateYearMonth(d.getFullYear(), this.getMonth(), 5)['n_year'],
+            from_month: this.getMonthNameByNumber(this.subtractDateYearMonth(d.getFullYear(), this.getMonth(), 5)['n_month']),
             to_year: d.getFullYear(),
-            to_month: this.getMonthNameByNumber(d.getMonth()),
+            to_month: this.getMonthNameByNumber(this.getMonth()),
             fromList: [],
             toList: []
         };
@@ -30,6 +30,10 @@ class ChartPanel extends React.Component {
 
     componentDidMount() {
         this.onClickDisplay();
+    }
+
+    getMonth() {
+        return new Date().getMonth() + 1;
     }
 
     subtractDateYearMonth(year, month, n){
