@@ -48,7 +48,6 @@ class ShopsPage extends React.Component {
         } else {
             ShopApi.getShops(pageIndex, pageSize)
                 .then((d) => {
-                        console.log(d);
                         this.setState({shopList: d.items});
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
@@ -125,6 +124,7 @@ class ShopsPage extends React.Component {
     }
 
     render(){
+        console.log(this.state.pages);
         if (this.state.isLoading) return <Loader />;
         const s_columns = [
             {Header: "", Cell: row => {
@@ -176,24 +176,9 @@ class ShopsPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'Page-search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to='/shops/add'>
-                            <button>Add Shop</button>
-                        </Link>
-                    </div>
+                    <Link className='Link' to='/shops/add'>
+                        <button>Add Shop</button>
+                    </Link>
                 </div>
                 <div className={'Page-Table'}>
                     <ReactTable

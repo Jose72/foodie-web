@@ -1,12 +1,12 @@
 import React from 'react';
-import { UserApi } from '../services/UserApi'
-import { Link } from "react-router-dom";
-import {FoodieFooter, Loader} from "../components";
-import {ImageDisplay} from "../components"
+import {UserApi} from '../services/UserApi'
+import {Link} from "react-router-dom";
+import {FoodieFooter, ImageDisplay, Loader} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import  '../styles/PageStyles.css'
+import '../styles/PageStyles.css'
+
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -21,13 +21,16 @@ class UsersPage extends React.Component {
             query: '',
             pages: -1,
             isLoading: true,
+            subscriptionMode: (q.subsMode === undefined) ? false : q.subsMode,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onPageSizeChange = this.onPageSizeChange.bind(this);
-
+        this.getTable = this.getTable.bind(this);
+        this.onClickCancelSubscription  = this.onClickCancelSubscription.bind(this);
+        this.onClickUpgradeSubscription  = this.onClickUpgradeSubscription.bind(this);
     }
 
     componentDidMount() {
@@ -121,13 +124,63 @@ class UsersPage extends React.Component {
         });
         window.location.reload();
     }
+    
+    onClickCancelSubscription(user){
+        if(window.confirm('Cancel subscription?')) {
+            UserApi.cancelSubscription(user.user_id)
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+        }
+    }
 
-    render(){
-        if (this.state.isLoading) return <Loader />;
-        const u_columns = [
+    onClickUpgradeSubscription(user){
+        if(window.confirm('Upgrade subscription?')) {
+            UserApi.upgradeSubscription(user.user_id)
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+            console.log('Delete')
+        }
+    }
+
+    getSubscriptionButton(user){
+        if(user.suscripcion === 'premium'){
+            return(
+                <button onClick={() => this.onClickCancelSubscription(user)}>
+                    Cancel </button>
+            );
+        }
+        return(
+            <button onClick={() => this.onClickUpgradeSubscription(user)}>
+                Upgrade </button>
+        );
+    }
+
+    getTable(){
+        const u_s_columns = [
+            {Header: "User Id", accessor: "user_id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Signup Date", accessor: "created_at"},
+            {Header: "Subscription", accessor: "suscripcion"},
             {Header: "", Cell: row => {
-                return(ImageDisplay.renderPicture(row.original, "picture"))
-                }},
+                    return(
+                        this.getSubscriptionButton(row.original)
+                    )
+                }}
+        ];
+        let cols = [
+            {
+                Header: "", Cell: row => {
+                    return (ImageDisplay.renderPicture(row.original, "picture"))
+                }
+            },
             {Header: "User Id", accessor: "user_id"},
             {Header: "Name", accessor: "name"},
             {Header: "Phone", accessor: "phone_number"},
@@ -135,26 +188,55 @@ class UsersPage extends React.Component {
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Subscription", accessor: "suscripcion"},
             {Header: "Rating", accessor: "rating"},
-            {Header: "", Cell: row => {
-                return(
-                    <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
+            {
+                Header: "", Cell: row => {
+                    return (
+                        <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
                     )
-                }},
-            {Header: "", Cell: row => {
-                    return(
+                }
+            },
+            {
+                Header: "", Cell: row => {
+                    return (
                         <Link className='Link' to={`user/modify/${row.original.user_id}`}>
                             <button>Modify</button>
                         </Link>
                     )
-                }},
-            {Header: "", Cell: row => {
-                    return(
+                }
+            },
+            {
+                Header: "", Cell: row => {
+                    return (
                         <Link className='Link' to={`/orders?p=1&pSize=10&user_id=${row.original.user_id}`}>
                             <button>Orders</button>
                         </Link>
                     )
-                }}
+                }
+            }
         ];
+        if(this.state.subscriptionMode){
+           cols = u_s_columns;
+        }
+
+        return(
+            <div className={'Page-Table'}>
+                <ReactTable
+                    manual
+                    page={parseInt(this.state.page, 10) - 1}
+                    pageSize={this.state.pageSize}
+                    data={this.state.userList}
+                    pages={this.state.pages}
+                    columns={cols}
+                    onPageChange={this.onPageChange}
+                    onPageSizeChange={this.onPageSizeChange}
+                    showPagination={true}
+                />
+            </div>
+        );
+    }
+
+    render(){
+        if (this.state.isLoading) return <Loader />;
         return (
             <div className={'Page'}>
                 <header className={'Page-header'}>
@@ -163,38 +245,26 @@ class UsersPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={''}>
-                        <Link className='Link' to='/users/add'>
-                            <button>Add User</button>
-                        </Link>
+                    <div className={'Page-search-add'}>
+                        <div>
+                            <input
+                                className='Page-input'
+                                type="checkbox"
+                                defaultChecked={this.state.subscriptionMode}
+                                onChange={() => {this.setState({subscriptionMode: !this.state.subscriptionMode})}}
+                                placeholder={'Subscription Mode'}
+                            />
+                            <label className={'Page-label'}>Subscription Mode</label>
+                        </div>
+                        <div>
+                            <Link className='Link' to='/users/add'>
+                                <button>Add User</button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-                <div className={'Page-Table'}>
-                    <ReactTable
-                        manual
-                        page={parseInt(this.state.page, 10) - 1}
-                        pageSize={this.state.pageSize}
-                        data={this.state.userList}
-                        pages={this.state.pages}
-                        columns={u_columns}
-                        onPageChange={this.onPageChange}
-                        onPageSizeChange={this.onPageSizeChange}
-                        showPagination={true}
-                    />
-                </div>
+
+                {this.getTable()}
                 <FoodieFooter/>
             </div>
         )

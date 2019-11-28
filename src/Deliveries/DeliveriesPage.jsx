@@ -49,7 +49,7 @@ class DeliveriesPage extends React.Component {
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
-                        this.setState({pages: (Math.ceil(d.totalItems / pageSize))})
+                        this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
                         this.setState({isLoading: false});
                     }
                 )
@@ -162,24 +162,9 @@ class DeliveriesPage extends React.Component {
                     </h5>
                 </header>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to='/deliveries/add'>
-                            <button>Add Delivery</button>
-                        </Link>
-                    </div>
+                    <Link className='Link' to='/deliveries/add'>
+                        <button>Add Delivery</button>
+                    </Link>
                 </div>
                 <div className={'Page-Table'}>
                     <ReactTable

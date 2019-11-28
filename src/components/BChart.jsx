@@ -2,7 +2,6 @@ import React from 'react';
 import {
     BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import './DisplayTable.css'
 
 class BChart extends React.Component {
     constructor(props) {

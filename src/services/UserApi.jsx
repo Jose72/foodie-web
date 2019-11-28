@@ -89,6 +89,28 @@ class UserApi extends React.Component {
         return CommonApi.get(API_URL + USER_ROUTE + '?id=' + id, params, headers);
     };
 
+    static cancelSubscription(id){
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/cancel' + '?id=' + id, params, headers);
+    };
+
+    static upgradeSubscription(id){
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/upgrade' + '?id=' + id, params, headers);
+    };
+
 }
 
 export {UserApi}
