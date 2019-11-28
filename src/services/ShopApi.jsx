@@ -76,6 +76,23 @@ class ShopApi extends React.Component {
         return CommonApi.post(API_URL + SHOP_ROUTE, params, headers, data);
     }
 
+    static addShopGoogle(shop){
+
+        let params = {};
+
+        let data = {
+            latitude: parseFloat(shop.latitude),
+            longitude: parseFloat(shop.longitude),
+            radius: parseFloat(shop.radius),
+        };
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + SHOP_ROUTE + '/zone', params, headers, data);
+    }
+
     static getShop(id){
 
         let params = {};

@@ -133,6 +133,11 @@ class ShopsPage extends React.Component {
             {Header: "Shop Id", accessor: "id"},
             {Header: "Name", accessor: "name"},
             {Header: "Address", accessor: "address"},
+            {Header: "Long/Lat", Cell: row => {
+                    return(
+                        row.original.longitude + ',' + row.original.latitude
+                    )}
+            },
             {Header: "Description", accessor: "description"},
             {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
