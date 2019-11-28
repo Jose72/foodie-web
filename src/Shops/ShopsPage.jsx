@@ -39,12 +39,12 @@ class ShopsPage extends React.Component {
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
-        if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
+        if (pageSize === undefined || pageIndex === undefined) {
             this.props.history.push({
                 pathname: '/shops',
+                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
             });
-            this.setState({page: 1});
-            this.setState({pageSize: 10});
+            window.location.reload();
         } else {
             ShopApi.getShops(pageIndex, pageSize)
                 .then((d) => {
@@ -135,7 +135,8 @@ class ShopsPage extends React.Component {
             {Header: "Address", accessor: "address"},
             {Header: "Long/Lat", Cell: row => {
                     return(
-                        row.original.longitude + ',' + row.original.latitude
+                        row.original.longitude + ',' +
+                        row.original.latitude
                     )}
             },
             {Header: "Description", accessor: "description"},

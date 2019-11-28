@@ -38,9 +38,9 @@ class UsersPage extends React.Component {
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/users',
+                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
             });
-            this.setState({page: 1});
-            this.setState({pageSize: 10});
+            window.location.reload();
         } else {
             UserApi.getUsers(pageIndex, pageSize)
                 .then((u) => {

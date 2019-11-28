@@ -37,10 +37,10 @@ class DeliveriesPage extends React.Component {
         console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
-                pathname: '/deliveries'
+                pathname: '/deliveries',
+                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
             });
-            this.setState({page: 1});
-            this.setState({pageSize: 10});
+            window.location.reload();
         } else {
             DeliveryApi.getDeliveries(pageIndex, pageSize)
                 .then((d) => {

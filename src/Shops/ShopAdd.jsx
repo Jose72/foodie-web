@@ -104,7 +104,7 @@ class ShopAdd extends React.Component{
                     <div className={'Page-buttons'}>
                         <button onClick={(e) => this.onSubmitGoogle(e)}> Add</button>
                         {" "}
-                        <Link className='Link' to='/shops/'>
+                        <Link className='Link' to='/shops'>
                             <button>Cancel</button>
                         </Link>
                     </div>
@@ -179,7 +179,7 @@ class ShopAdd extends React.Component{
                     <div className={'Page-buttons'}>
                         <button onClick={(e) => this.onSubmit(e)}> Add</button>
                         {" "}
-                        <Link className='Link' to='/shops/'>
+                        <Link className='Link' to='/shops'>
                             <button>Cancel</button>
                         </Link>
                     </div>
