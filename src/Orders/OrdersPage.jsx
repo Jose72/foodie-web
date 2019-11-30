@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from "query-string";
 import {OrderApi} from "../services";
-import {FoodieFooter, Loader} from "../components";
+import {FoodieFooter, Loader, OptPanel} from "../components";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -110,6 +110,9 @@ class OrdersPage extends React.Component{
                         Order Page
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-Table'}>
                     <ReactTable
                         manual

@@ -101,8 +101,10 @@ class StatisticsPage extends React.Component {
                     <h5>
                         Statistics
                     </h5>
-                    <OptPanel/>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-content'}>
                     <div>
                         <h2>{this.getYear()} / {this.getMonth()}</h2>

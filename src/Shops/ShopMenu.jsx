@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopMenuApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter, ImageDisplay, Loader} from "../components";
+import {FoodieFooter, ImageDisplay, Loader, OptPanel} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -150,25 +150,13 @@ class ShopMenu extends React.Component {
                         Shop {this.state.shopId} Menu
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'Page-search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to={`/shop/${this.state.shopId}/menu/add`}>
-                            <button>Add Food</button>
-                        </Link>
-                    </div>
+                    <Link className='Link' to={`/shop/${this.state.shopId}/menu/add`}>
+                        <button>Add Food</button>
+                    </Link>
                 </div>
                 <div className={'Page-Table'}>
                     <ReactTable

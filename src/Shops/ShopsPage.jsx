@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopApi, UserApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter, Loader} from "../components";
+import {FoodieFooter, Loader, OptPanel} from "../components";
 import {ImageDisplay} from "../components"
 import queryString from 'query-string';
 import ReactTable from "react-table";
@@ -175,6 +175,9 @@ class ShopsPage extends React.Component {
                         Shop Menu
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
                     <Link className='Link' to='/shops/add'>
                         <button>Add Shop</button>

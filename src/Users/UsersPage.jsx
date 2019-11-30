@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserApi} from '../services/UserApi'
 import {Link} from "react-router-dom";
-import {FoodieFooter, ImageDisplay, Loader} from "../components";
+import {FoodieFooter, ImageDisplay, Loader, OptPanel} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -242,8 +242,12 @@ class UsersPage extends React.Component {
                 <header className={'Page-header'}>
                     <h5>
                         Users Page
+
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
                     <div className={'Page-search-add'}>
                         <div>
