@@ -31,6 +31,7 @@ class UsersPage extends React.Component {
         this.getTable = this.getTable.bind(this);
         this.onClickCancelSubscription  = this.onClickCancelSubscription.bind(this);
         this.onClickUpgradeSubscription  = this.onClickUpgradeSubscription.bind(this);
+        this.setSubscriptionMode = this.setSubscriptionMode.bind(this);
     }
 
     componentDidMount() {
@@ -123,6 +124,23 @@ class UsersPage extends React.Component {
             search: new URLSearchParams(q).toString(),
         });
         window.location.reload();
+    }
+
+    setSubscriptionMode() {
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        if (q.subsMode === undefined) {
+            this.props.history.push({
+                pathname: '/users',
+                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize + '&subsMode=true',
+            });
+            this.setState({subscriptionMode: true});
+        } else {
+            this.props.history.push({
+                pathname: '/users',
+                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            });
+            this.setState({subscriptionMode: false});
+        }
     }
     
     onClickCancelSubscription(user){
@@ -255,7 +273,7 @@ class UsersPage extends React.Component {
                                 className='Page-input'
                                 type="checkbox"
                                 defaultChecked={this.state.subscriptionMode}
-                                onChange={() => {this.setState({subscriptionMode: !this.state.subscriptionMode})}}
+                                onChange={this.setSubscriptionMode}
                                 placeholder={'Subscription Mode'}
                             />
                             <label className={'Page-label'}>Subscription Mode</label>
