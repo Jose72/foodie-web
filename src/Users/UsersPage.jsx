@@ -164,7 +164,6 @@ class UsersPage extends React.Component {
                 .catch((t) => {
                     alert(t)
                 });
-            console.log('Delete')
         }
     }
 

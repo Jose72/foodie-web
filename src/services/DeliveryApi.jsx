@@ -35,7 +35,8 @@ class DeliveryApi extends React.Component {
         return CommonApi.delete(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
 
-    static modifyDelivery(delivery, opts){
+    static modifyDelivery(delivery){
+
         let params = {};
 
         let data = {
@@ -46,7 +47,6 @@ class DeliveryApi extends React.Component {
             balance: delivery.balance,
             favourPoints: delivery.favourPoints,
         };
-
         let headers = {
             Authorization: Auth.getToken()
         };
@@ -83,6 +83,14 @@ class DeliveryApi extends React.Component {
 
         return CommonApi.get(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
+
+    static balanceAdd(user, balance){
+
+        let d = user;
+        d.balance = balance;
+
+        return DeliveryApi.modifyDelivery(d);
+    }
 }
 
 export {DeliveryApi}

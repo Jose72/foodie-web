@@ -56,7 +56,6 @@ class StatisticsPage extends React.Component {
             )
             .catch((t) => {
                 alert(t);
-                window.location.reload();
                 }
             );
     }
