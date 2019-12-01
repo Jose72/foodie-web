@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import{UserApi} from "../services";
 import  '../styles/PageStyles.css'
+import {invalidMessage, userAddValidate} from "../utils";
 
 class UserAdd extends React.Component{
     constructor(props) {
@@ -13,6 +14,7 @@ class UserAdd extends React.Component{
             email: '',
             phone_number: '',
             suscripcion: 'flat',
+            picture: '',
             };
 
             this.onSubmit = this.onSubmit.bind(this);
@@ -27,15 +29,19 @@ class UserAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        UserApi.addUser(this.state)
-            .then(() => {
-                alert('User Added Successfully');
-                console.log("User Added");
+        if(userAddValidate(this.state)){
+            UserApi.addUser(this.state)
+                .then(() => {
+                    alert('User Added Successfully');
+                    console.log("User Added");
 
-            })
-            .catch((r) => {
-                alert(r)
-            });
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        }else {
+            alert(invalidMessage);
+        }
 
     }
 
@@ -54,10 +60,10 @@ class UserAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
-                                size='150%'
-                                name='name'
-                                value={this.state.name}
-                                onChange={e => this.change(e)}
+                                    type="text"
+                                    name='name'
+                                    value={this.state.name}
+                                    onChange={e => this.change(e)}
                             />
                             <br/>
                             <br/>
@@ -65,6 +71,7 @@ class UserAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Password</label>
                             <input className='Page-input'
+                                   type="text"
                                    name='password'
                                    value={this.state.password}
                                    onChange={e => this.change(e)}
@@ -75,6 +82,7 @@ class UserAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Email</label>
                             <input className='Page-input'
+                                type="text"
                                 name='email'
                                 value={this.state.email}
                                 onChange={e => this.change(e)}
@@ -85,9 +93,9 @@ class UserAdd extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Phone</label>
                             <input className='Page-input'
-                                name='phone_number'
-                                value={this.state.phone_number}
-                                onChange={e => this.change(e)}
+                                    name='phone_number'
+                                    value={this.state.phone_number}
+                                    onChange={e => this.change(e)}
                             />
                             <br/>
                             <br/>

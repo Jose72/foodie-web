@@ -47,7 +47,8 @@ class UserApi extends React.Component {
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
             rating: user.rating,
-            favourPoints: user.favourPoints
+            favourPoints: user.favourPoints,
+            picture: user.picture,
         };
 
         let headers = {
@@ -67,7 +68,7 @@ class UserApi extends React.Component {
             email: user.email,
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
-            picture: '',
+            picture: user.picture,
             firebase_uid: user.email,
         };
 

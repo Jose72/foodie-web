@@ -204,6 +204,7 @@ class UsersPage extends React.Component {
             {Header: "Email", accessor: "email"},
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Subscription", accessor: "suscripcion"},
+            {Header: "Favour Points", accessor: "favourPoints"},
             {Header: "Rating", accessor: "rating"},
             {
                 Header: "", Cell: row => {

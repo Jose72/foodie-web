@@ -2,6 +2,8 @@ import React from "react";
 import {UserApi} from "../services";
 import  '../styles/PageStyles.css'
 import {Loader} from "../components";
+import {userModifyValidate} from '../utils/Validator'
+import {invalidMessage} from "../utils";
 
 class UserModify extends React.Component{
     constructor(props) {
@@ -48,13 +50,17 @@ class UserModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        UserApi.modifyUser(this.state.user)
-            .then(() => {
-                alert('User Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
+        if(userModifyValidate(this.state.user)){
+            UserApi.modifyUser(this.state.user)
+                .then(() => {
+                    alert('User Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
 
     }
 
@@ -81,7 +87,7 @@ class UserModify extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
-                                   size='150%'
+                                   type="text"
                                    name='name'
                                    value={this.state.user.name}
                                    onChange={e => this.update(e)}
@@ -92,6 +98,7 @@ class UserModify extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Email</label>
                             <input className='Page-input'
+                                   type="email"
                                    name='email'
                                    value={this.state.user.email}
                                    onChange={e => this.update(e)}
@@ -102,6 +109,7 @@ class UserModify extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Phone</label>
                             <input className='Page-input'
+                                   type="phone"
                                    name='phone_number'
                                    value={this.state.user.phone_number}
                                    onChange={e => this.update(e)}
@@ -122,11 +130,10 @@ class UserModify extends React.Component{
                             <br/>
                         </div>
                         <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Gratitude Points</label>
+                            <label className={'Page-label'}>Favour Points</label>
                             <input className='Page-input'
-                                   name='gratitudePoints'
-
-                                   value={this.state.user.gratitudePoints}
+                                   name='favourPoints'
+                                   value={this.state.user.favourPoints}
                                    onChange={e => this.update(e)}
                             />
                             <br/>

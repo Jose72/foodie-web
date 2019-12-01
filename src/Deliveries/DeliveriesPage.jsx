@@ -250,7 +250,6 @@ class DeliveriesPage extends React.Component {
                         </Link>
                     </div>
                 </div>
-
                 {this.getTable()}
                 <FoodieFooter/>
             </div>
