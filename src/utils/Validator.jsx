@@ -96,6 +96,10 @@ const validateRadius = (radius) => {
     return positive(radius)
 };
 
+const validatePrice = (price) => {
+    return positive(price)
+};
+
 const validateCoordinates = (coordinates) => {
     return validateLatitude(coordinates.latitude) && validateLongitude(coordinates.longitude)
 };
@@ -155,4 +159,14 @@ export const shopModifyValidate = (shop) => {
         validateLatitude(shop.latitude) && validateLongitude(shop.longitude) &&
         validateShopPicture(shop.photoUrl) && validateRating(shop.rating);
 };
+
+// MENU
+export const productAddValidate = (product) => {
+    return validateName(product.name) && validateDescription(product.description) && validatePrice(product.price);
+};
+
+export const productModifyValidate = (product) => {
+    return validateName(product.name) && validateDescription(product.description) && validatePrice(product.price);
+};
+
 

@@ -2,6 +2,7 @@ import React from "react";
 import {ShopMenuApi} from "../services";
 import '../styles/PageStyles.css'
 import {FoodieFooter, Loader} from "../components";
+import {invalidMessage, productModifyValidate} from "../utils";
 
 class ShopMenuModify extends React.Component{
     constructor(props) {
@@ -35,14 +36,17 @@ class ShopMenuModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopMenuApi.modifyMenuFood(this.state.shopId, this.state.food)
-            .then(() => {
-                alert('Food Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
-
+        if(productModifyValidate(this.state.food)) {
+            ShopMenuApi.modifyMenuFood(this.state.shopId, this.state.food)
+                .then(() => {
+                    alert('Food Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
     }
 
     onClickCancel(e){

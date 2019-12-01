@@ -4,6 +4,7 @@ import {ShopMenuApi} from "../services";
 
 import '../styles/PageStyles.css';
 import queryString from "query-string";
+import {invalidMessage, productAddValidate} from "../utils";
 
 class ShopMenuAdd extends React.Component{
     constructor(props) {
@@ -30,14 +31,17 @@ class ShopMenuAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopMenuApi.addMenuFood(this.state.shopId, this.state)
-            .then(() => {
-                alert('Food Added Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
-
+        if(productAddValidate(this.state)) {
+            ShopMenuApi.addMenuFood(this.state.shopId, this.state)
+                .then(() => {
+                    alert('Food Added Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
     }
 
     render(){
