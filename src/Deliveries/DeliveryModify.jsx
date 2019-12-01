@@ -3,6 +3,7 @@ import {DeliveryApi} from "../services";
 import {Link} from "react-router-dom";
 import '../styles/PageStyles.css'
 import {FoodieFooter, Loader} from "../components";
+import {deliveryModifyValidate, invalidMessage} from "../utils";
 
 class DeliveryModify extends React.Component{
     constructor(props) {
@@ -37,13 +38,17 @@ class DeliveryModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        DeliveryApi.modifyDelivery(this.state.delivery)
-            .then(() => {
-                alert('Delivery Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
+        if(deliveryModifyValidate(this.state.delivery)) {
+            DeliveryApi.modifyDelivery(this.state.delivery)
+                .then(() => {
+                    alert('Delivery Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
 
     }
 

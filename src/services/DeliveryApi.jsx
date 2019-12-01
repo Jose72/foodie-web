@@ -45,6 +45,7 @@ class DeliveryApi extends React.Component {
             phone_number: delivery.phone_number,
             rating: delivery.rating,
             balance: delivery.balance,
+            picture: delivery.picture,
             favourPoints: delivery.favourPoints,
         };
         let headers = {
@@ -63,7 +64,7 @@ class DeliveryApi extends React.Component {
             email: delivery.email,
             balance: 0,
             phone_number: delivery.phone_number,
-            picture: 'https://user-images.githubusercontent.com/11250/39013954-f5091c3a-43e6-11e8-9cac-37cf8e8c8e4e.jpg',
+            picture: delivery.picture,
             firebase_uid: delivery.email,
         };
 

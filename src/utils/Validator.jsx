@@ -71,10 +71,18 @@ const validateUserPicture = (picture) => {
     return !notEmptyString(picture) || (validURL(picture) || validFirebaseURL(picture))
 };
 
+const validateDeliveryPicture = (picture) => {
+    return notEmptyString(picture) && ((validURL(picture) || validFirebaseURL(picture)))
+};
 
 const  validateFavourPoints = (favourPoints) => {
     return zeroPositive(favourPoints)
 };
+
+const  validateBalance = (balance) => {
+    return zeroPositive(balance)
+};
+
 
 const  validateRadius = (radius) => {
     return positive(radius)
@@ -99,3 +107,17 @@ export const userModifyValidate = (user) => {
         validatePassword(user.password) && validateEmail(user.email) && validateUserPicture(user.picture) &&
         validateFavourPoints(user.favourPoints) && validateRating(user.rating);
 };
+
+// DELIVERY
+
+export const deliveryAddValidate = (delivery) => {
+    return  validateName(delivery.name) && validatePhone(delivery.phone_number) &&
+        validatePassword(delivery.password) && validateEmail(delivery.email) && validateDeliveryPicture(delivery.picture);
+};
+
+export const deliveryModifyValidate = (delivery) => {
+    return  validateName(delivery.name) && validatePhone(delivery.phone_number) && validateBalance(delivery.balance) &&
+        validatePassword(delivery.password) && validateEmail(delivery.email) && validateDeliveryPicture(delivery.picture) &&
+        validateFavourPoints(delivery.favourPoints) && validateRating(delivery.rating);
+};
+
