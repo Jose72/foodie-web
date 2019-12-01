@@ -3,26 +3,25 @@ import {Link} from "react-router-dom";
 import {ShopApi} from "../services";
 
 import '../styles/PageStyles.css';
+import {invalidMessage, shopAddGoogleValidate, shopAddValidate} from "../utils";
 
 class ShopAdd extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            id: '',
             name: '',
             address: '',
-            phone: '',
             description: '',
             longitude: '',
             latitude: '',
             radius: 0,
-            photoURL: '',
+            photoUrl: '',
             showGoogleAdd: false,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onSubmit = this.onSubmitGoogle.bind(this);
+        this.onSubmitGoogle = this.onSubmitGoogle.bind(this);
         this.handleChangeChk = this.handleChangeChk.bind(this);
         this.getPageContent = this.getPageContent.bind(this);
     }
@@ -32,32 +31,36 @@ class ShopAdd extends React.Component{
         this.setState({[e.target.name]:  e.target.value})
     };
 
-
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopApi.addShop(this.state)
-            .then(() => {
-                alert('Shop Added Successfully');
-                console.log("Shop Added");
-            })
-            .catch((r) => {
-                alert(r)
-            });
-
+        if(shopAddValidate(this.state)) {
+            ShopApi.addShop(this.state)
+                .then(() => {
+                    alert('Shop Added Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
     }
 
     onSubmitGoogle(e){
         e.persist();
         e.preventDefault();
-        ShopApi.addShopGoogle(this.state)
-            .then(() => {
-                alert('Shop Added Successfully');
-                console.log("Shop Added");
-            })
-            .catch((r) => {
-                alert(r)
-            });
+        if(shopAddGoogleValidate(this.state)) {
+            ShopApi.addShopGoogle(this.state)
+                .then(() => {
+                    alert('Shop Added Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
 
     }
 
@@ -119,7 +122,6 @@ class ShopAdd extends React.Component{
                         <input className='Page-input'
                                size='150%'
                                name='name'
-                                //placeholder='Username'
                                value={this.state.name}
                                onChange={e => this.change(e)}
                         />

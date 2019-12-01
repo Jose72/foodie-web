@@ -91,6 +91,7 @@ class UserModify extends React.Component{
                                    name='name'
                                    value={this.state.user.name}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -102,6 +103,7 @@ class UserModify extends React.Component{
                                    name='email'
                                    value={this.state.user.email}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -113,6 +115,7 @@ class UserModify extends React.Component{
                                    name='phone_number'
                                    value={this.state.user.phone_number}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>

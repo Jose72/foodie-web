@@ -58,10 +58,11 @@ class DeliveryAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
-                                   size='150%'
+                                   type='text'
                                    name='name'
                                    value={this.state.name}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -69,9 +70,11 @@ class DeliveryAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Password</label>
                             <input className='Page-input'
+                                   type='text'
                                    name='password'
                                    value={this.state.password}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -79,9 +82,11 @@ class DeliveryAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Email</label>
                             <input className='Page-input'
+                                   type='text'
                                    name='email'
                                    value={this.state.email}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -89,9 +94,11 @@ class DeliveryAdd extends React.Component{
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Phone</label>
                             <input className='Page-input'
+                                   type='text'
                                    name='phone_number'
                                    value={this.state.phone_number}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>

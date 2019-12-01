@@ -4,6 +4,7 @@ const RATING_LIMIT = 10;
 const MAX_CHARS_NAME = 100;
 const MAX_CHARS_EMAIL = 100;
 const MAX_CHARS_PASS = 100;
+const MAX_CHARS_DESCRIPTION = 256;
 
 export const invalidMessage = "One or more fields are invalid";
 
@@ -75,6 +76,10 @@ const validateDeliveryPicture = (picture) => {
     return notEmptyString(picture) && ((validURL(picture) || validFirebaseURL(picture)))
 };
 
+const validateShopPicture = (picture) => {
+    return !notEmptyString(picture) || validURL(picture)
+};
+
 const  validateFavourPoints = (favourPoints) => {
     return zeroPositive(favourPoints)
 };
@@ -83,17 +88,29 @@ const  validateBalance = (balance) => {
     return zeroPositive(balance)
 };
 
+const validateAddress = (address) =>{
+    return notEmptyString(address)
+};
 
-const  validateRadius = (radius) => {
+const validateRadius = (radius) => {
     return positive(radius)
 };
 
-const  validateLatitude = (latitude) => {
+const validateCoordinates = (coordinates) => {
+    return validateLatitude(coordinates.latitude) && validateLongitude(coordinates.longitude)
 };
 
-const  validateLongitude = (longitude) => {
+const validateLatitude = (latitude) => {
+    return -90 < parseFloat(latitude) && parseFloat(latitude) < 90
 };
 
+const validateLongitude = (longitude) => {
+    return -180 < parseFloat(longitude) && parseFloat(longitude) < 180
+};
+
+const validateDescription = (description) => {
+    return withinCharsLimit(description, MAX_CHARS_DESCRIPTION)
+};
 
 
 // USER
@@ -119,5 +136,23 @@ export const deliveryModifyValidate = (delivery) => {
     return  validateName(delivery.name) && validatePhone(delivery.phone_number) && validateBalance(delivery.balance) &&
         validatePassword(delivery.password) && validateEmail(delivery.email) && validateDeliveryPicture(delivery.picture) &&
         validateFavourPoints(delivery.favourPoints) && validateRating(delivery.rating);
+};
+
+
+// SHOP
+export const shopAddValidate = (shop) => {
+    return validateName(shop.name) && validateAddress(shop.address) &&  validateDescription(shop.description) &&
+       validateLatitude(shop.latitude) && validateLongitude(shop.longitude) && validateShopPicture(shop.photoUrl);
+};
+
+export const shopAddGoogleValidate = (shop) => {
+    return validateLatitude(shop.latitude) && validateLongitude(shop.longitude) &&
+        validateRadius(shop.radius);
+};
+
+export const shopModifyValidate = (shop) => {
+    return validateName(shop.name) && validateAddress(shop.address) && validateDescription(shop.description) &&
+        validateLatitude(shop.latitude) && validateLongitude(shop.longitude) &&
+        validateShopPicture(shop.photoUrl) && validateRating(shop.rating);
 };
 

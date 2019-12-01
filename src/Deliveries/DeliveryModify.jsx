@@ -77,9 +77,9 @@ class DeliveryModify extends React.Component{
                             <input className='Page-input'
                                    size='150%'
                                    name='name'
-                                //placeholder='Deliveryname'
                                    value={this.state.delivery.name}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -90,6 +90,7 @@ class DeliveryModify extends React.Component{
                                    name='email'
                                    value={this.state.delivery.email}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -100,6 +101,7 @@ class DeliveryModify extends React.Component{
                                    name='phone_number'
                                    value={this.state.delivery.phone_number}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -110,6 +112,7 @@ class DeliveryModify extends React.Component{
                                    name='rating'
                                    value={this.state.delivery.rating}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -120,6 +123,7 @@ class DeliveryModify extends React.Component{
                                    name='balance'
                                    value={this.state.delivery.balance}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -130,6 +134,7 @@ class DeliveryModify extends React.Component{
                                    name='favourPoints'
                                    value={this.state.delivery.favourPoints}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>

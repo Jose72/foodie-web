@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import{UserApi} from "../services";
 import  '../styles/PageStyles.css'
-import {invalidMessage, userAddValidate} from "../utils";
+import {invalidMessage, shopAddValidate, userAddValidate} from "../utils";
 
 class UserAdd extends React.Component{
     constructor(props) {
@@ -29,20 +29,23 @@ class UserAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        if(userAddValidate(this.state)){
-            UserApi.addUser(this.state)
-                .then(() => {
-                    alert('User Added Successfully');
-                    console.log("User Added");
+        if(shopAddValidate(this.state)) {
+            if (userAddValidate(this.state)) {
+                UserApi.addUser(this.state)
+                    .then(() => {
+                        alert('User Added Successfully');
+                        console.log("User Added");
 
-                })
-                .catch((r) => {
-                    alert(r)
-                });
-        }else {
+                    })
+                    .catch((r) => {
+                        alert(r)
+                    });
+            } else {
+                alert(invalidMessage);
+            }
+        } else {
             alert(invalidMessage);
         }
-
     }
 
     render(){
@@ -64,6 +67,7 @@ class UserAdd extends React.Component{
                                     name='name'
                                     value={this.state.name}
                                     onChange={e => this.change(e)}
+                                    autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -75,6 +79,7 @@ class UserAdd extends React.Component{
                                    name='password'
                                    value={this.state.password}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -82,10 +87,11 @@ class UserAdd extends React.Component{
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>Email</label>
                             <input className='Page-input'
-                                type="text"
-                                name='email'
-                                value={this.state.email}
-                                onChange={e => this.change(e)}
+                                   type="text"
+                                   name='email'
+                                   value={this.state.email}
+                                   onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -96,13 +102,18 @@ class UserAdd extends React.Component{
                                     name='phone_number'
                                     value={this.state.phone_number}
                                     onChange={e => this.change(e)}
+                                    autoComplete="off"
                             />
                             <br/>
                             <br/>
                         </div>
                         <div className={'Page-input-group'}>
                             <label className={'Page-label'}>suscripcion</label>
-                            <select className='Page-input' name='suscripcion' value={this.state.suscripcion} onChange={e => this.change(e)}>
+                            <select className='Page-input'
+                                    name='suscripcion'
+                                    value={this.state.suscripcion}
+                                    onChange={e => this.change(e)}
+                            >
                                 <option value='flat'>flat</option>
                                 <option value='premium'>premium</option>
                             </select>
