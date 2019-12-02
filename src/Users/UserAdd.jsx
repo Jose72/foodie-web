@@ -29,20 +29,16 @@ class UserAdd extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        if(shopAddValidate(this.state)) {
-            if (userAddValidate(this.state)) {
-                UserApi.addUser(this.state)
-                    .then(() => {
-                        alert('User Added Successfully');
-                        console.log("User Added");
+        if (userAddValidate(this.state)) {
+            UserApi.addUser(this.state)
+                .then(() => {
+                    alert('User Added Successfully');
+                    console.log("User Added");
 
-                    })
-                    .catch((r) => {
-                        alert(r)
-                    });
-            } else {
-                alert(invalidMessage);
-            }
+                })
+                .catch((r) => {
+                    alert(r)
+                });
         } else {
             alert(invalidMessage);
         }
