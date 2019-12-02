@@ -2,7 +2,8 @@ import React from "react";
 import {DeliveryApi} from "../services";
 import {Link} from "react-router-dom";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
+import {deliveryModifyValidate, invalidMessage} from "../utils";
 
 class DeliveryModify extends React.Component{
     constructor(props) {
@@ -11,13 +12,15 @@ class DeliveryModify extends React.Component{
         this.state = {
             deliveryId: props.match.params.id,
             delivery: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         DeliveryApi.getDelivery(this.state.deliveryId)
             .then((u) => {
-                this.setState({delivery: u})
+                this.setState({delivery: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -35,13 +38,17 @@ class DeliveryModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        DeliveryApi.modifyDelivery(this.state.delivery)
-            .then(() => {
-                alert('Delivery Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
+        if(deliveryModifyValidate(this.state.delivery)) {
+            DeliveryApi.modifyDelivery(this.state.delivery)
+                .then(() => {
+                    alert('Delivery Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
 
     }
 
@@ -52,6 +59,7 @@ class DeliveryModify extends React.Component{
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>
@@ -69,9 +77,9 @@ class DeliveryModify extends React.Component{
                             <input className='Page-input'
                                    size='150%'
                                    name='name'
-                                //placeholder='Deliveryname'
                                    value={this.state.delivery.name}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -82,6 +90,7 @@ class DeliveryModify extends React.Component{
                                    name='email'
                                    value={this.state.delivery.email}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -92,6 +101,7 @@ class DeliveryModify extends React.Component{
                                    name='phone_number'
                                    value={this.state.delivery.phone_number}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -102,6 +112,7 @@ class DeliveryModify extends React.Component{
                                    name='rating'
                                    value={this.state.delivery.rating}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -112,6 +123,7 @@ class DeliveryModify extends React.Component{
                                    name='balance'
                                    value={this.state.delivery.balance}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -122,6 +134,7 @@ class DeliveryModify extends React.Component{
                                    name='favourPoints'
                                    value={this.state.delivery.favourPoints}
                                    onChange={e => this.update(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>

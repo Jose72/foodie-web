@@ -1,7 +1,8 @@
 import React from "react";
 import {ShopApi} from "../services";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
+import {invalidMessage, shopModifyValidate} from "../utils";
 
 class ShopModify extends React.Component{
     constructor(props) {
@@ -10,13 +11,15 @@ class ShopModify extends React.Component{
         this.state = {
             shopsId: props.match.params.id,
             shop: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         ShopApi.getShop(this.state.shopsId)
             .then((u) => {
-                this.setState({shop: u})
+                this.setState({shop: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -32,14 +35,17 @@ class ShopModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopApi.modifyShop(this.state.shop)
-            .then(() => {
-                alert('Shop Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
-
+        if(shopModifyValidate(this.state.shop)) {
+            ShopApi.modifyShop(this.state.shop)
+                .then(() => {
+                    alert('Shop Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
     }
 
     onClickCancel(e){
@@ -56,6 +62,7 @@ class ShopModify extends React.Component{
     };
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>

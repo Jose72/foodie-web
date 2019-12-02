@@ -2,7 +2,6 @@ import React from 'react';
 import {
     BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import './DisplayTable.css'
 
 class BChart extends React.Component {
     constructor(props) {
@@ -15,10 +14,23 @@ class BChart extends React.Component {
     };
 
 
+    getWidth(){
+        let base = 600;
+        if(this.props.data === null){
+            return base;
+        }
+        let l = this.props.data.length;
+        if(typeof this.props.data !== undefined && l > 5){
+            return (l - 5)*100 + base;
+        }
+        return base;
+    }
+
     render(){
         return(
             <BarChart
-                width={800}
+                minwidth={800}
+                width={this.getWidth()}
                 height={300}
                 data={this.props.data.map((d) => {
                     return(

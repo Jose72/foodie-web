@@ -35,7 +35,8 @@ class DeliveryApi extends React.Component {
         return CommonApi.delete(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
 
-    static modifyDelivery(delivery, opts){
+    static modifyDelivery(delivery){
+
         let params = {};
 
         let data = {
@@ -44,9 +45,9 @@ class DeliveryApi extends React.Component {
             phone_number: delivery.phone_number,
             rating: delivery.rating,
             balance: delivery.balance,
+            picture: delivery.picture,
             favourPoints: delivery.favourPoints,
         };
-
         let headers = {
             Authorization: Auth.getToken()
         };
@@ -63,7 +64,7 @@ class DeliveryApi extends React.Component {
             email: delivery.email,
             balance: 0,
             phone_number: delivery.phone_number,
-            picture: 'https://user-images.githubusercontent.com/11250/39013954-f5091c3a-43e6-11e8-9cac-37cf8e8c8e4e.jpg',
+            picture: delivery.picture,
             firebase_uid: delivery.email,
         };
 
@@ -83,6 +84,14 @@ class DeliveryApi extends React.Component {
 
         return CommonApi.get(API_URL + DELIVERY_ROUTE + '?id=' + id, params, headers);
     };
+
+    static balanceAdd(user, balance){
+
+        let d = user;
+        d.balance = balance;
+
+        return DeliveryApi.modifyDelivery(d);
+    }
 }
 
 export {DeliveryApi}

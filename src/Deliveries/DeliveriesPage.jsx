@@ -1,7 +1,7 @@
 import React from 'react';
 import { DeliveryApi } from '../services/DeliveryApi'
 import { Link } from "react-router-dom";
-import {FoodieFooter} from "../components";
+import {BalanceUpdater, FoodieFooter, Loader, OptPanel} from "../components";
 import {ImageDisplay} from "../components"
 import queryString from 'query-string';
 import ReactTable from "react-table";
@@ -21,13 +21,16 @@ class DeliveriesPage extends React.Component {
             query: '',
             pages: -1,
             isLoading: true,
+            balanceMode: (q.balMode === undefined) ? false : q.balMode,
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onPageSizeChange = this.onPageSizeChange.bind(this);
-
+        this.getTable = this.getTable.bind(this);
+        this.onClickBalanceAdd  = this.onClickBalanceAdd.bind(this);
+        this.setBalanceMode = this.setBalanceMode.bind(this);
     }
 
     componentDidMount() {
@@ -37,10 +40,10 @@ class DeliveriesPage extends React.Component {
         console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
-                pathname: '/deliveries'
+                pathname: '/deliveries',
+                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
             });
-            this.setState({page: 1});
-            this.setState({pageSize: 10});
+            window.location.reload();
         } else {
             DeliveryApi.getDeliveries(pageIndex, pageSize)
                 .then((d) => {
@@ -49,7 +52,9 @@ class DeliveriesPage extends React.Component {
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
+                        this.setState({balancesAdd: d.items.map(i => ({id: i.user_id, balanceAdd: 0}))});
                         this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -119,8 +124,50 @@ class DeliveriesPage extends React.Component {
         window.location.reload();
     }
 
-    render(){
-        const d_columns = [
+    setBalanceMode() {
+        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        if (q.balMode === undefined) {
+            this.props.history.push({
+                pathname: '/deliveries',
+                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize + '&balMode=true',
+            });
+            this.setState({balanceMode: true});
+        } else {
+            this.props.history.push({
+                pathname: '/deliveries',
+                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            });
+            this.setState({balanceMode: false});
+        }
+    }
+
+    onClickBalanceAdd(user, balance){
+        if(window.confirm('Add to balance?')) {
+            DeliveryApi.balanceAdd(user, balance)
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((t) => {
+                    alert(t)
+                });
+        }
+    }
+
+    getTable(){
+        const d_b_columns = [
+            {Header: "Delivery Id", accessor: "user_id"},
+            {Header: "Name", accessor: "name"},
+            {Header: "Balance", accessor: "balance"},
+            {Header: "", Cell: row => {
+                    return(
+                        <BalanceUpdater
+                            user={row.original}
+                            balanceChange={this.onClickBalanceAdd}
+                        />
+                    )
+                }},
+        ];
+        let cols = [
             {Header: "", Cell: row => {
                     return(ImageDisplay.renderPicture(row.original, "picture"))
                 }},
@@ -152,6 +199,30 @@ class DeliveriesPage extends React.Component {
                     )
                 }}
         ];
+        if(this.state.balanceMode){
+            cols = d_b_columns;
+        }
+
+        return(
+            <div className={'Page-Table'}>
+                <ReactTable
+                    manual
+                    page={parseInt(this.state.page, 10) - 1}
+                    pageSize={this.state.pageSize}
+                    data={this.state.deliveryList}
+                    pages={this.state.pages}
+                    columns={cols}
+                    onPageChange={this.onPageChange}
+                    onPageSizeChange={this.onPageSizeChange}
+                    showPagination={true}
+                />
+            </div>
+        );
+
+    }
+
+    render(){
+        if (this.state.isLoading) return <Loader />;
         return (
             <div className={'Page'}>
                 <header className='Page-header'>
@@ -159,39 +230,27 @@ class DeliveriesPage extends React.Component {
                         Delivery Menu
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
+                    <div>
+                        <input
+                            className='Page-input'
+                            type="checkbox"
+                            defaultChecked={this.state.balanceMode}
+                            onChange={this.setBalanceMode}
+                            placeholder={'Balance Mode'}
                         />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
+                        <label className={'Page-label'}>Balance Mode</label>
                     </div>
-                    <div className={'Page-add-button-container'}>
+                    <div className={'Page-search-add'}>
                         <Link className='Link' to='/deliveries/add'>
                             <button>Add Delivery</button>
                         </Link>
                     </div>
                 </div>
-                <div className={'Page-Table'}>
-                    <ReactTable
-                        manual
-                        page={parseInt(this.state.page, 10) - 1}
-                        pageSize={this.state.pageSize}
-                        data={this.state.deliveryList}
-                        pages={this.state.pages}
-                        columns={d_columns}
-                        onPageChange={this.onPageChange}
-                        onPageSizeChange={this.onPageSizeChange}
-                        showPagination={true}
-                    />
-                </div>
+                {this.getTable()}
                 <FoodieFooter/>
             </div>
         )

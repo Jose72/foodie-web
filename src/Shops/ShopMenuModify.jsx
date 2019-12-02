@@ -1,22 +1,26 @@
 import React from "react";
 import {ShopMenuApi} from "../services";
 import '../styles/PageStyles.css'
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader} from "../components";
+import {invalidMessage, productModifyValidate} from "../utils";
 
 class ShopMenuModify extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            shopId: props.match.params.id,
+            shopId: props.match.params.shopId,
+            foodId: props.match.params.foodId,
             food: {},
+            isLoading: true,
         };
     }
 
     componentDidMount() {
-        ShopMenuApi.getShopMenu(this.state.shopId)
+        ShopMenuApi.getMenuFood(this.state.foodId)
             .then((u) => {
-                this.setState({food: u})
+                this.setState({food: u});
+                this.setState({isLoading: false});
             })
             .catch((t) => {
                 alert(t);
@@ -32,14 +36,17 @@ class ShopMenuModify extends React.Component{
     onSubmit(e){
         e.persist();
         e.preventDefault();
-        ShopMenuApi.modifyMenuFood(this.state.shop)
-            .then(() => {
-                alert('Shop Updated Successfully');
-            })
-            .catch((r) => {
-                alert(r)
-            });
-
+        if(productModifyValidate(this.state.food)) {
+            ShopMenuApi.modifyMenuFood(this.state.shopId, this.state.food)
+                .then(() => {
+                    alert('Food Updated Successfully');
+                })
+                .catch((r) => {
+                    alert(r)
+                });
+        } else {
+            alert(invalidMessage);
+        }
     }
 
     onClickCancel(e){
@@ -48,7 +55,15 @@ class ShopMenuModify extends React.Component{
         this.props.history.goBack();
     }
 
+    update = (e) => {
+        e.persist();
+        let dummy = this.state.food;
+        dummy[e.target.name] = e.target.value;
+        this.setState({food: dummy})
+    };
+
     render(){
+        if (this.state.isLoading) return <Loader />;
         return(
             <div className={'Page'}>
                 <div>
@@ -67,7 +82,7 @@ class ShopMenuModify extends React.Component{
                                    size='150%'
                                    name='name'
                                    value={this.state.food.name}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
@@ -77,17 +92,17 @@ class ShopMenuModify extends React.Component{
                             <input className='Page-input'
                                    name='description'
                                    value={this.state.food.description}
-                                   onChange={e => this.change(e)}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>
                         </div>
-                        <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Picture</label>
+                        <div className={'Page-input-group'}>
+                            <label className={'Page-label'}>Price</label>
                             <input className='Page-input'
-                                   name='photoURL'
-                                   value={this.state.food.photoURL}
-                                   onChange={e => this.change(e)}
+                                   name='price'
+                                   value={this.state.food.price}
+                                   onChange={e => this.update(e)}
                             />
                             <br/>
                             <br/>

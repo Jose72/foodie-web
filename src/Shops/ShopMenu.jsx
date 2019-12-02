@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopMenuApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter, ImageDisplay} from "../components";
+import {FoodieFooter, ImageDisplay, Loader, OptPanel} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -45,7 +45,7 @@ class ShopMenu extends React.Component {
             this.setState({page: 1});
             this.setState({pageSize: 10});
         } else {
-            ShopMenuApi.getShopMenu(pageIndex, pageSize)
+            ShopMenuApi.getShopMenu(this.state.shopId, pageIndex, pageSize)
                 .then((d) => {
                         console.log(d);
                         this.setState({foodList: d.items});
@@ -53,6 +53,7 @@ class ShopMenu extends React.Component {
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
                         this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -123,14 +124,12 @@ class ShopMenu extends React.Component {
     }
 
     render(){
+        if (this.state.isLoading) return <Loader />;
         const m_columns = [
-            {Header: "", Cell: row => {
-                    return(ImageDisplay.renderPicture(row.original, "photoURL"))
-                }},
             {Header: "Food Id", accessor: "id"},
             {Header: "Name", accessor: "name"},
             {Header: "Description", accessor: "description"},
-            {Header: "Rating", accessor: "rating"},
+            {Header: "Price", accessor: "price"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>
@@ -138,7 +137,7 @@ class ShopMenu extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`shop/${this.state.shopId}/modify/${row.original.id}`}>
+                        <Link className='Link' to={`/shop/${this.state.shopId}/menu/modify/${row.original.id}`}>
                             <button>Modify</button>
                         </Link>
                     )
@@ -151,25 +150,13 @@ class ShopMenu extends React.Component {
                         Shop {this.state.shopId} Menu
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'Page-search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to={`shop/${this.shopId}/add`}>
-                            <button>Add Food</button>
-                        </Link>
-                    </div>
+                    <Link className='Link' to={`/shop/${this.state.shopId}/menu/add`}>
+                        <button>Add Food</button>
+                    </Link>
                 </div>
                 <div className={'Page-Table'}>
                     <ReactTable

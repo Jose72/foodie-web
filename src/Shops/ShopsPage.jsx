@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopApi, UserApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter} from "../components";
+import {FoodieFooter, Loader, OptPanel} from "../components";
 import {ImageDisplay} from "../components"
 import queryString from 'query-string';
 import ReactTable from "react-table";
@@ -39,21 +39,21 @@ class ShopsPage extends React.Component {
         let pageIndex = q.p;
         let pageSize = q.pSize;
         console.log(q);
-        if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
+        if (pageSize === undefined || pageIndex === undefined) {
             this.props.history.push({
                 pathname: '/shops',
+                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
             });
-            this.setState({page: 1});
-            this.setState({pageSize: 10});
+            window.location.reload();
         } else {
             ShopApi.getShops(pageIndex, pageSize)
                 .then((d) => {
-                        console.log(d);
                         this.setState({shopList: d.items});
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
                         this.setState({pageSize: pageSize});
                         this.setState({pages: (Math.ceil(d.totalItems / pageSize))});
+                        this.setState({isLoading: false});
                     }
                 )
                 .catch((t) => {
@@ -124,6 +124,8 @@ class ShopsPage extends React.Component {
     }
 
     render(){
+        console.log(this.state.pages);
+        if (this.state.isLoading) return <Loader />;
         const s_columns = [
             {Header: "", Cell: row => {
                     return(ImageDisplay.renderPicture(row.original, "photoUrl"))
@@ -131,6 +133,12 @@ class ShopsPage extends React.Component {
             {Header: "Shop Id", accessor: "id"},
             {Header: "Name", accessor: "name"},
             {Header: "Address", accessor: "address"},
+            {Header: "Long/Lat", Cell: row => {
+                    return(
+                        row.original.longitude + ',' +
+                        row.original.latitude
+                    )}
+            },
             {Header: "Description", accessor: "description"},
             {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
@@ -140,7 +148,7 @@ class ShopsPage extends React.Component {
                 }},
             {Header: "", Cell: row => {
                     return(
-                        <Link className='Link' to={`shop/modify/${row.original.id}`}>
+                        <Link className='Link' to={`/shop/modify/${row.original.id}`}>
                             <button>Modify</button>
                         </Link>
                     )
@@ -167,25 +175,13 @@ class ShopsPage extends React.Component {
                         Shop Menu
                     </h5>
                 </header>
+                <div className={'Page-opt-panel'}>
+                    <OptPanel/>
+                </div>
                 <div className={'Page-search-add'}>
-                    <div className={'Page-search-bar'}>
-                        <input className={'Page-search-input-bar'}
-                               onKeyPress={(e) => this.onKeyPress(e)}
-                               name='query'
-                               placeholder=''
-                               value={this.state.query}
-                               onChange={(e) => this.change(e)}
-                        />
-                        <button onClick={(e) => this.onSubmit(e)}> Search </button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-add-button-container'}>
-                        <Link className='Link' to='/shops/add'>
-                            <button>Add Shop</button>
-                        </Link>
-                    </div>
+                    <Link className='Link' to='/shops/add'>
+                        <button>Add Shop</button>
+                    </Link>
                 </div>
                 <div className={'Page-Table'}>
                     <ReactTable

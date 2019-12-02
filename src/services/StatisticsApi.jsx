@@ -3,6 +3,7 @@ import axios from "axios";
 import { Auth } from './Authentication'
 
 import {API_URL} from "../utils/Config";
+import {CommonApi} from "./CommonApi";
 
 const STATISTICS_ROUTE = 'statistics';
 
@@ -11,24 +12,14 @@ axios.defaults.headers.common['Content-Type'] =  'application/json';
 class StatisticsApi extends React.Component {
 
     static getCurrentStatistics(){
-        return axios.get(API_URL + STATISTICS_ROUTE, {
-            headers: {
-                Authorization: Auth.getToken(),
-                'Access-Control-Allow-Origin': '*',
-            }
-        })
-            .then(res => {
-                console.log(res);
-                if (res.status === 200) {
-                    return res.data;
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error.toString())
-            })
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken(),
+        };
+
+        return CommonApi.get(API_URL + STATISTICS_ROUTE, params, headers);
     }
 
     static getUsersStatistics(year_from, month_from, year_to, month_to){
@@ -48,28 +39,19 @@ class StatisticsApi extends React.Component {
     }
 
     static getStatistics(year_from, month_from, year_to, month_to, route){
-        return axios.get(API_URL + STATISTICS_ROUTE + route, {
-            params: {
-                year_from: year_from,
-                month_from: month_from,
-                year_to: year_to,
-                month_to: month_to
-            },
-            headers: {
-                Authorization: Auth.getToken()
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.data;
-                } else {
-                    return Promise.reject(res.status.toString() + ': ' + res.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                return Promise.reject(error.toString())
-            })
+
+        let params = {
+            year_from: year_from,
+            month_from: month_from,
+            year_to: year_to,
+            month_to: month_to
+        };
+
+        let headers = {
+            Authorization: Auth.getToken(),
+        };
+
+        return CommonApi.get(API_URL + STATISTICS_ROUTE + route, params, headers);
     }
 
 }

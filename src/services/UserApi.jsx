@@ -47,7 +47,8 @@ class UserApi extends React.Component {
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
             rating: user.rating,
-            favourPoints: user.favourPoints
+            favourPoints: user.favourPoints,
+            picture: user.picture,
         };
 
         let headers = {
@@ -67,7 +68,7 @@ class UserApi extends React.Component {
             email: user.email,
             phone_number: user.phone_number,
             suscripcion: user.suscripcion,
-            picture: '',
+            picture: user.picture,
             firebase_uid: user.email,
         };
 
@@ -87,6 +88,28 @@ class UserApi extends React.Component {
         };
 
         return CommonApi.get(API_URL + USER_ROUTE + '?id=' + id, params, headers);
+    };
+
+    static cancelSubscription(id){
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/cancel' + '?id=' + id, params, headers);
+    };
+
+    static upgradeSubscription(id){
+
+        let params = {};
+
+        let headers = {
+            Authorization: Auth.getToken()
+        };
+
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/upgrade' + '?id=' + id, params, headers);
     };
 
 }
