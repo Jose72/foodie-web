@@ -142,15 +142,14 @@ class DeliveriesPage extends React.Component {
     }
 
     onClickBalanceAdd(user, balance){
-        if(window.confirm('Add to balance?')) {
-            DeliveryApi.balanceAdd(user, balance)
-                .then(() => {
-                    window.location.reload();
-                })
-                .catch((t) => {
-                    alert(t)
-                });
-        }
+        DeliveryApi.balanceAdd(user, balance)
+            .then(() => {
+                window.location.reload();
+            })
+            .catch((t) => {
+                alert(t)
+            });
+
     }
 
     getTable(){

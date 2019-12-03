@@ -89,12 +89,13 @@ class OrdersPage extends React.Component{
     render(){
         if (this.state.isLoading) return <Loader />;
         const o_columns = [
-            {Header: "Order Id", accessor: "id"},
-            {Header: "Status", accessor: "status"},
-            {Header: "Shop Id", accessor: "shopId"},
-            {Header: "User Id", accessor: "userId"},
-            {Header: "Created at", accessor: "createdAt"},
-            {Header: "Delivery Id", accessor: "deliveryId"}
+            {Header: "Order Id", accessor: "order_id"},
+            {Header: "Status", accessor: "state"},
+            {Header: "Shop Id", accessor: "shop_id"},
+            {Header: "User Id", accessor: "user_id"},
+            {Header: "Price", accessor: "price"},
+            {Header: "Created at", accessor: "created_at"},
+            {Header: "Delivery Id", accessor: "delivery_id"}
             ];
 
         const p_columns = [
