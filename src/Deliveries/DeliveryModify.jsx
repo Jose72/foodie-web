@@ -1,6 +1,5 @@
 import React from "react";
 import {DeliveryApi} from "../services";
-import {Link} from "react-router-dom";
 import '../styles/PageStyles.css'
 import {FoodieFooter, Loader} from "../components";
 import {deliveryModifyValidate, invalidMessage} from "../utils";

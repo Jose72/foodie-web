@@ -71,6 +71,10 @@
     text-align: center;
 }
 
+.Page-input-url{
+    width: 100%;
+}
+
 .Page-label{
     color: white;
     width: 100%;

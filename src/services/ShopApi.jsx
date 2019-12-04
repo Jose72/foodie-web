@@ -64,7 +64,7 @@ class ShopApi extends React.Component {
             name: shop.name,
             address: shop.address,
             description: shop.description,
-            photoUrl: 'https://p7.hiclipart.com/preview/3/10/517/computer-icons-shopping-cart-retail-sales-thumbnail.jpg',
+            photoUrl: shop.photoUrl,
             coordinates: {latitude: parseFloat(shop.latitude), longitude: parseFloat(shop.longitude)},
             rating: 0,
         };

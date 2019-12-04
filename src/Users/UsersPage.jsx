@@ -42,7 +42,7 @@ class UsersPage extends React.Component {
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/users',
-                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
+                search: '?p=' + 1 + '&pSize=' + 10,
             });
             window.location.reload();
         } else {
@@ -70,7 +70,7 @@ class UsersPage extends React.Component {
         //fetch query
         this.props.history.push({
             pathname: '/users',
-            search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
         });
         window.location.reload();
     };
@@ -131,13 +131,13 @@ class UsersPage extends React.Component {
         if (q.subsMode === undefined) {
             this.props.history.push({
                 pathname: '/users',
-                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize + '&subsMode=true',
+                search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize + '&subsMode=true',
             });
             this.setState({subscriptionMode: true});
         } else {
             this.props.history.push({
                 pathname: '/users',
-                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+                search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
             });
             this.setState({subscriptionMode: false});
         }

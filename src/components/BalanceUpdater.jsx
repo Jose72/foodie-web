@@ -1,8 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import{UserApi} from "../services";
 import  '../styles/PageStyles.css'
-import PropTypes from 'prop-types';
 
 class BalanceUpdater extends  React.Component{
     constructor(props) {
@@ -41,9 +38,5 @@ class BalanceUpdater extends  React.Component{
         )
     }
 }
-
-BalanceUpdater.propTypes = {
-    user: PropTypes.object.isRequired,
-};
 
 export {BalanceUpdater}

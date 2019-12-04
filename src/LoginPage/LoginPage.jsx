@@ -1,7 +1,7 @@
 import React from 'react';
 import { Auth } from '../services/Authentication'
-import { Redirect, Router} from 'react-router-dom';
 import './LoginPage.css';
+import {FoodieFooter} from "../components";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -51,8 +51,7 @@ class LoginPage extends React.Component {
             <br/>
             <input
                 className={'Login-input'}
-                name='username' 
-                //placeholder='Username'
+                name='username'
                 value={this.state.username} 
                 onChange={e => this.change(e)} 
             />
@@ -66,7 +65,6 @@ class LoginPage extends React.Component {
                     className={'Login-input'}
                     name={'password'}
                     type={this.state.hidePassword ? "password" : "text"}
-                    //placeholder='Password'
                     value={this.state.password}
                     onChange={e => this.change(e)}
                 />
@@ -89,6 +87,7 @@ class LoginPage extends React.Component {
             <br/>
             <button onClick={(e) => this.onSubmit(e)}> Sign In </button>
         </form>
+          <FoodieFooter/>
       </div>
     )
     

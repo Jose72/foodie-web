@@ -1,7 +1,7 @@
 import React from "react";
 import {UserApi} from "../services";
 import  '../styles/PageStyles.css'
-import {Loader} from "../components";
+import {FoodieFooter, Loader} from "../components";
 import {userModifyValidate} from '../utils/Validator'
 import {invalidMessage} from "../utils";
 
@@ -28,7 +28,7 @@ class UserModify extends React.Component{
                 alert(t);
                 this.props.history.push({
                     pathname: '/users',
-                    search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
+                    search: '?p=' + 1 + '&pSize=' + 10,
                 });
                 window.location.reload();
             })
@@ -160,6 +160,7 @@ class UserModify extends React.Component{
                         </div>
                     </form>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }

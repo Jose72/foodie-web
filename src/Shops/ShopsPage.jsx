@@ -1,5 +1,5 @@
 import React from 'react';
-import {ShopApi, UserApi} from "../services";
+import {ShopApi} from "../services";
 import { Link } from "react-router-dom";
 import {FoodieFooter, Loader, OptPanel} from "../components";
 import {ImageDisplay} from "../components"
@@ -7,10 +7,6 @@ import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import  '../styles/PageStyles.css'
-
-const shop_fields = ['id', 'name','phone', 'description', 'reputation'];
-
-const shop_headers = ['Id', 'Name', 'Phone', 'Description', 'Reputation'];
 
 class ShopsPage extends React.Component {
     constructor(props) {
@@ -42,7 +38,7 @@ class ShopsPage extends React.Component {
         if (pageSize === undefined || pageIndex === undefined) {
             this.props.history.push({
                 pathname: '/shops',
-                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
+                search: '?p=' + 1 + '&pSize=' + 10,
             });
             window.location.reload();
         } else {
@@ -68,7 +64,7 @@ class ShopsPage extends React.Component {
         e.preventDefault();
         this.props.history.push({
             pathname: '/shops',
-            search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
         });
         window.location.reload();
     };

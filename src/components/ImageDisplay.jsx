@@ -1,12 +1,7 @@
 import React from 'react';
 import logo from '../styles/logo192.png'
-import axios from 'axios'
 
 class ImageDisplay extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     static validURL(str) {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -30,7 +25,7 @@ class ImageDisplay extends React.Component {
             return(
                 <img
                     src={this.getImage(item, field)}
-                    alt={'picture'}
+                    alt={''}
                     width={'100px'}
                     height={'100px'}
                 />

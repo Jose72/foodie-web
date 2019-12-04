@@ -2,9 +2,6 @@ import React from 'react';
 import '../styles/PageStyles.css'
 
 class FoodieFooter extends React.Component{
-    constructor(props) {
-        super(props);
-    }
 
     render(){
         return(

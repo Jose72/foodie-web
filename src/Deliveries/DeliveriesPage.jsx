@@ -41,7 +41,7 @@ class DeliveriesPage extends React.Component {
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/deliveries',
-                search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
+                search: '?p=' + 1 + '&pSize=' + 10,
             });
             window.location.reload();
         } else {
@@ -69,7 +69,7 @@ class DeliveriesPage extends React.Component {
         e.preventDefault();
         this.props.history.push({
             pathname: '/deliveries',
-            search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
         });
         window.location.reload();
     };
@@ -129,13 +129,13 @@ class DeliveriesPage extends React.Component {
         if (q.balMode === undefined) {
             this.props.history.push({
                 pathname: '/deliveries',
-                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize + '&balMode=true',
+                search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize + '&balMode=true',
             });
             this.setState({balanceMode: true});
         } else {
             this.props.history.push({
                 pathname: '/deliveries',
-                search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+                search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
             });
             this.setState({balanceMode: false});
         }
@@ -176,8 +176,8 @@ class DeliveriesPage extends React.Component {
             {Header: "Email", accessor: "email"},
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Balance", accessor: "balance"},
-            {Header: "Rating", accessor: "rating"},
             {Header: "Favour Points", accessor: "favourPoints"},
+            {Header: "Rating", accessor: "rating"},
             {Header: "", Cell: row => {
                     return(
                         <button onClick={() => this.onClickDelete(row.original)}> Delete </button>

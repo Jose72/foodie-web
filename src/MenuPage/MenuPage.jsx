@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../styles/PageStyles.css';
 import {Auth} from "../services";
 import {FoodieFooter} from "../components";
