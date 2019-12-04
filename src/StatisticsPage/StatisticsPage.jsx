@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { StatisticsApi } from "../services";
 import {BChart} from "../components";
 import {ChartPanel} from "../components";
@@ -107,23 +106,20 @@ class StatisticsPage extends React.Component {
                 <div className={'Page-content'}>
                     <div>
                         <h2>{this.getYear()} / {this.getMonth()}</h2>
-                        <br/>
-                        <br/>
-                        <div>
-                            Usuarios Registrados (totales): {this.state.currentRegisteredUsers}
-                            <br/><br/>
-                            Deliveris Registrados (totales): {this.state.currentRegisteredDeliveries}
-                        </div>
-                        <br/>
-                        <div>
-                            Pedidos Completedos (este mes): {this.state.currentCompletedOrders}
-                            <br/><br/>
-                            Pedidos Cancelados (este mes): {this.state.currentCanceledOrders}
-                        </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+                        <table>
+                            <tr>
+                                <td>Usuarios Registrados (totales)</td>
+                                <td>Deliveris Registrados (totales)</td>
+                                <td>Pedidos Completedos (este mes)</td>
+                                <td>Pedidos Cancelados (este mes)</td>
+                            </tr>
+                            <tbody>
+                                <td>{this.state.currentRegisteredUsers}</td>
+                                <td>{this.state.currentRegisteredDeliveries}</td>
+                                <td>{this.state.currentCompletedOrders}</td>
+                                <td>{this.state.currentCanceledOrders}</td>
+                            </tbody>
+                        </table>
                     </div>
                     <div>
                         <h3>Usuarios Registrados</h3>
