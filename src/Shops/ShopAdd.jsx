@@ -119,7 +119,7 @@ class ShopAdd extends React.Component{
         }
         return(
             <div>
-                <img src={this.state.photoUrl} alt={'picture'} width={200} height={200}/>
+                <img src={this.state.photoUrl} alt={''} width={200} height={200}/>
                 <form>
                     <div className={'Page-input-group'}>
                         <label className={'Page-label'}>Picture</label>

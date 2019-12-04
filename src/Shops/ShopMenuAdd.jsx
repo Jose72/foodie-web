@@ -3,14 +3,11 @@ import {Link} from "react-router-dom";
 import {ShopMenuApi} from "../services";
 
 import '../styles/PageStyles.css';
-import queryString from "query-string";
 import {invalidMessage, productAddValidate} from "../utils";
 
 class ShopMenuAdd extends React.Component{
     constructor(props) {
         super(props);
-
-        let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
 
         this.state = {
             shopId: props.match.params.shopId,

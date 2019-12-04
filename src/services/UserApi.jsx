@@ -98,7 +98,7 @@ class UserApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/cancel' + '?id=' + id, params, headers);
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/cancel?id=' + id, params, headers);
     };
 
     static upgradeSubscription(id){
@@ -109,7 +109,7 @@ class UserApi extends React.Component {
             Authorization: Auth.getToken()
         };
 
-        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/upgrade' + '?id=' + id, params, headers);
+        return CommonApi.post(API_URL + USER_ROUTE + '/subscription/upgrade?id=' + id, params, headers);
     };
 
 }

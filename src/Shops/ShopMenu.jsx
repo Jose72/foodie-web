@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShopMenuApi} from "../services";
 import { Link } from "react-router-dom";
-import {FoodieFooter, ImageDisplay, Loader, OptPanel} from "../components";
+import {FoodieFooter, Loader, OptPanel} from "../components";
 import queryString from 'query-string';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -68,7 +68,7 @@ class ShopMenu extends React.Component {
         e.preventDefault();
         this.props.history.push({
             pathname: this.props.location.pathname,
-            search: '?' + 'p=' + this.state.page + '&' + 'pSize=' + this.state.pageSize,
+            search: '?p=' + this.state.page + '&pSize=' + this.state.pageSize,
         });
         window.location.reload();
     };

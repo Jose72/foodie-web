@@ -64,7 +64,7 @@ class DeliveryAdd extends React.Component{
                 </div>
 
                 <div className='Page-content'>
-                    <img src={this.getPicture()} alt={'picture'} width={200} height={200}/>
+                    <img src={this.getPicture()} alt={''} width={200} height={200}/>
                     <form>
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Picture</label>

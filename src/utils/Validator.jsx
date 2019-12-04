@@ -1,4 +1,3 @@
-import React from "react";
 
 const RATING_LIMIT = 10;
 const MAX_CHARS_NAME = 100;

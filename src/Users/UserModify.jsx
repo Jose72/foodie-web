@@ -28,7 +28,7 @@ class UserModify extends React.Component{
                 alert(t);
                 this.props.history.push({
                     pathname: '/users',
-                    search: '?' + 'p=' + 1 + '&' + 'pSize=' + 10,
+                    search: '?p=' + 1 + '&pSize=' + 10,
                 });
                 window.location.reload();
             })

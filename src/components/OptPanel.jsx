@@ -5,9 +5,6 @@ import {Auth} from "../services";
 
 
 class OptPanel extends React.Component{
-    constructor(props) {
-        super(props);
-    }
 
     onClickLogout(){
         Auth.logout();

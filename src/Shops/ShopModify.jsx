@@ -73,7 +73,7 @@ class ShopModify extends React.Component{
                     </header>
                 </div>
                 <div className='Page-content'>
-                    <img src={this.state.shop.photoUrl} alt={'picture'} width={200} height={200}/>
+                    <img src={this.state.shop.photoUrl} alt={''} width={200} height={200}/>
                     <form>
                         <div className={'Page-input-group'} >
                             <label className={'Page-label'}>Picture</label>

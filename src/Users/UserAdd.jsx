@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import{UserApi} from "../services";
 import  '../styles/PageStyles.css'
-import {invalidMessage, shopAddValidate, userAddValidate} from "../utils";
+import {invalidMessage, userAddValidate} from "../utils";
 
 class UserAdd extends React.Component{
     constructor(props) {
