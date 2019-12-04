@@ -16,7 +16,7 @@ class ShopAdd extends React.Component{
             longitude: '',
             latitude: '',
             radius: 0,
-            photoUrl: '',
+            photoUrl: 'https://p7.hiclipart.com/preview/3/10/517/computer-icons-shopping-cart-retail-sales-thumbnail.jpg',
             showGoogleAdd: false,
         };
 
@@ -79,6 +79,7 @@ class ShopAdd extends React.Component{
                                    name='latitude'
                                    value={this.state.latitude}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -89,6 +90,7 @@ class ShopAdd extends React.Component{
                                    name='longitude'
                                    value={this.state.longitude}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -99,6 +101,7 @@ class ShopAdd extends React.Component{
                                    name='radius'
                                    value={this.state.radius}
                                    onChange={e => this.change(e)}
+                                   autoComplete="off"
                             />
                             <br/>
                             <br/>
@@ -116,7 +119,19 @@ class ShopAdd extends React.Component{
         }
         return(
             <div>
+                <img src={this.state.photoUrl} alt={'picture'} width={200} height={200}/>
                 <form>
+                    <div className={'Page-input-group'}>
+                        <label className={'Page-label'}>Picture</label>
+                        <input className='Page-input-url'
+                               name='photoUrl'
+                               value={this.state.photoUrl}
+                               onChange={e => this.change(e)}
+                               autoComplete="off"
+                        />
+                        <br/>
+                        <br/>
+                    </div>
                     <div className={'Page-input-group'}>
                         <label className='Page-label'>Name</label>
                         <input className='Page-input'
@@ -163,16 +178,6 @@ class ShopAdd extends React.Component{
                         <input className='Page-input'
                                name='longitude'
                                value={this.state.longitude}
-                               onChange={e => this.change(e)}
-                        />
-                        <br/>
-                        <br/>
-                    </div>
-                    <div className={'Page-input-group'}>
-                        <label className={'Page-label'}>Picture</label>
-                        <input className='Page-input'
-                               name='photoURL'
-                               value={this.state.photoURL}
                                onChange={e => this.change(e)}
                         />
                         <br/>

@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {DeliveryApi} from "../services";
 import '../styles/PageStyles.css'
-import {deliveryAddValidate, invalidMessage} from "../utils";
+import {deliveryAddValidate, validURL, invalidMessage} from "../utils";
+import logo from './logo192.png'
 
 class DeliveryAdd extends React.Component{
     constructor(props) {
@@ -17,6 +18,7 @@ class DeliveryAdd extends React.Component{
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.getPicture = this.getPicture.bind(this);
     }
 
     change = (e) => {
@@ -42,6 +44,14 @@ class DeliveryAdd extends React.Component{
         }
     }
 
+    getPicture(){
+        if(validURL(this.state.picture)){
+            return this.state.picture
+        } else {
+            return logo
+        }
+    }
+
     render(){
         return(
             <div className={'Page'}>
@@ -54,7 +64,19 @@ class DeliveryAdd extends React.Component{
                 </div>
 
                 <div className='Page-content'>
+                    <img src={this.getPicture()} alt={'picture'} width={200} height={200}/>
                     <form>
+                        <div className={'Page-input-group'}>
+                            <label className='Page-label'>Picture</label>
+                            <input className='Page-input'
+                                   name='picture'
+                                   value={this.state.picture}
+                                   onChange={e => this.change(e)}
+                                   autoComplete="off"
+                            />
+                            <br/>
+                            <br/>
+                        </div>
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'

@@ -72,9 +72,19 @@ class ShopModify extends React.Component{
                         </h5>
                     </header>
                 </div>
-
                 <div className='Page-content'>
+                    <img src={this.state.shop.photoUrl} alt={'picture'} width={200} height={200}/>
                     <form>
+                        <div className={'Page-input-group'} >
+                            <label className={'Page-label'}>Picture</label>
+                            <input className='Page-input'
+                                   name='photoUrl'
+                                   value={this.state.shop.photoUrl}
+                                   onChange={e => this.update(e)}
+                            />
+                            <br/>
+                            <br/>
+                        </div>
                         <div className={'Page-input-group'}>
                             <label className='Page-label'>Name</label>
                             <input className='Page-input'
@@ -101,16 +111,6 @@ class ShopModify extends React.Component{
                             <input className='Page-input'
                                    name='description'
                                    value={this.state.shop.description}
-                                   onChange={e => this.update(e)}
-                            />
-                            <br/>
-                            <br/>
-                        </div>
-                        <div className={'Page-input-group'} >
-                            <label className={'Page-label'}>Picture</label>
-                            <input className='Page-input'
-                                   name='photoUrl'
-                                   value={this.state.shop.photoUrl}
                                    onChange={e => this.update(e)}
                             />
                             <br/>
