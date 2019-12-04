@@ -10,7 +10,7 @@ class ApiErrorHandler extends React.Component {
 
         if(res.status === 422){
             Auth.logout();
-            window.reload();
+            window.location.reload();
         }
         return Promise.reject(err_msg)
     }
