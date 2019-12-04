@@ -4,6 +4,7 @@ import {ShopApi} from "../services";
 
 import '../styles/PageStyles.css';
 import {invalidMessage, shopAddGoogleValidate, shopAddValidate} from "../utils";
+import {FoodieFooter} from "../components";
 
 class ShopAdd extends React.Component{
     constructor(props) {
@@ -223,6 +224,7 @@ class ShopAdd extends React.Component{
 
                     {this.getPageContent()}
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }

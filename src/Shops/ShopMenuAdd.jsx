@@ -4,6 +4,7 @@ import {ShopMenuApi} from "../services";
 
 import '../styles/PageStyles.css';
 import {invalidMessage, productAddValidate} from "../utils";
+import {FoodieFooter} from "../components";
 
 class ShopMenuAdd extends React.Component{
     constructor(props) {
@@ -94,6 +95,7 @@ class ShopMenuAdd extends React.Component{
                         </div>
                     </form>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Auth } from '../services/Authentication'
 import './LoginPage.css';
+import {FoodieFooter} from "../components";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -86,6 +87,7 @@ class LoginPage extends React.Component {
             <br/>
             <button onClick={(e) => this.onSubmit(e)}> Sign In </button>
         </form>
+          <FoodieFooter/>
       </div>
     )
     

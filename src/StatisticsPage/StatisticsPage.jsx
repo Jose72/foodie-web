@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatisticsApi } from "../services";
-import {BChart} from "../components";
+import {BChart, FoodieFooter} from "../components";
 import {ChartPanel} from "../components";
 import {OptPanel} from "../components";
 import '../styles/PageStyles.css'
@@ -178,8 +178,7 @@ class StatisticsPage extends React.Component {
                         <br/>
                     </div>
                 </div>
-                <footer className={'Page-footer'}>
-                </footer>
+                <FoodieFooter/>
             </div>
         )
     }

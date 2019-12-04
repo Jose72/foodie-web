@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import{UserApi} from "../services";
 import  '../styles/PageStyles.css'
 import {invalidMessage, userAddValidate} from "../utils";
+import {FoodieFooter} from "../components";
 
 class UserAdd extends React.Component{
     constructor(props) {
@@ -125,6 +126,7 @@ class UserAdd extends React.Component{
                         </div>
                     </form>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }

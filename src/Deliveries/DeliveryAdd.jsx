@@ -4,6 +4,7 @@ import {DeliveryApi} from "../services";
 import '../styles/PageStyles.css'
 import {deliveryAddValidate, validURL, invalidMessage} from "../utils";
 import logo from './logo192.png'
+import {FoodieFooter} from "../components";
 
 class DeliveryAdd extends React.Component{
     constructor(props) {
@@ -134,6 +135,7 @@ class DeliveryAdd extends React.Component{
                         </div>
                     </form>
                 </div>
+                <FoodieFooter/>
             </div>
         )
     }
