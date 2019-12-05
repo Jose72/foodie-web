@@ -99,7 +99,7 @@ class OrdersPage extends React.Component{
             ];
 
         const p_columns = [
-            {Header: "Product Id", accessor: "id"},
+            {Header: "Product Id", accessor: "product_id"},
             {Header: "Name", accessor: "name"},
             {Header: "Price", accessor: "price"},
             {Header: "Units", accessor: "units"},
