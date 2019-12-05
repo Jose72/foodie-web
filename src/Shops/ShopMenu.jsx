@@ -13,7 +13,6 @@ class ShopMenu extends React.Component {
         super(props);
 
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
-        console.log(props);
 
         this.state = {
             shopId: props.match.params.shopId,
@@ -37,7 +36,6 @@ class ShopMenu extends React.Component {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         let pageIndex = q.p;
         let pageSize = q.pSize;
-        console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/shops',
@@ -47,7 +45,6 @@ class ShopMenu extends React.Component {
         } else {
             ShopMenuApi.getShopMenu(this.state.shopId, pageIndex, pageSize)
                 .then((d) => {
-                        console.log(d);
                         this.setState({foodList: d.items});
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
@@ -89,7 +86,6 @@ class ShopMenu extends React.Component {
     //Delete Shop
     onClickDelete(food){
         if(window.confirm('Delete shop?')) {
-            console.log(food);
             ShopMenuApi.deleteMenuFood(this.state.shopId, food.id)
                 .then(() => {
                     window.location.reload();

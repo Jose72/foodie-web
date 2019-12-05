@@ -21,8 +21,6 @@ class ChartPanel extends React.Component {
             toList: []
         };
 
-        console.log(this.state);
-
         this.onClickDisplay = this.onClickDisplay.bind(this);
         this.change = this.change.bind(this);
         this.changeMonth = this.changeMonth.bind(this);
@@ -47,7 +45,6 @@ class ChartPanel extends React.Component {
     }
 
     getMonthNumberByName(m){
-        console.log('mn', m, months_n[m]);
         return months_n[m];
     }
 
@@ -66,7 +63,6 @@ class ChartPanel extends React.Component {
     changeMonth = (e) => {
         e.persist();
         this.setState({[e.target.name]:  e.target.value});
-        console.log(this.state);
     };
 
     onClickDisplay(){

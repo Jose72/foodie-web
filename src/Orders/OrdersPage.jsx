@@ -33,7 +33,6 @@ class OrdersPage extends React.Component{
         let sid = q.shop_id;
         let pageIndex = q.p;
         let pageSize = q.pSize;
-        console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/orders',
@@ -41,7 +40,6 @@ class OrdersPage extends React.Component{
         } else {
             OrderApi.getOrders(pageIndex, pageSize, uid, did, sid)
                 .then((r) => {
-                        console.log(r);
                         this.setState({orderList: r.items});
                         this.setState({totalItems: r.totalItems});
                         this.setState({page: pageIndex});
@@ -64,7 +62,6 @@ class OrdersPage extends React.Component{
 
     onPageChange(page){
         page++;
-        console.log("Page change to ",page);
         if(page <= this.state.pages && page >= 1) {
             let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
             q.p = page;
@@ -99,7 +96,7 @@ class OrdersPage extends React.Component{
             ];
 
         const p_columns = [
-            {Header: "Product Id", accessor: "id"},
+            {Header: "Product Id", accessor: "product_id"},
             {Header: "Name", accessor: "name"},
             {Header: "Price", accessor: "price"},
             {Header: "Units", accessor: "units"},

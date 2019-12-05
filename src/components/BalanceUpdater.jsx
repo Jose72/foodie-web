@@ -20,7 +20,6 @@ class BalanceUpdater extends  React.Component{
 
     balanceChange(){
         if(parseFloat(this.props.user.balance) + parseFloat(this.state.balance) >= 0){
-            console.log(parseFloat(this.props.user.balance) + parseFloat(this.state.balance));
             this.props.balanceChange(this.props.user, parseFloat(this.props.user.balance) + parseFloat(this.state.balance));
         }
     }

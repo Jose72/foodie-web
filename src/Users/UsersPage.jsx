@@ -38,7 +38,6 @@ class UsersPage extends React.Component {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         let pageIndex = q.p;
         let pageSize = q.pSize;
-        console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/users',
@@ -48,7 +47,6 @@ class UsersPage extends React.Component {
         } else {
             UserApi.getUsers(pageIndex, pageSize)
                 .then((u) => {
-                        console.log(u);
                         this.setState({userList: u.items});
                         this.setState({totalItems: u.totalItems});
                         this.setState({page: pageIndex});
@@ -91,7 +89,6 @@ class UsersPage extends React.Component {
     //Delete user
     onClickDelete(user){
         if(window.confirm('Delete user?')) {
-            console.log(user);
             UserApi.deleteUser(user.user_id)
                 .then(() => {
                     window.location.reload();
@@ -99,7 +96,6 @@ class UsersPage extends React.Component {
                 .catch((t) => {
                     alert(t)
                 });
-            console.log('Delete')
         }
     };
 
@@ -202,6 +198,12 @@ class UsersPage extends React.Component {
             {Header: "Name", accessor: "name"},
             {Header: "Phone", accessor: "phone_number"},
             {Header: "Email", accessor: "email"},
+            {Header: "Long/Lat", Cell: row => {
+                    return(
+                        row.original.longitude + ',' +
+                        row.original.latitude
+                    )}
+            },
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Subscription", accessor: "suscripcion"},
             {Header: "Favour Points", accessor: "favourPoints"},

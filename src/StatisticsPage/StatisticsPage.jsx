@@ -5,6 +5,8 @@ import {ChartPanel} from "../components";
 import {OptPanel} from "../components";
 import '../styles/PageStyles.css'
 import {Loader} from "../components/Loader";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 
 class StatisticsPage extends React.Component {
@@ -104,23 +106,25 @@ class StatisticsPage extends React.Component {
                     <OptPanel/>
                 </div>
                 <div className={'Page-content'}>
+                    <br/>
+                </div>
+                <div className={'Page-Table'}>
                     <div>
                         <h2>{this.getYear()} / {this.getMonth()}</h2>
-                        <table>
-                            <tr>
-                                <td>Usuarios Registrados (totales)</td>
-                                <td>Deliveris Registrados (totales)</td>
-                                <td>Pedidos Completedos (este mes)</td>
-                                <td>Pedidos Cancelados (este mes)</td>
-                            </tr>
-                            <tbody>
-                                <td>{this.state.currentRegisteredUsers}</td>
-                                <td>{this.state.currentRegisteredDeliveries}</td>
-                                <td>{this.state.currentCompletedOrders}</td>
-                                <td>{this.state.currentCanceledOrders}</td>
-                            </tbody>
-                        </table>
                     </div>
+                    <ReactTable
+                        data={[this.state]}
+                        columns={[
+                            {Header: "Usuarios Registrados (totales)", accessor: 'currentRegisteredUsers'},
+                            {Header: "Deliveris Registrados (totales)", accessor: 'currentRegisteredDeliveries'},
+                            {Header: "Pedidos Completedos (este mes)", accessor: 'currentCompletedOrders'},
+                            {Header: "Pedidos Cancelados (este mes)", accessor: 'currentCanceledOrders'},
+                        ]}
+                        showPagination={false}
+                        defaultPageSize={1}
+                    />
+                </div>
+                <div className={'Page-content'}>
                     <div>
                         <h3>Usuarios Registrados</h3>
                         <br/>

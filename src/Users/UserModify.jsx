@@ -9,8 +9,6 @@ class UserModify extends React.Component{
     constructor(props) {
         super(props);
 
-        console.log(props.match.params.id);
-
         this.state = {
             userId: props.match.params.id,
             user: {},
