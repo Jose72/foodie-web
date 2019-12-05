@@ -4,6 +4,8 @@ import { API_URL_LOGIN }  from '../utils/Config'
 
 axios.defaults.headers.common['Content-Type'] =  'application/json';
 
+const TOKEN_KEY = 'foodie_token';
+
 class Auth extends React.Component {
 
     static login(username, password) {
@@ -12,7 +14,7 @@ class Auth extends React.Component {
         if (username === "admin" && password === "admin"){
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
-                localStorage.setItem('token', 'token');
+                localStorage.setItem(TOKEN_KEY, 'token');
                 resolve({status: true, text: 'Login successful'});
             })
         }
@@ -30,7 +32,7 @@ class Auth extends React.Component {
             })
             .then(res => {
                 if (res.status === 200) {
-                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem(TOKEN_KEY, res.data.token);
                     return 'Login successful';
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
@@ -42,11 +44,11 @@ class Auth extends React.Component {
     }
 
     static logout(){
-        localStorage.removeItem('token');
+        localStorage.removeItem(TOKEN_KEY);
     }
 
     static isAuthenticated(){
-        return (localStorage.getItem('token') != null)
+        return (localStorage.getItem(TOKEN_KEY) != null)
     }
 
     static getToken() { return localStorage.getItem('token')}
