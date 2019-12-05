@@ -202,6 +202,12 @@ class UsersPage extends React.Component {
             {Header: "Name", accessor: "name"},
             {Header: "Phone", accessor: "phone_number"},
             {Header: "Email", accessor: "email"},
+            {Header: "Long/Lat", Cell: row => {
+                    return(
+                        row.original.longitude + ',' +
+                        row.original.latitude
+                    )}
+            },
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Subscription", accessor: "suscripcion"},
             {Header: "Favour Points", accessor: "favourPoints"},

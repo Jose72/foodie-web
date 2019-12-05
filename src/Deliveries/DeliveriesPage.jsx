@@ -174,6 +174,12 @@ class DeliveriesPage extends React.Component {
             {Header: "Name", accessor: "name"},
             {Header: "Phone_number", accessor: "phone_number"},
             {Header: "Email", accessor: "email"},
+            {Header: "Long/Lat", Cell: row => {
+                    return(
+                        row.original.longitude + ',' +
+                        row.original.latitude
+                    )}
+            },
             {Header: "Signup Date", accessor: "created_at"},
             {Header: "Balance", accessor: "balance"},
             {Header: "Favour Points", accessor: "favourPoints"},
