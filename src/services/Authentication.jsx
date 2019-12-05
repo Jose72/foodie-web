@@ -10,15 +10,6 @@ class Auth extends React.Component {
 
     static login(username, password) {
 
-        //TODO: remove this
-        if (username === "admin" && password === "admin"){
-            return new Promise(function(resolve, reject) {
-                // call resolve if the method succeeds
-                localStorage.setItem(TOKEN_KEY, 'token');
-                resolve({status: true, text: 'Login successful'});
-            })
-        }
-
         return axios.post(API_URL_LOGIN,
             {
                 email: username,
@@ -51,7 +42,7 @@ class Auth extends React.Component {
         return (localStorage.getItem(TOKEN_KEY) != null)
     }
 
-    static getToken() { return localStorage.getItem('token')}
+    static getToken() { return localStorage.getItem(TOKEN_KEY)}
 
 }
 
