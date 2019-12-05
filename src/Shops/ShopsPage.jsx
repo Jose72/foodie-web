@@ -34,7 +34,6 @@ class ShopsPage extends React.Component {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         let pageIndex = q.p;
         let pageSize = q.pSize;
-        console.log(q);
         if (pageSize === undefined || pageIndex === undefined) {
             this.props.history.push({
                 pathname: '/shops',
@@ -85,7 +84,6 @@ class ShopsPage extends React.Component {
     //Delete Shop
     onClickDelete(shop){
         if(window.confirm('Delete shop?')) {
-            console.log(shop);
             ShopApi.deleteShop(shop.id)
                 .then(() => {
                     window.location.reload();
@@ -120,7 +118,6 @@ class ShopsPage extends React.Component {
     }
 
     render(){
-        console.log(this.state.pages);
         if (this.state.isLoading) return <Loader />;
         const s_columns = [
             {Header: "", Cell: row => {

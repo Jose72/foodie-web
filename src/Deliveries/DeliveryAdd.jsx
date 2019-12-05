@@ -35,7 +35,6 @@ class DeliveryAdd extends React.Component{
             DeliveryApi.addDelivery(this.state)
                 .then(() => {
                     alert('Delivery Added Successfully');
-                    console.log("Delivery Added");
                 })
                 .catch((r) => {
                     alert(r)

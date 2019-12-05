@@ -34,8 +34,6 @@ class UserAdd extends React.Component{
             UserApi.addUser(this.state)
                 .then(() => {
                     alert('User Added Successfully');
-                    console.log("User Added");
-
                 })
                 .catch((r) => {
                     alert(r)

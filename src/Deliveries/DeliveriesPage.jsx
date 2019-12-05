@@ -37,7 +37,6 @@ class DeliveriesPage extends React.Component {
         let q = queryString.parse(this.props.location.search, {ignoreQueryPrefix: true});
         let pageIndex = q.p;
         let pageSize = q.pSize;
-        console.log(q);
         if (pageSize === undefined || pageIndex === undefined || pageIndex < 1) {
             this.props.history.push({
                 pathname: '/deliveries',
@@ -47,7 +46,6 @@ class DeliveriesPage extends React.Component {
         } else {
             DeliveryApi.getDeliveries(pageIndex, pageSize)
                 .then((d) => {
-                        console.log(d);
                         this.setState({deliveryList: d.items});
                         this.setState({totalItems: d.totalItems});
                         this.setState({page: pageIndex});
@@ -90,7 +88,6 @@ class DeliveriesPage extends React.Component {
     //Delete Delivery
     onClickDelete(delivery){
         if(window.confirm('Delete user?')) {
-            console.log(delivery);
             DeliveryApi.deleteDelivery(delivery.user_id)
                 .then(() => {
                     window.location.reload();

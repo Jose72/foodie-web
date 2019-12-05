@@ -13,7 +13,6 @@ class Auth extends React.Component {
             return new Promise(function(resolve, reject) {
                 // call resolve if the method succeeds
                 localStorage.setItem('token', 'token');
-                console.log("Login successful");
                 resolve({status: true, text: 'Login successful'});
             })
         }
@@ -30,24 +29,20 @@ class Auth extends React.Component {
                 }
             })
             .then(res => {
-                console.log(res);
                 if (res.status === 200) {
                     localStorage.setItem('token', res.data.token);
-                    console.log(res.data);
                     return 'Login successful';
                 } else {
                     return Promise.reject(res.status.toString() + ': ' + res.statusText)
                 }
             })
             .catch(error => {
-                console.log(error);
                 return Promise.reject(error.toString())
             })
     }
 
     static logout(){
         localStorage.removeItem('token');
-        console.log("Logout")
     }
 
     static isAuthenticated(){

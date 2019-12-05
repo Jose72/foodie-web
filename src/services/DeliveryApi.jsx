@@ -55,7 +55,7 @@ class DeliveryApi extends React.Component {
         return CommonApi.put(API_URL + DELIVERY_ROUTE + '?id=' + delivery.user_id, params, headers, data);
     }
 
-    static addDelivery(delivery, opts){
+    static addDelivery(delivery){
         let params = {};
 
         let data = {
@@ -86,9 +86,8 @@ class DeliveryApi extends React.Component {
     };
 
     static balanceAdd(user, balance){
-
         let d = user;
-        d.balance = balance;
+        d.balance = parseFloat(balance);
 
         return DeliveryApi.modifyDelivery(d);
     }
